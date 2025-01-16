@@ -1,0 +1,43 @@
+@import "../../../styles/variables.css";
+
+.inputContainer {
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--Gray-5);
+  display: flex;
+  outline: none;
+}
+
+.input {
+  background: transparent;
+  border: none;
+  /* color: var(--gray-text-color); */
+  font-family: Verdana;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.56px;
+  min-width: 240px;
+  outline: none;
+  padding: 8px 0;
+}
+
+.inputCenter {
+  font-weight: 600;
+  text-align: center;
+}
+
+.inputInfo {
+  color: rgb(255, 134, 141);
+  font-size: 14px;
+  font-weight: 500;
+  padding-left: 20px;
+}
+
+@media screen and (width >=768px) {
+  .inputInfo {
+    padding-left: 12px;
+  }
+}
