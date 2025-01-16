@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/TaskPro/static/css/main.f855e6bc.css",
+    "main.js": "/TaskPro/static/js/main.848beaaa.js",
+    "static/js/453.ad6eb26e.chunk.js": "/TaskPro/static/js/453.ad6eb26e.chunk.js",
+    "index.html": "/TaskPro/index.html",
+    "main.f855e6bc.css.map": "/TaskPro/static/css/main.f855e6bc.css.map",
+    "main.848beaaa.js.map": "/TaskPro/static/js/main.848beaaa.js.map",
+    "453.ad6eb26e.chunk.js.map": "/TaskPro/static/js/453.ad6eb26e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.848beaaa.js"
+  ]
+}
