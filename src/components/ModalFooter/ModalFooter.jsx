@@ -98,7 +98,7 @@ const ModalFooter = ({ closeModal }) => {
               <em className={styles.footerTeamFunction}>Scrum Master</em>
               <div className={styles.socialLinks}>
                 <a
-                  href="https://github.com/turbomatrixxxl"
+                  href="https://github.com/SecaraAdrian"
                   className={styles.footerGithubIcon}
                   aria-label="GitHub profile"
                   target="_blank"
@@ -106,7 +106,7 @@ const ModalFooter = ({ closeModal }) => {
                   <FaGithub />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/radu-bogdan-naramzoiu-fullstack-developer/"
+                  href="http://linkedin.com/in/adrian-secara-254ba3312"
                   className={styles.footerLinkedinIcon}
                   aria-label="LinkedIn profile"
                   target="_blank"
