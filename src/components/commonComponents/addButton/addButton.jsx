@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import icon from "../../../../images/sprite.svg";
-import { Container, PlusIcon, TitleButton } from "./addButton.styled";
+import icon from "../../../images/sprite.svg";
+import { Container, PlusIcon, TitleButton , TitleText } from "./addButton.styled";
 import { useTheme } from "@mui/material";
 
 export default function AddButton({
@@ -26,6 +26,7 @@ export default function AddButton({
           <PlusIcon theme={theme} variant={variant} style={{ color }}>
         <use href={`${icon}#plus-black`}></use>
       </PlusIcon>
+      <TitleText>Create</TitleText>
       <TitleButton theme={theme} variant={variant}>
         {btnTitle}
       </TitleButton>

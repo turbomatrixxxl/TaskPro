@@ -1,38 +1,32 @@
-
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5); 
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  backdrop-filter: blur(5px); 
+  backdrop-filter: blur(5px);
 }
 
-/* Containerul pentru modal */
 .modal-container {
-  background-color: white;
+  background-color: #151515;
   position: relative;
   padding: 20px;
   border-radius: 8px;
   width: 350px;
   height: 433px;
-  z-index: 10000; 
+  z-index: 10000;
   border: 1px solid rgba(190, 219, 176, 0.50);
-  background: #151515;
-  
 }
 
-/* Butonul de închidere (X) */
 .close-btn {
   position: absolute;
   top: 14px;
   right: 14px;
-
   background: none;
   border: none;
   cursor: pointer;
@@ -40,74 +34,100 @@
   transition: background 0.3s ease;
 }
 
-
-
 .close-btn svg {
   width: 18px;
   height: 18px;
 }
 
 .text {
- 
   color: #FFF;
-font-family: Poppins;
-font-size: 18px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-letter-spacing: -0.36px;
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
 }
 
-.div-container { 
-  margin-left:4px;
-  margin-top:24px;
-  margin-right: 4px;
+.input, .custom-input {
+  font-size: 16px;
+  color: white;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  padding-left: 18px;
+  transition: border-color 0.3s ease;
 }
-.custom-input::placeholder {
 
-color: #FFF !important;
-font-family: Poppins;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-letter-spacing: -0.28px;
-padding-left: 18px;
+.input:focus, .custom-input:focus {
+  color: white;
+  background-color: #1F1F1F;
+  border-color: #BEDBB0;
 }
-.custom-input{
-  padding-left: 18px; /* Distanță pentru textul din input */
-  color: white; 
+
+.inputContainer {
+  width: 100%;
+  display: flex;
+}
+
+.custom-input {
+  padding-left: 18px !important; /* Padding stânga */
+  padding-right: 18px !important; /* Adăugat padding dreapta */
+  color: white !important; 
   border-radius: 8px;
   border: 1px solid #BEDBB0;
   opacity: 0.4;
   background: #1F1F1F;
-  box-shadow: 0px 4px 16px 0px rgba(22, 22, 22, 0.08);
+  box-shadow: 0px 4px 16px rgba(22, 22, 22, 0.08);
   display: flex;
-  width: -webkit-fill-available;
-  padding: 14px 256px 14px 18px;
-  align-items: center;
+  width: 100%;  /* Asigură-te că input-ul se extinde pe toată lățimea */
   margin-top: 24px;
-
+  height: 50px; /* Poți ajusta înălțimea pentru a face input-ul să fie mai mare sau mai mic */
 }
 
-h3 {
-  margin-top: 24px;
+.custom-input::placeholder {
   color: #FFF;
-font-family: Poppins;
-font-size: 14px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-letter-spacing: -0.28px;
+  font-family: Poppins, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+
+.custom-create-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #BEDBB0;
+  width: 360px;
+}
+
+.div-btn {
+  margin-top: 40px;
+  display: flex;
+}
+
+
+h3 {
+  margin-top: 24px !important;
+  color: #FFF;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.28px;
 }
 
 .icon {
   width: 18px;
-height: 18px;
-flex-shrink: 0;
-margin-top: 14px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 14px;
+  margin-right: 8px;
+  cursor: pointer;
 }
+
 .image-container {
+  margin-top: 14px;
   display: grid;
   grid-template-columns: repeat(8, 1fr); 
   max-width: 248px;
@@ -115,7 +135,7 @@ margin-top: 14px;
   /* justify-items: center; */
 }
 
-.image-item {
+/* .image-item {
   background-size: cover; 
   background-position: center; 
   width: 28px; 
@@ -123,24 +143,22 @@ margin-top: 14px;
   border-radius: 6% !important;
   background-color: white;
   margin-bottom: 4px;
-}
+} */
 
-.custom-create-btn{
-  /* margin-top: 50px; */
+.custom-create-btn {
   display: flex;
-/* padding: 10px 0px 11px 0px; */
-justify-content: center;
-align-items: center;
-background: #BEDBB0;
-width: 360px !important;
-max-width: 380px !important;
+  justify-content: center;
+  align-items: center;
+  background: #BEDBB0;
+  width: 360px !important;
+  max-width: 380px !important;
 }
 
 span {
   color: black;
 }
-.div-btn {
-  margin-top: 50px;
-  display: flex;
 
+.div-btn {
+  margin-top: 40px;
+  display: flex;
 }

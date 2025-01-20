@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-
 import styles from "./Input.module.css";
 
 export default function Input({
@@ -19,10 +18,10 @@ export default function Input({
   handleBlur,
 }) {
   return (
-    <div style={{ width: width || "auto" }} className={styles.inputContainer}>
+    <div style={{ width: width || "100%" }} className={styles.inputContainer}>
       <input
         autoComplete={autoComplete || "off"}
-        style={{ paddingLeft: paddingLeft || "0px" }}
+        style={{ paddingLeft: paddingLeft || "18px" }}
         onChange={handleChange}
         name={name || ""}
         className={clsx(
