@@ -24,7 +24,7 @@ export default function AddButton({
       style={{ backgroundColor: btnColor }}
     > 
           <PlusIcon theme={theme} variant={variant} style={{ color }}>
-        <use href={`${icon}#plus-1`}></use>
+        <use href={`${icon}#plus-black`}></use>
       </PlusIcon>
       <TitleButton theme={theme} variant={variant}>
         {btnTitle}

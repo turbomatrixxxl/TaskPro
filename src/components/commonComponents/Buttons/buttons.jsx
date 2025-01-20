@@ -15,7 +15,7 @@ import { useTheme } from "@mui/material";
 export const BtnClose = ({ variant = "default" }) => {
   const theme = useTheme();
 
-  const iconId = variant === "black" ? "#x-close-2" : "#x-close";
+  const iconId = variant === "black" ? "#x-close-black" : "#x-close";
 
   return (
     <ButtonClose>
@@ -33,7 +33,7 @@ export const BtnFilter = ({ color, onClick }) => {
     <ButtonFilter onClick={onClick} theme={theme} style={{ color }}>
       <ButtonFilterThumb>
         <ButtonFilterIcon>
-          <use href={`${icon}#filter`}></use>
+          <use href={`${icon}#filter-black`}></use>
         </ButtonFilterIcon>
       </ButtonFilterThumb>
       Filter
