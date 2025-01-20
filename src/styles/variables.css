@@ -9,15 +9,15 @@ body {
   font-weight: 400;
   font-size: 14px;
   line-height: 1.16;
-  font-family: -apple-system, BlinkMacSystemFont, 'Poppins', 'Segoe UI', 
-    'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Poppins", "Segoe UI",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', 
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -45,6 +45,8 @@ ol {
 
 img {
   display: block;
+  height: fit-content;
+  width: 100%;
 }
 
 li {
@@ -83,11 +85,16 @@ button {
   --icon-user-stroke-color: #ffffff;
   --icon-user-plus-fill-color: #bedbb0;
   --icon-user-plus-stroke-color: #121212;
-  --welcome-bg-gradient: linear-gradient(180deg, #ffffff 0%, #ffffff 25%, #bedbb0 92.19%);
+  --welcome-bg-gradient: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #ffffff 25%,
+    #bedbb0 92.19%
+  );
 }
 
 /* Dark Theme */
-html[data-theme='dark'] {
+html[data-theme="dark"] {
   --background-primary-color: #121212;
   --background-secondary-color: #1f1f1f;
   --background-header-color: #161616;
@@ -190,7 +197,7 @@ html[data-theme='dark'] {
 }
 
 /* Light Theme */
-html[data-theme='light'] {
+html[data-theme="light"] {
   --background-primary-color: #fdfdfd;
   --background-secondary-color: #f6f6f7;
   --background-header-color: #fcfcfc;
@@ -292,8 +299,8 @@ html[data-theme='light'] {
   --modal-progress-shadow-color: rgba(200, 200, 200, 0.1);
 }
 
-  /* Violet Theme */
-html[data-theme='violet'] {
+/* Violet Theme */
+html[data-theme="violet"] {
   --background-primary-color: #ecedfd;
   --background-secondary-color: #ecedfd;
   --header-background-color: #ffffff;
@@ -395,5 +402,3 @@ html[data-theme='violet'] {
   --modal-progress-bg-color: #fcfcfc;
   --modal-progress-shadow-color: rgba(17, 17, 17, 0.1);
 }
-
-

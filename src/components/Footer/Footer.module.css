@@ -5,6 +5,7 @@
   color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
   background: linear-gradient(270deg, #2e1746 3.2%, #2e225f 99.98%);
+  width: -webkit-fill-available;
 }
 
 .footerText {

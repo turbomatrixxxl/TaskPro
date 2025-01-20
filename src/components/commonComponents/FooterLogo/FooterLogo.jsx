@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./FooterLogo.module.css";
-import logoImage from "../../../images/logo-image.jpg";
+import logoImage from "../../../images/cactus.png";
 import PropTypes from "prop-types";
 
 const Logo = ({ variant = "default" }) => {
@@ -9,7 +9,7 @@ const Logo = ({ variant = "default" }) => {
             className={`${styles.logo} ${styles[variant] || styles.default}`}
             to="/">
             <img src={logoImage} alt="Logo" />
-            <span>Health</span>
+            <span>TaskPro</span>
         </Link>
     );
 };

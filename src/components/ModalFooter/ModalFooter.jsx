@@ -8,6 +8,11 @@ import "animate.css";
 
 // Corectarea importului imaginii
 import Radu from "../../images/teamMembersPhoto/Radu.webp";
+import Adrian from '../../images/teamMembersPhoto/Adrian.jpg'
+import Sara from '../../images/teamMembersPhoto/Sara.png'
+import catalin from '../../images/teamMembersPhoto/catalin.webp'
+
+
 
 const ModalFooter = ({ closeModal }) => {
   const modalRef = useRef();
@@ -44,7 +49,7 @@ const ModalFooter = ({ closeModal }) => {
       <div className={styles.modalBg}>
         <div className={styles.modalContent}>
           {screenCondition && <ModalLogo variant={"formLogo"} />}
-          <h2>Fullstack Developer:</h2>
+          <h2>Ultimate Team:</h2>
 
           <div className={styles.footerCards}>
             {/* Card pentru Radu */}
@@ -58,7 +63,7 @@ const ModalFooter = ({ closeModal }) => {
               <span className={styles.footerTeamName}>
                 Naramzoiu Radu Bogdan
               </span>
-              <em className={styles.footerTeamFunction}>Fullstack Developer</em>
+              <em className={styles.footerTeamFunction}>Team Leader</em>
               <div className={styles.socialLinks}>
                 <a
                   href="https://github.com/turbomatrixxxl"
@@ -79,6 +84,88 @@ const ModalFooter = ({ closeModal }) => {
               </div>
             </div>
 
+            {/* Card pentru Adrian */}
+            <div
+              className={`${styles.footerTeamCard} ${animation} ${styles.Adrian}`}>
+              <img
+                src={Adrian} // Folosește variabila corectă pentru imagine
+                alt="Secara Adrian"
+                className={styles.teamMemberImage}
+              />
+              <span className={styles.footerTeamName}>
+                Secara Adrian
+              </span>
+              <em className={styles.footerTeamFunction}>Scrum Master</em>
+              <div className={styles.socialLinks}>
+                <a
+                  href="https://github.com/turbomatrixxxl"
+                  className={styles.footerGithubIcon}
+                  aria-label="GitHub profile"
+                  target="_blank"
+                  rel="noreferrer noopener">
+                  <FaGithub />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/radu-bogdan-naramzoiu-fullstack-developer/"
+                  className={styles.footerLinkedinIcon}
+                  aria-label="LinkedIn profile"
+                  target="_blank"
+                  rel="noreferrer noopener">
+                  <FaLinkedin />
+                </a>
+              </div>
+            </div>
+
+            {/* Card pentru Sara */}
+            <div
+              className={`${styles.footerTeamCard} ${animation} ${styles.Sara}`}>
+              <img
+                src={Sara} // Folosește variabila corectă pentru imagine
+                alt="Smarandoiu Sara"
+                className={styles.teamMemberImage}
+              />
+              <span className={styles.footerTeamName}>
+                Smarandoiu Sara
+              </span>
+              <em className={styles.footerTeamFunction}>Frontend Developer</em>
+              <div className={styles.socialLinks}>
+                <a
+                  href="https://github.com/turbomatrixxxl"
+                  className={styles.footerGithubIcon}
+                  aria-label="GitHub profile"
+                  target="_blank"
+                  rel="noreferrer noopener">
+                  <FaGithub />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/radu-bogdan-naramzoiu-fullstack-developer/"
+                  className={styles.footerLinkedinIcon}
+                  aria-label="LinkedIn profile"
+                  target="_blank"
+                  rel="noreferrer noopener">
+                  <FaLinkedin />
+                </a>
+              </div>
+            </div>
+
+            {/* Card pentru Catalin */}
+            <div className={`${styles.footerTeamCard} ${animation} ${styles.catalin}`}>
+              <img
+                src={catalin} // Folosește variabila corectă pentru imagine
+                alt="Catalin"
+                className={styles.teamMemberImage}
+              />
+              <span className={styles.footerTeamName}>Catalin Negoita</span>
+              <em className={styles.footerTeamFunction}>Frontend Developer</em>
+              <div className={styles.socialLinks}>
+                <a href="https://github.com/PNM24" className={styles.footerGithubIcon} aria-label="GitHub profile" target="_blank" rel="noreferrer noopener">
+                  <FaGithub />
+                </a>
+                <a href="https://www.linkedin.com/" className={styles.footerLinkedinIcon} aria-label="LinkedIn profile" target="_blank" rel="noreferrer noopener">
+                  <FaLinkedin />
+                </a>
+              </div>
+            </div>
             {/* Adaugă alte carduri pentru membrii echipei dacă este necesar */}
           </div>
 
