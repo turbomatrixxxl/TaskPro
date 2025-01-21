@@ -1,0 +1,67 @@
+/* Stil pentru containerul inputului */
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Stiluri pentru inputul de tip text */
+  .input {
+    padding: 14px 18px 14px 239px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(190, 219, 176, 0.50);
+
+
+    box-sizing: border-box;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    margin-top: 24px;
+    color: white;
+    width: 100%;
+  }
+  
+  .input-email {
+    margin-top: 24px;
+  }
+  
+  .input:focus {
+    border-color: #FFFFFF; /* Culoare la focus */
+    outline: none;
+  }
+  
+  /* Stiluri pentru input-ul centrat */
+  .inputCenter {
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  /* Stiluri pentru inputul de tip comentarii (textarea) */
+  .commentInput {
+    /* display: flex; */
+    width: 352px;
+    height: 120px;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 8px;
+    border: 1px solid rgba(190, 219, 176, 0.50);
+    opacity: 0.4;
+    background: #151515;
+    box-shadow: 0px 4px 16px 0px rgba(22, 22, 22, 0.08);
+
+
+
+    padding: 18px;
+    font-size: 16px;
+    box-sizing: border-box;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    margin-top: 24px;
+    color: white;
+    width: 100%;
+  }
+  
+  
+ 
+
+  
+  

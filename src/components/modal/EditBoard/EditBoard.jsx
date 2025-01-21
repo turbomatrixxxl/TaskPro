@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Input from '../../commonComponents/Input/Input';
-import "./NewBoardForm.styled.css"
+import "./EditBoard.styled.css"
 import Button from '../../commonComponents/addButton/addButton';
 // import { FaPlus } from 'react-icons/fa';
 import Sprite from '../../../images/projectIconsSprite.svg';
@@ -183,7 +183,7 @@ const backgroundImages = [
 // );
 
 
-export default function NewBoardForm({ onClose}) {
+export default function EditBoard({ onClose}) {
   const [title, setTitle] = useState('');
 
   const handleTitleChange = (e) => {
@@ -208,12 +208,12 @@ export default function NewBoardForm({ onClose}) {
       
 
         <div className="div-container" >
-        <div className="text">New board</div>
+        <div className="text">Edit board</div>
   <Input
     className="custom-input"
     value={title}
     handleChange={handleTitleChange}
-    placeholder="Title"
+    placeholder="Project office"
   />
             <h3 >
               Icons
@@ -272,7 +272,7 @@ export default function NewBoardForm({ onClose}) {
           <div className='div-btn'>
           <Button className="custom-create-btn">
             <span>
-              Create
+              Edit
             </span>
           </Button>
           </div>
