@@ -1,26 +1,30 @@
 import { useSelector } from "react-redux";
 import {
-  selectAuthToken,
-  selectIsLoggedIn,
   selectUser,
-  selectError,
-  selectIsRefreshing,
+  selectAuthToken,
+  selectAvatarURL,
   selectIsLoading,
+  selectIsLoggedIn,
   selectIsisRegistered,
+  selectIsRefreshing,
+  selectError,
   selectIsemailResendStatus,
   selectIsLoggedOut,
+  selectProjects,
 } from "../redux/auth/selectorsAuth";
 
 export const useAuth = () => {
-  const tokenAuth = useSelector(selectAuthToken);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
-  const errorAuth = useSelector(selectError);
-  const isRefreshing = useSelector(selectIsRefreshing);
+  const tokenAuth = useSelector(selectAuthToken);
+  const avatarUrl = useSelector(selectAvatarURL);
   const isLoadingAuth = useSelector(selectIsLoading);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const isRegistered = useSelector(selectIsisRegistered);
+  const isRefreshing = useSelector(selectIsRefreshing);
+  const errorAuth = useSelector(selectError);
   const emailResendStatus = useSelector(selectIsemailResendStatus);
   const isLoggedOut = useSelector(selectIsLoggedOut);
+  const projects = useSelector(selectProjects);
 
   return {
     tokenAuth,
@@ -32,5 +36,7 @@ export const useAuth = () => {
     isRegistered,
     emailResendStatus,
     isLoggedOut,
+    avatarUrl,
+    projects,
   };
 };

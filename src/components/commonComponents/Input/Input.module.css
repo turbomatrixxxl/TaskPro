@@ -1,27 +1,39 @@
 @import "../../../styles/variables.css";
 
-.inputContainer {
+/* .inputContainer {
+  display: inline-flex;
+  padding: 14px 160px 14px 18px;
   align-items: center;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--Gray-5);
-  display: flex;
-  outline: none;
-}
+
+  border-radius: 8px;
+  border: 1px solid #bedbb0;
+  opacity: 0.4;
+  background: #1f1f1f;
+  box-shadow: 0px 4px 16px 0px rgba(22, 22, 22, 0.08);
+} */
 
 .input {
-  background: transparent;
-  border: none;
-  /* color: var(--gray-text-color); */
-  font-family: Verdana;
+  color: white;
+  font-family: Poppins;
   font-size: 14px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: normal;
-  letter-spacing: 0.56px;
-  min-width: 240px;
-  outline: none;
-  padding: 8px 0;
+  letter-spacing: -0.28px;
+  display: flex;
+  padding: 14px 18px;
+  align-items: center;
+
+  border-radius: 8px;
+  border: 1px solid #bedbb0;
+  opacity: 0.4;
+  background: #1f1f1f;
+  box-shadow: 0px 4px 16px 0px rgba(22, 22, 22, 0.08);
+  width: 287px;
+}
+
+input::placeholder {
+  color: white;
 }
 
 .inputCenter {
@@ -37,7 +49,7 @@
 }
 
 @media screen and (width >=768px) {
-  .inputInfo {
-    padding-left: 12px;
+  .input {
+    width: 344px;
   }
 }

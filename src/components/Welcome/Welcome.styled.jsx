@@ -6,8 +6,7 @@ import logoDesk from '../../images/user.png';
 export const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background: var(--welcome-bg-gradient);
   background-repeat: no-repeat;
@@ -20,6 +19,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  flex-grow: 1;
   text-align: center;
 `;
 

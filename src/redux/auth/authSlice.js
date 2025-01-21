@@ -5,44 +5,42 @@ import {
   logOut,
   refreshUser,
   resendVerificationEmail,
+  updateUserInfo,
+  updateUserAvatar,
 } from "./operationsAuth";
 
 const initialState = {
   user: null,
   token: null,
+  avatarURL: null, // Add avatar URL here
   isLoading: false,
   isLoggedIn: false,
   isRegistered: false,
   isRefreshing: false,
   error: null,
-  isLoggedOut: false,
-  emailResendStatus: null, // New state for resend email
+  emailResendStatus: null,
+  isLoggedOut: null,
+  projects: [], // List of projects, each containing columns, each containing tasks
 };
 
 const handlePending = (state) => {
   state.isLoading = true;
   state.error = null;
-
-  // Only clear user and token if it's a critical operation like login/register
   if (!state.isLoggedIn) {
     state.user = null;
     state.token = null;
   }
-
-  state.isRefreshing = false; // Ensure this reflects the operation's context
+  state.isRefreshing = false;
 };
 
 const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
-
-  // If the rejection invalidates the session, clear user and token
   if (!state.isRefreshing) {
     state.user = null;
     state.token = null;
     state.isLoggedIn = false;
   }
-
   state.isRefreshing = false;
 };
 
@@ -56,21 +54,14 @@ const authSlice = createSlice({
       .addCase(logIn.pending, handlePending)
       .addCase(logIn.fulfilled, (state, { payload }) => {
         state.user = payload.user;
-
-        // console.log(payload.user);
-
-        if (payload.user.verify === false) {
-          // If not verified, clear token and prevent login
-          state.token = null;
-          state.isLoggedIn = false;
-        } else {
-          state.token = payload.token;
-          state.isLoggedIn = true;
-        }
-        state.isLoggedOut = false;
-        state.isRegistered = false;
+        state.token = payload.token;
+        state.avatarURL = payload.user.avatarURL || null; // Set the avatar URL
+        state.projects = payload.user.projects || []; // Populate projects
+        state.isLoggedIn = payload.user.verify ? true : false;
         state.isLoading = false;
         state.error = null;
+        state.isRegistered = false;
+        state.isLoggedOut = false;
       })
       .addCase(logIn.rejected, handleRejected)
 
@@ -78,12 +69,9 @@ const authSlice = createSlice({
       .addCase(register.pending, handlePending)
       .addCase(register.fulfilled, (state, { payload }) => {
         state.user = payload.user;
-        // console.log(payload.user);
-
-        if (state.user.verify) {
-          state.isLoggedOut = false;
-        }
-
+        state.token = payload.token;
+        state.avatarURL = payload.user.avatarURL || null; // Set the avatar URL
+        state.isLoggedIn = payload.user.verify ? true : false;
         state.isRegistered = true;
         state.isLoading = false;
         state.error = null;
@@ -93,27 +81,14 @@ const authSlice = createSlice({
       // Log Out
       .addCase(logOut.pending, handlePending)
       .addCase(logOut.fulfilled, (state) => {
-        const token = JSON.parse(localStorage.getItem("token"));
-
-        if (token) {
-          localStorage.setItem("token", null);
-        }
-
-        if (!token || token === null) {
-          state.user = null;
-          state.token = null;
-          state.isLoggedIn = false;
-          state.isLoading = false;
-          state.error = null;
-          state.isRegistered = false;
-        }
-
         state.user = null;
         state.token = null;
+        state.avatarURL = null; // Clear avatar URL
         state.isLoggedIn = false;
         state.isLoading = false;
         state.error = null;
         state.isRegistered = false;
+        state.projects = [];
         state.isLoggedOut = true;
       })
       .addCase(logOut.rejected, handleRejected)
@@ -125,24 +100,17 @@ const authSlice = createSlice({
       })
       .addCase(refreshUser.fulfilled, (state, { payload }) => {
         state.user = payload.data;
-        // console.log(state.user);
-
-        if (payload.verify === false) {
-          // If not verified, ensure user is not logged in
-          state.token = null;
-          state.isLoggedIn = false;
-          state.isLoggedOut = true;
-        } else {
-          state.isLoggedIn = true;
-          state.isLoggedOut = false;
-        }
-
+        state.token = payload.token;
+        state.avatarURL = payload.data.avatarURL || null; // Set the avatar URL
+        state.projects = payload.data.projects || []; // Populate projects
+        state.isLoggedIn = payload.data.verify ? true : false;
         state.isRefreshing = false;
+        state.isLoggedOut = false;
       })
-      .addCase(refreshUser.rejected, (state) => {
+      .addCase(refreshUser.rejected, (state, action) => {
         state.isRefreshing = false;
         state.isLoggedIn = false;
-        state.user = null;
+        state.error = action.payload;
       })
 
       // Resend Verification Email
@@ -151,10 +119,42 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(resendVerificationEmail.fulfilled, (state, { payload }) => {
-        state.emailResendStatus = payload; // Success message
+        state.emailResendStatus = payload;
       })
       .addCase(resendVerificationEmail.rejected, (state, action) => {
-        state.emailResendStatus = null; // Reset resend status on error
+        state.emailResendStatus = null;
+        state.error = action.payload;
+      })
+
+      // Update User Info
+      .addCase(updateUserInfo.pending, handlePending)
+      .addCase(updateUserInfo.fulfilled, (state, { payload }) => {
+        state.user = payload.data.user;
+        state.avatarURL = payload.data.user.avatarURL || null; // Set the avatar URL
+        state.projects = payload.data.user.projects || []; // Populate projects
+        state.isLoading = false;
+        state.error = null;
+        state.isLoggedOut = false;
+      })
+      .addCase(updateUserInfo.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+
+      // Update User Avatar
+      .addCase(updateUserAvatar.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updateUserAvatar.fulfilled, (state, { payload }) => {
+        state.avatarURL = payload.avatarUrl; // Set the new avatar URL
+        state.isLoading = false;
+        state.error = null;
+        state.isLoggedOut = false;
+      })
+      // Update User Avatar Rejected
+      .addCase(updateUserAvatar.rejected, (state, action) => {
+        state.isLoading = false;
         state.error = action.payload;
       });
   },

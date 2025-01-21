@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Set Axios base URL
 // axios.defaults.baseURL = "http://localhost:5000";
-axios.defaults.baseURL = "https://health-individual-project-node.onrender.com";
+axios.defaults.baseURL = "https://taskpro-nodejs.onrender.com";
 
 // Authorization setup with fallback
 const setAuthHeader = () => {

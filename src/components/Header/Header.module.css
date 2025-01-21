@@ -1,0 +1,66 @@
+@import "../../styles/variables.css";
+
+.header {
+  align-items: center;
+  display: flex;
+  gap: 14px;
+  height: 60px;
+  justify-content: flex-end;
+  padding: 18px 14px 18px 20px;
+  width: -webkit-fill-available;
+}
+
+.hamButton {
+  align-items: center;
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  justify-content: center;
+  outline: none;
+  width: fit-content;
+}
+
+.headerLight {
+  background: #fcfcfc;
+}
+
+.headerDark {
+  background: #161616;
+}
+
+.headerViolet {
+  background: white;
+}
+
+.userContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #161616;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  margin-left: auto;
+}
+
+.userContainerDark {
+  color: #fff;
+}
+
+@media screen and (width >=768px) {
+  .header {
+    height: 68px;
+    padding: 18px 18px 18px 32px;
+  }
+}
+
+@media screen and (width >=1024px) {
+  .header {
+    padding: 18px 24px;
+  }
+}

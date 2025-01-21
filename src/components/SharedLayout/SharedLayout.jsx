@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+
 // import { useMediaQuery } from "react-responsive";
 
 import { Outlet } from "react-router-dom";
-import Header from "../Header/Header";
+
 import Footer from "../Footer/Footer";
+import Header from "../Header";
+
+
 import { useAuth } from "../../hooks/useAuth";
 import { usePrivate } from "../../hooks/usePrivate";
 
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import clsx from "clsx";
+// import clsx from "clsx";
 
 import styles from "./SharedLayout.module.css";
 
-function SharedLayout() {
+function SharedLayout({ handleClick }) {
   const { isLoggedIn, isLoggedOut, isRegistered } = useAuth();
   const { message } = usePrivate();
 
@@ -68,20 +73,22 @@ function SharedLayout() {
 
   return (
     <div className={styles.cont}>
+      <Header handleClick={handleClick} />
+
       <ToastContainer position="top-center" autoClose={5000} />
-      <div
-        className={
-          isLoggedIn ? styles.content : clsx(styles.content, styles.notLoggedIn)
-        }
-      >
-        <Header />
-        <main className={styles.main}>
-          <Outlet />
-        </main>
-      </div>
+
+      <main className={styles.main}>
+        <Outlet />
+      </main>
+
       <Footer />
     </div>
   );
 }
+
+SharedLayout.propTypes = {
+  handleClick: PropTypes.func,
+};
+
 
 export default SharedLayout;

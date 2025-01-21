@@ -1,0 +1,135 @@
+.cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 225px;
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+}
+
+.logoutButton {
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  gap: 14px;
+  height: fit-content;
+  justify-content: center;
+  outline: none;
+  width: fit-content;
+}
+
+.modalLogoutActionCenter {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  padding: 0 20px;
+  /* width: 100%; */
+}
+
+.logo {
+  width: 84px;
+  height: 108px;
+  flex-shrink: 0;
+}
+
+.closeButton {
+  display: none;
+}
+
+.modalHeader {
+  z-index: 10000;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 12px 20px 11.51px 20px;
+  width: -webkit-fill-available;
+}
+
+.modalHeaderLight {
+  background: #fcfcfc;
+}
+
+.modalHeaderDark {
+  background: #161616;
+}
+
+.modalHeaderViolet {
+  background: white;
+}
+
+.userContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #161616;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  margin-left: auto;
+}
+
+.userContainerDark {
+  color: #fff;
+}
+
+.question {
+  color: #161616;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  margin-bottom: 40px;
+  margin-top: 100px;
+
+  width: 214px;
+}
+
+.questionDark {
+  color: #fff;
+}
+
+.modalButtonsContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+}
+
+.noScroll {
+  overflow: hidden;
+  /* Prevent scrolling */
+}
+
+@media screen and (width >=768px) {
+  .cont {
+    width: 260px;
+  }
+
+  .modalLogoutActionCenter {
+    margin-top: 0;
+    padding: 60px 117px;
+  }
+
+  .question {
+    margin-top: 50px;
+  }
+}
+
+@media screen and (width >=1024px) {
+  .cont {
+    position: static;
+  }
+}

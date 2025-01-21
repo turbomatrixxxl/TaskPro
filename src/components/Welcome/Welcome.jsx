@@ -12,6 +12,7 @@ import {
   AuthButton,
   AuthButtonLogin,
 } from './Welcome.styled';
+import Footer from '../Footer/Footer';
 
 function Welcome() {
   return (
@@ -29,14 +30,15 @@ function Welcome() {
           Pro - Don't wait, start achieving your goals now!
         </Text>
         <AuthWrapper>
-        <AuthButton to="register" className="register">
+          <AuthButton to="/auth/register" className="register">
             Registration
           </AuthButton>
-          <AuthButtonLogin to="login" className="login">
+          <AuthButtonLogin to="/auth/login" className="login">
             Log In
           </AuthButtonLogin>
         </AuthWrapper>
       </Wrapper>
+      <Footer />
     </Container>
   );
 }

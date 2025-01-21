@@ -13,7 +13,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div onClick={handleTextClick} className={styles.footerText}>
         <p>℗ & © GoIT 2024</p>
-        <p>Powered by Naramzoiu Radu Bogdan </p>
+        <p>Powered by Ultimate Team</p>
       </div>
       {/* Randează Modal-ul dacă este deschis */}
       {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}

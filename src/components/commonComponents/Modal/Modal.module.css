@@ -1,11 +1,11 @@
-@import '../../../styles/variables.css';
+@import "../../../styles/variables.css";
 
 .modalClassName {
   align-items: center;
   display: flex;
   flex-direction: column;
   backdrop-filter: blur(3.5px);
-  background: rgba(34, 13, 91, 0.23);
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 25%, #bedbb0 92.19%);
   border: none;
   color: var(--transparency-60);
   height: 100vh;
@@ -20,7 +20,7 @@
 
 .content {
   align-items: center;
-  background: var(--form-background);
+  background: #fcfcfc;
   border: none;
   display: flex;
   flex-direction: column;
@@ -41,6 +41,10 @@
 
   box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(50px);
+}
+
+.darkContent {
+  background: #151515;
 }
 
 .closeModal {
