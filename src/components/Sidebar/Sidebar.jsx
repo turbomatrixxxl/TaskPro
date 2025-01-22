@@ -13,6 +13,10 @@ import clsx from 'clsx';
 import Button from '../commonComponents/Button';
 import Modal from '../commonComponents/Modal/Modal';
 
+import LogoSection from './LogoSection/LogoSection'; 
+import MyBoardsSection from './MyBoardsSection/MyBoardsSection';
+import NeedHelpSection from './NeedHelpSection/NeedHelpSection'; 
+
 import logoSmall from '../../images/cactus.png'
 import logoBig from '../../images/cactus@2x.png'
 
@@ -69,7 +73,12 @@ export default function Sidebar() {
     const imageUrl = `https://taskpro-nodejs.onrender.com/${user.avatarURL}`;
 
     return (
-        <div className={styles.cont}>
+      <div className={styles.cont}>
+        <LogoSection />
+
+        <MyBoardsSection />
+         
+        <NeedHelpSection />
             {isLogoutModalVisible && (
                 <div
                     ref={modalRef}
@@ -124,7 +133,7 @@ export default function Sidebar() {
                 </div>
             )}
 
-            <p>Sidebar</p>
+            
             <button onClick={toggleIsLogoutModalVisible} className={styles.logoutButton}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <path d="M11.8667 10.0798C12.28 5.27982 14.7467 3.31982 20.1467 3.31982H20.32C26.28 3.31982 28.6667 5.70649 28.6667 11.6665V20.3598C28.6667 26.3198 26.28 28.7065 20.32 28.7065H20.1467C14.7867 28.7065 12.32 26.7732 11.88 22.0532" stroke={clsx(user?.theme === "violet" ? "white" : "#BEDBB0")} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
