@@ -1,0 +1,55 @@
+.helpContainer {
+    border-radius: 8px;
+    background: #F6F6F7;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    
+}
+  
+.helpText {
+    color: #161616;
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.28px;
+    margin-bottom: 18px;
+    
+}
+.highlight{
+    color: #BEDBB0;
+}
+  
+.helpBar {
+    font-size: 12px;
+  color: black; 
+  cursor: pointer; 
+  font-weight: 500;
+  background-color: transparent; 
+  padding: 0; 
+  border: none; 
+  display: inline-flex;
+  align-items: center; 
+  transition: color 0.3s ease;
+  line-height: 18px;
+}
+  
+.helpBar:hover {
+    color: #BEDBB0;
+}
+  
+.helpBar svg {
+    width: 16px; 
+    height: 16px;
+    margin-right: 5px; 
+    
+}
+
+.plantImage {
+    width: 54px;
+    height: 78px;
+    flex-shrink: 0;
+}
