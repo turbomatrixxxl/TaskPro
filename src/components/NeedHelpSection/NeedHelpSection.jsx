@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../../hooks/useAuth'; 
-import plant from '../../../images/cactus.png';
+import { useAuth } from '../../hooks/useAuth'; 
+import plant from '../../images/cactus.png';
 import clsx from 'clsx';
 import styles from './NeedHelpSection.module.css';
 // import NeedHelp from '../../modal/NeedHelp/NeedHelp'; 

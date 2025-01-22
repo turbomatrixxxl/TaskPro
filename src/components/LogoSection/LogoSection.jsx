@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAuth } from '../../../hooks/useAuth'; 
-import icons from '../../../images/sprite.svg'; 
+import { useAuth } from '../../hooks/useAuth'; 
+import icons from '../../images/sprite.svg'; 
 import clsx from 'clsx';
 import styles from './LogoSection.module.css'; 
 
