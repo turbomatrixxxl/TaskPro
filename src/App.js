@@ -6,6 +6,7 @@ import { useAuth } from "./hooks/useAuth"; // Import custom hook
 
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
+import RestrictedLoginRoute from "./components/RestrictedLoginRoute/RestrictedLoginRoute";
 
 import WelcomePage from "./components/Welcome/Welcome";
 import RegisterPage from "./pages/RegisterPage"; // Assuming this component exists
@@ -46,7 +47,10 @@ function App() {
         <Route
           path="/auth/login"
           element={
-            <RestrictedRoute component={<LoginPage />} redirectTo="/home" />
+            <RestrictedLoginRoute
+              component={<LoginPage />}
+              redirectTo="/home"
+            />
           }
         />
         <Route path="/verify-email" element={<VerifyEmailPage />} />

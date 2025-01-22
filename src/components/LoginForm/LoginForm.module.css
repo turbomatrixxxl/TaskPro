@@ -93,6 +93,8 @@
   color: red;
   font-size: 14px;
   font-weight: 500;
+  padding: 0 5px;
+  width: 287px;
 }
 
 .buttonsContainer {
@@ -112,7 +114,11 @@
 @media screen and (width >=768px) {
   .cont {
     width: fit-content;
-    height: 385px;
+    height: fit-content;
     padding: 40px;
+  }
+
+  .error {
+    width: 344px;
   }
 }

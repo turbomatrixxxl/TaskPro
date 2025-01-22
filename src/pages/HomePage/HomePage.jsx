@@ -6,7 +6,6 @@ import useToggle from "../../hooks/useToggle";
 import styles from "./HomePage.module.css";
 import { useAuth } from "../../hooks/useAuth";
 import clsx from "clsx";
-import { dark } from "@mui/material/styles/createPalette";
 
 const breakpoints = {
   mobile: "(max-width: 767px)",
