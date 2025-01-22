@@ -18,9 +18,10 @@ import "react-toastify/dist/ReactToastify.css";
 // import clsx from "clsx";
 
 import styles from "./SharedLayout.module.css";
+import clsx from "clsx";
 
 function SharedLayout({ handleClick }) {
-  const { isLoggedIn, isLoggedOut, isRegistered } = useAuth();
+  const { isLoggedIn, isLoggedOut, isRegistered, user } = useAuth();
   const { message } = usePrivate();
 
   const [toastShown, setToastShown] = useState(false);
@@ -77,7 +78,7 @@ function SharedLayout({ handleClick }) {
 
       <ToastContainer position="top-center" autoClose={5000} />
 
-      <main className={styles.main}>
+      <main className={clsx(styles.main, user?.theme === "dark" ? styles.mainDark : user?.theme === "violet" ? styles.mainViolet : user?.theme === "light" ? styles.mainLight : styles.mainLight)}>
         <Outlet />
       </main>
 

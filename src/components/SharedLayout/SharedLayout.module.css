@@ -12,6 +12,18 @@
   background: transparent;
 }
 
+.mainLight {
+  background: #f6f6f7;
+}
+
+.mainViolet {
+  background: #ecedfd;
+}
+
+.mainDark {
+  background: #1f1f1f;
+}
+
 /* @media screen and (width >=768px) {
 }
 

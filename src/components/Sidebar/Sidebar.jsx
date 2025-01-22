@@ -24,8 +24,10 @@ const breakpoints = {
     tablet: "(min-width:768px)",
 };
 
-export default function Sidebar() {
+export default function Sidebar({ sideBarRef }) {
     const { user } = useAuth()
+    console.log(user.theme);
+
 
     const [isLogoutModalVisible, toggleIsLogoutModalVisible] = useToggle(false);
     const modalRef = useRef();
@@ -38,6 +40,10 @@ export default function Sidebar() {
     const handleLogout = () => {
         dispatch(logOut());
     };
+
+    // useEffect(() => {
+    //     dispatch(refreshUser())
+    // }, [dispatch])
 
     useEffect(() => {
         if (isLogoutModalVisible) {
@@ -69,7 +75,7 @@ export default function Sidebar() {
     const imageUrl = `https://taskpro-nodejs.onrender.com/${user.avatarURL}`;
 
     return (
-        <div className={styles.cont}>
+        <aside ref={sideBarRef} className={clsx(styles.cont, user?.theme === "dark" ? styles.asideDark : user?.theme === "violet" ? styles.asideViolet : user?.theme === "light" ? styles.asideLight : styles.asideLight)}>
             {isLogoutModalVisible && (
                 <div
                     ref={modalRef}
@@ -127,13 +133,13 @@ export default function Sidebar() {
             <p>Sidebar</p>
             <button onClick={toggleIsLogoutModalVisible} className={styles.logoutButton}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <path d="M11.8667 10.0798C12.28 5.27982 14.7467 3.31982 20.1467 3.31982H20.32C26.28 3.31982 28.6667 5.70649 28.6667 11.6665V20.3598C28.6667 26.3198 26.28 28.7065 20.32 28.7065H20.1467C14.7867 28.7065 12.32 26.7732 11.88 22.0532" stroke={clsx(user?.theme === "violet" ? "white" : "#BEDBB0")} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M2.6665 16H19.8398" stroke={clsx(user?.theme === "violet" ? "white" : "#BEDBB0")} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M16.8667 11.5332L21.3334 15.9999L16.8667 20.4665" stroke={clsx(user?.theme === "violet" ? "white" : "#BEDBB0")} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M11.8667 10.0798C12.28 5.27982 14.7467 3.31982 20.1467 3.31982H20.32C26.28 3.31982 28.6667 5.70649 28.6667 11.6665V20.3598C28.6667 26.3198 26.28 28.7065 20.32 28.7065H20.1467C14.7867 28.7065 12.32 26.7732 11.88 22.0532" stroke={clsx(user?.theme === "violet" ? "white" : "#BEDBB0")} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M2.6665 16H19.8398" stroke={clsx(user?.theme === "violet" ? "white" : "#BEDBB0")} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M16.8667 11.5332L21.3334 15.9999L16.8667 20.4665" stroke={clsx(user?.theme === "violet" ? "white" : "#BEDBB0")} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
 
-                <span className={styles.logoutButtonSpan}>Log out</span>
+                <span className={clsx(styles.logoutButtonSpan, user?.theme === "light" ? styles.logoutButtonSpanLight : styles.logoutButtonSpan)}>Log out</span>
             </button>
-        </div>
+        </aside>
     )
 }

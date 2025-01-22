@@ -25,7 +25,7 @@ function Header({ handleClick }) {
 
   const isMobile = useMediaQuery({ query: breakpoints.mobile });
   const isTablet = useMediaQuery({ query: breakpoints.tablet });
-  // const isDesktop = useMediaQuery({ query: breakpoints.desktop });
+  const isDesktop = useMediaQuery({ query: breakpoints.desktop });
 
 
 
@@ -36,17 +36,17 @@ function Header({ handleClick }) {
       >
         {isMobile && <button onClick={handleClick} className={styles.hamButton}>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M3 12H21" stroke={clsx(user?.theme === "dark" ? "white" : "#161616")} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M3 6H21" stroke={clsx(user?.theme === "dark" ? "white" : "#161616")} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M3 18H21" stroke={clsx(user?.theme === "dark" ? "white" : "#161616")} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M3 12H21" stroke={clsx(user?.theme === "dark" ? "white" : "#161616")} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M3 6H21" stroke={clsx(user?.theme === "dark" ? "white" : "#161616")} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M3 18H21" stroke={clsx(user?.theme === "dark" ? "white" : "#161616")} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>}
 
-        {isTablet && <button onClick={handleClick} className={styles.hamButton}>
+        {isTablet && !isDesktop && <button onClick={handleClick} className={styles.hamButton}>
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <path d="M4 16H28" stroke={clsx(user?.theme === "dark" ? "white" : "#161616")} stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M4 8H28" stroke={clsx(user?.theme === "dark" ? "white" : "#161616")} stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M4 24H28" stroke={clsx(user?.theme === "dark" ? "white" : "#161616")} stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M4 16H28" stroke={clsx(user?.theme === "dark" ? "white" : "#161616")} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M4 8H28" stroke={clsx(user?.theme === "dark" ? "white" : "#161616")} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M4 24H28" stroke={clsx(user?.theme === "dark" ? "white" : "#161616")} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>}
 

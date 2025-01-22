@@ -4,6 +4,9 @@ import SharedLayout from '../../components/SharedLayout/SharedLayout';
 import Sidebar from '../../components/Sidebar';
 import useToggle from "../../hooks/useToggle";
 import styles from "./HomePage.module.css";
+import { useAuth } from "../../hooks/useAuth";
+import clsx from "clsx";
+import { dark } from "@mui/material/styles/createPalette";
 
 const breakpoints = {
   mobile: "(max-width: 767px)",
@@ -15,6 +18,7 @@ export default function HomePage() {
   const [isSidebarVisible, toggleIsSidebarVisible] = useToggle(false); // Default to false for mobile
   const sideBarRef = useRef();
   const isDesktop = useMediaQuery({ query: breakpoints.desktop });
+  const { user } = useAuth()
 
   useEffect(() => {
     const handleEscapeKey = (event) => {
@@ -38,13 +42,20 @@ export default function HomePage() {
 
   return (
     <section className={styles.section}>
-      {isSidebarVisible && !isDesktop && (
-        <div ref={sideBarRef} className={styles.sidebarWrapper}>
-          <Sidebar />
+      {!isDesktop && (
+        <div
+          className={clsx(
+            styles.sidebarWrapper,
+            isSidebarVisible ? styles.sidebarOpen : styles.sidebarClose,
+            user?.theme === "dark" && styles.bgDark
+          )}
+        >
+          <Sidebar sideBarRef={sideBarRef} />
         </div>
       )}
       {isDesktop && <Sidebar />}
       <SharedLayout handleClick={toggleIsSidebarVisible} />
     </section>
   );
+
 }

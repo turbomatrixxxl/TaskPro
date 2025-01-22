@@ -60,7 +60,7 @@ const authSlice = createSlice({
         state.isLoggedIn = payload.user.verify ? true : false;
         state.isLoading = false;
         state.error = null;
-        state.isRegistered = false;
+        state.isRegistered = true;
         state.isLoggedOut = false;
       })
       .addCase(logIn.rejected, handleRejected)
@@ -111,6 +111,7 @@ const authSlice = createSlice({
         state.isRefreshing = false;
         state.isLoggedIn = false;
         state.error = action.payload;
+        state.isRegistered = true;
       })
 
       // Resend Verification Email
