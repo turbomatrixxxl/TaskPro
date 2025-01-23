@@ -21,7 +21,10 @@ const breakpoints = {
 function Header({ handleClick }) {
   const { user } = useAuth();
 
-  const imageUrl = `https://taskpro-nodejs.onrender.com/${user.avatarURL}`;
+  const imageUrl = user?.avatarURL?.startsWith("http")
+    ? user.avatarURL
+    : `https://taskpro-nodejs.onrender.com/${user.avatarURL}`;
+
 
   const isMobile = useMediaQuery({ query: breakpoints.mobile });
   const isTablet = useMediaQuery({ query: breakpoints.tablet });

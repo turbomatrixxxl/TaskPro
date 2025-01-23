@@ -2,10 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // Set Axios base URL
-// axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.baseURL = "https://taskpro-nodejs.onrender.com";
 
-// Authorization setup with fallback
+// Set Authorization header
 const setAuthHeader = () => {
   const token = localStorage.getItem("token")
     ? JSON.parse(localStorage.getItem("token"))
@@ -15,100 +14,197 @@ const setAuthHeader = () => {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   } else {
     console.error("Token not found or expired. Please log in.");
-    // Optional: Redirect user or show login prompt here
   }
 };
 
-// Generic error handler
-const handleError = (error, thunkAPI) =>
-  thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
-
-// Fetch private calculation data
-export const fetchPrivateCalculationData = createAsyncThunk(
-  "private/fetchPrivateCalculationData",
-  async (formData, { rejectWithValue }) => {
-    const { height, desiredWeight, age, bloodGroupIndex, currentWeight } =
-      formData;
-
-    if (
-      !height ||
-      !desiredWeight ||
-      !age ||
-      !bloodGroupIndex ||
-      !currentWeight
-    ) {
-      return rejectWithValue("All parameters are required");
-    }
-
-    const url = `/api/private/${height}/${desiredWeight}/${age}/${bloodGroupIndex}/${currentWeight}`;
-
+// Async thunk for updating the theme
+export const updateTheme = createAsyncThunk(
+  "user/updateTheme",
+  async (theme, { rejectWithValue }) => {
     try {
-      setAuthHeader();
-      const response = await axios.get(url);
-      return response.data;
+      setAuthHeader(); // Ensure token is set in headers
+      const response = await axios.patch("/api/theme", { theme });
+      return response.data.updatedTheme; // Extract the updated user object from the response
     } catch (error) {
-      return handleError(error, { rejectWithValue });
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
 
-// Add consumed product
-export const addConsumedProductForSpecificDay = createAsyncThunk(
-  "private/addConsumedProductForSpecificDay",
-  async (credentials, thunkAPI) => {
+// Async thunk for adding a project
+export const addProject = createAsyncThunk(
+  "user/addProject",
+  async ({ name, icon = 0, background = "none" }, { rejectWithValue }) => {
     try {
-      setAuthHeader();
-      const response = await axios.post("/api/private/consumed", credentials);
-      return response.data;
+      setAuthHeader(); // Ensure token is set in headers
+      const response = await axios.post("/api/projects", {
+        name,
+        icon,
+        background,
+      });
+      return response.data.projects; // Extract the updated user object from the response
     } catch (error) {
-      return handleError(error, thunkAPI);
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
 
-// Delete consumed product
-export const deleteConsumedProductForSpecificDay = createAsyncThunk(
-  "private/deleteConsumedProductForSpecificDay",
-  async (credentials, thunkAPI) => {
-    const { productId, date } = credentials;
-
-    if (!productId || !date) {
-      return thunkAPI.rejectWithValue("Product ID and date are required");
-    }
-
-    const url = `/api/private/consumed/${productId}/${date}`;
-
+// Async thunk for adding a column
+export const addColumn = createAsyncThunk(
+  "user/addColumn",
+  async ({ projectName, columnName }, { rejectWithValue }) => {
     try {
-      setAuthHeader();
-      const response = await axios.delete(url); // Use DELETE method here
-      return {
-        message: response.data.message,
-        user: response.data.user,
-      }; // Return productId for local update
+      setAuthHeader(); // Ensure token is set in headers
+      const response = await axios.post(
+        `/api/projects/${projectName}/columns`,
+        {
+          columnName,
+        }
+      );
+      return response.data.project; // Extract the updated user object with the project
     } catch (error) {
-      return handleError(error, thunkAPI);
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
 
-// Fetch consumed products
-export const fetchConsumedProductsForSpecificDay = createAsyncThunk(
-  "private/fetchConsumedProductsForSpecificDay",
-  async (credentials, thunkAPI) => {
-    const { date } = credentials;
-
-    if (!date) {
-      return thunkAPI.rejectWithValue("Date is required");
-    }
-
-    const url = `/api/private/${date}`;
-
+// Async thunk for updating a column title
+export const updateColumn = createAsyncThunk(
+  "user/updateColumn",
+  async ({ projectName, columnName, newColumnName }, { rejectWithValue }) => {
     try {
-      setAuthHeader();
-      const response = await axios.get(url);
-      return response.data;
+      setAuthHeader(); // Ensure token is set in headers
+      const response = await axios.patch(
+        `/api/projects/${projectName}/column/${columnName}`,
+        { name: newColumnName }
+      );
+      return response.data.project; // Extract the updated user object with the project
     } catch (error) {
-      return handleError(error, thunkAPI);
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+// Async thunk for adding a task
+export const addTask = createAsyncThunk(
+  "user/addTask",
+  async ({ projectName, columnName, taskData }, { rejectWithValue }) => {
+    try {
+      setAuthHeader(); // Ensure token is set in headers
+      const response = await axios.post(
+        `/api/projects/${projectName}/columns/${columnName}/tasks`,
+        taskData
+      );
+      return response.data.column; // Return the full user object from the response, which contains the updated projects
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+// Async thunk for updating a task
+export const updateTask = createAsyncThunk(
+  "user/updateTask",
+  async (
+    { projectName, columnName, taskName, updates },
+    { rejectWithValue }
+  ) => {
+    try {
+      setAuthHeader(); // Ensure token is set in headers
+      const response = await axios.patch(
+        `/api/projects/${projectName}/column/${columnName}/tasks/${taskName}`,
+        updates
+      );
+      return response.data.task; // Extract the updated user object (which includes projects)
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+// Async thunk for moving a task
+export const moveTask = createAsyncThunk(
+  "user/moveTask",
+  async (
+    { projectName, columnName, taskName, toColumnName },
+    { rejectWithValue }
+  ) => {
+    try {
+      setAuthHeader(); // Ensure token is set in headers
+
+      // Send a patch request to move the task
+      const response = await axios.patch(
+        `/api/projects/${projectName}/column/${columnName}/tasks/${taskName}/move`,
+        { toColumnName }
+      );
+
+      // Return the updated user object, which includes updated projects
+      return response.data.task;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+// Async thunk for deleting a task
+export const deleteTask = createAsyncThunk(
+  "user/deleteTask",
+  async ({ projectName, columnName, taskName }, { rejectWithValue }) => {
+    try {
+      setAuthHeader(); // Ensure token is set in headers
+      const response = await axios.delete(
+        `/api/projects/${projectName}/columns/${columnName}/tasks/${taskName}`
+      );
+      return response.data.column; // Return the updated user object, which includes the projects
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+// Async thunk for deleting a column
+export const deleteColumn = createAsyncThunk(
+  "user/deleteColumn",
+  async ({ projectName, columnName }, { rejectWithValue }) => {
+    try {
+      setAuthHeader(); // Ensure token is set in headers
+      const response = await axios.delete(
+        `/api/projects/${projectName}/columns/${columnName}`
+      );
+      return response.data.project; // Return the updated user object, including the updated projects
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+// Async thunk for deleting a project
+export const deleteProject = createAsyncThunk(
+  "user/deleteProject",
+  async ({ projectName }, { rejectWithValue }) => {
+    try {
+      setAuthHeader(); // Ensure token is set in headers
+      const response = await axios.delete(`/api/projects/${projectName}`);
+      return response.data.projects; // Return the updated user object, including the updated projects
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+// Async thunk for updating the project appearance
+export const updateProjectAppearance = createAsyncThunk(
+  "user/updateProjectAppearance",
+  async ({ projectName, updates }, { rejectWithValue }) => {
+    try {
+      setAuthHeader(); // Ensure token is set in headers
+      const response = await axios.patch(
+        `/api/projects/${projectName}/appearance`,
+        updates
+      );
+      return response.data.project; // Return the updated user object, including the updated project
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );

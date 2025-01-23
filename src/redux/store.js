@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./auth/authSlice";
-import { publicCalculatorReducer } from "./public/publicCalculatorSlice";
+import { helpMailReducer } from "./public/helpSlice";
 import { privateReducer } from "./private/privateSlice";
 
 export const store = configureStore({
   reducer: {
     authSlice: authReducer,
-    publicCalculatorSlice: publicCalculatorReducer,
+    helpSlice: helpMailReducer,
     privateSlice: privateReducer,
   },
   middleware: (getDefaultMiddleware) =>

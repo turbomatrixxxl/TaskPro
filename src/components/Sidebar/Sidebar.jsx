@@ -72,7 +72,9 @@ export default function Sidebar({ sideBarRef }) {
 
     const isMobile = useMediaQuery({ query: breakpoints.mobile });
 
-    const imageUrl = `https://taskpro-nodejs.onrender.com/${user.avatarURL}`;
+    const imageUrl = user?.avatarURL?.startsWith("http")
+        ? user.avatarURL
+        : `https://taskpro-nodejs.onrender.com/${user.avatarURL}`;
 
     return (
         <aside ref={sideBarRef} className={clsx(styles.cont, user?.theme === "dark" ? styles.asideDark : user?.theme === "violet" ? styles.asideViolet : user?.theme === "light" ? styles.asideLight : styles.asideLight)}>
