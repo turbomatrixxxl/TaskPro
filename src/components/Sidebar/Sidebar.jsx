@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
@@ -16,6 +16,10 @@ import Modal from '../commonComponents/Modal/Modal';
 import logoSmall from '../../images/cactus.png'
 import logoBig from '../../images/cactus@2x.png'
 
+// import NeedHelpSection from '../NeedHelpSection';
+import MyBoardsSection from '../MyBoardsSection'
+import LogoSection from '../LogoSection/LogoSection'
+
 import styles from './Sidebar.module.css'
 
 
@@ -26,7 +30,7 @@ const breakpoints = {
 
 export default function Sidebar({ sideBarRef }) {
     const { user } = useAuth()
-    console.log(user.theme);
+    // console.log(user.theme);
 
 
     const [isLogoutModalVisible, toggleIsLogoutModalVisible] = useToggle(false);
@@ -131,8 +135,23 @@ export default function Sidebar({ sideBarRef }) {
                     </div>
                 </div>
             )}
-
-            <p>Sidebar</p>
+            <div className={styles.projectsCont}>
+                <LogoSection />
+                <MyBoardsSection />
+                <nav className={styles.projectsNav}>
+                    {user?.projects.map((project) => {
+                        return <NavLink key={project._id}
+                            to={`/home/${project.name}`}
+                            className={({ isActive }) =>
+                                isActive ? styles.activeLink : styles.link
+                            }
+                        >
+                            {project?.name}
+                        </NavLink>
+                    })}
+                </nav>
+                {/* <NeedHelpSection /> */}
+            </div>
             <button onClick={toggleIsLogoutModalVisible} className={styles.logoutButton}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <path d="M11.8667 10.0798C12.28 5.27982 14.7467 3.31982 20.1467 3.31982H20.32C26.28 3.31982 28.6667 5.70649 28.6667 11.6665V20.3598C28.6667 26.3198 26.28 28.7065 20.32 28.7065H20.1467C14.7867 28.7065 12.32 26.7732 11.88 22.0532" stroke={clsx(user?.theme === "violet" ? "white" : "#BEDBB0")} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

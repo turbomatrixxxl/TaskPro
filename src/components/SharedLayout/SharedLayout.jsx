@@ -17,21 +17,24 @@ import "react-toastify/dist/ReactToastify.css";
 
 // import clsx from "clsx";
 
-import styles from "./SharedLayout.module.css";
 import clsx from "clsx";
 
+// import ScreenPage from "../../pages/ScreenPage";
+
+import styles from "./SharedLayout.module.css";
+
 function SharedLayout({ handleClick }) {
-  const { isLoggedIn, isLoggedOut, isRegistered, user } = useAuth();
+  const { isLoggedIn, isLoggedOut, errorAuth, user } = useAuth();
   const { message } = usePrivate();
 
   const [toastShown, setToastShown] = useState(false);
   const [logoutShown, setLogoutShown] = useState(false);
 
-  useEffect(() => {
-    if (isRegistered) {
-      toast.success("Registration successful!");
-    }
-  }, [isRegistered]);
+  // useEffect(() => {
+  //   if (isRegistered) {
+  //     toast.success("Registration successful!");
+  //   }
+  // }, [isRegistered]);
 
   useEffect(() => {
     if (isLoggedIn && !toastShown) {
@@ -49,11 +52,11 @@ function SharedLayout({ handleClick }) {
     }
   }, [isLoggedOut, logoutShown]);
 
-  // useEffect(() => {
-  //   if (error) {
-  //     toast.error(error);
-  //   }
-  // }, [error]);
+  useEffect(() => {
+    if (errorAuth) {
+      toast.error(errorAuth);
+    }
+  }, [errorAuth]);
 
   useEffect(() => {
     if (message) {
@@ -61,22 +64,11 @@ function SharedLayout({ handleClick }) {
     }
   }, [message]);
 
-  // console.log({
-  //   isLoggedIn: isLoggedIn,
-  //   toastShown: toastShown,
-  //   logoutShown: logoutShown,
-  //   isLoggedOut: isLoggedOut,
-  //   error: error,
-  //   errorAuth: errorAuth,
-  //   message: message,
-  //   isRegistered: isRegistered,
-  // });
-
   return (
     <div className={styles.cont}>
       <Header handleClick={handleClick} />
 
-      <ToastContainer position="top-center" autoClose={5000} />
+      <ToastContainer position="top-center" autoClose={1500} />
 
       <main className={clsx(styles.main, user?.theme === "dark" ? styles.mainDark : user?.theme === "violet" ? styles.mainViolet : user?.theme === "light" ? styles.mainLight : styles.mainLight)}>
         <Outlet />

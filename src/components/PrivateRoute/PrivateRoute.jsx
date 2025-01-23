@@ -4,9 +4,9 @@ import Loader from "../commonComponents/Loader";// Ensure this hook is correctly
 
 const PrivateRoute = ({ component, redirectTo = "/" }) => {
   const { isLoggedIn, isRefreshing, user } = useAuth();
-  console.log("isLoggedIn:", isLoggedIn);
-  console.log("isRefreshing:", isRefreshing);
-  console.log("user:", user);
+  // console.log("isLoggedIn:", isLoggedIn);
+  // console.log("isRefreshing:", isRefreshing);
+  // console.log("user:", user);
 
 
 

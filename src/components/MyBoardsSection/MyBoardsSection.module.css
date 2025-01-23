@@ -1,46 +1,83 @@
-.h3Board {
-    color: rgba(22, 22, 22, 0.50);
-    font-family: Poppins;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.24px;
-    margin-bottom: 16px;  
-    padding-bottom: 8px;   
-    border-bottom: 1px solid rgba(22, 22, 22, 0.10);
+.cont {
+  display: flex;
+  flex-direction: column;
+  margin-top: 70px;
+  margin-bottom: 40px;
+  padding: 0 14px;
 }
 
-.createBoard {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    font-family: Poppins;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    letter-spacing: -0.28px;
-    color: #161616;
-    padding-right: 8px; 
-    margin-bottom: 20px;  
-    padding-bottom: 8px;   
-    border-bottom: 1px solid rgba(22, 22, 22, 0.10);; 
-    
+.h3Board {
+  color: rgba(255, 255, 255, 0.5);
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.24px;
+  margin-bottom: 8px;
+}
+
+.lightH3 {
+  color: rgba(22, 22, 22, 0.5);
+}
+
+.createBoardCont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  color: #161616;
+  padding: 14px 0;
+  padding-right: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.createBoardContLight {
+  border-bottom: 1px solid rgba(22, 22, 22, 0.1);
+  border-top: 1px solid rgba(22, 22, 22, 0.1);
+}
+
+.createBoardText {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 42px;
+}
+
+.createBoardTextLight {
+  color: #161616;
 }
 
 .iconPlus {
-    width: 40px;
-    height: 40px;
-    flex-shrink: 0;
-    border: none;
-    border-radius: 8px; 
-    background: #BEDBB0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    font-size: 24px;
-    color: white;
-    
+  width: 40px;
+  height: 36px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 8px;
+  background: #bedbb0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 24px;
+  color: white;
+}
+
+.iconPlusViolet {
+  background: #b8bcfd;
+}
+@media screen and (width >=768px) {
+  .cont {
+    padding: 0 24px;
+  }
+
+  .createBoardCont {
+    padding: 14px 0;
+  }
 }

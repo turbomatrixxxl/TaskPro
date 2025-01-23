@@ -6,6 +6,25 @@
   width: 225px;
 }
 
+.projectsCont {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.projectsNav {
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  color: white;
+}
+
+.activeLink {
+  color: red;
+}
+
 .asideLight {
   background: #fff;
 }
@@ -28,6 +47,8 @@
   justify-content: center;
   outline: none;
   width: fit-content;
+  padding-bottom: 24px;
+  padding-left: 14px;
 }
 
 .logoutButtonSpan {
@@ -148,6 +169,10 @@
 
   .question {
     margin-top: 50px;
+  }
+
+  .logoutButton {
+    padding-left: 24px;
   }
 }
 
