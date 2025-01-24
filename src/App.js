@@ -7,7 +7,7 @@ import NeedHelp from "./components/modal/Needhelp/NeedHelp";
 import AddCard from "./components/modal/AddCard/AddCard";
 import "./styles/variables.css";
 import { TheamBtn } from './components/commonComponents/Buttons/AddButtonApp';
-import ThemeModals from "./components/commonComponents/ThemeComponent/ThemeModal";  // Asigură-te că ThemeModal este importat corect
+import ThemeModals from "./components/commonComponents/ThemeComponent/ThemeChanger";  // Asigură-te că ThemeModal este importat corect
 
 function App() {
   const [isNewBoardModalOpen, setIsNewBoardModalOpen] = useState(false);
