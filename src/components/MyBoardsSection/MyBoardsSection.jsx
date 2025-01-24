@@ -1,12 +1,14 @@
 import React from 'react';
 import { useAuth } from '../../hooks/useAuth';
 
-import styles from './MyBoardsSection.module.css';
 import clsx from 'clsx';
+// import { useDispatch } from 'react-redux';
+
+import styles from './MyBoardsSection.module.css';
 
 const MyBoardsSection = ({ setShowModalBoard }) => {
   const { user } = useAuth()
-
+  // const dispatch=useDispatch()
   // const [showModalBoard, setShowModalBoard] = useState(false); 
 
   return (
@@ -22,8 +24,6 @@ const MyBoardsSection = ({ setShowModalBoard }) => {
         <button
           className={clsx(styles.iconPlus, user?.theme === "violet" ? styles.iconPlusViolet : styles.iconPlus)}
           onClick={() => {
-            // Deschide modalul de creare a unui board
-            // setShowModalBoard(true);
 
           }}
         >

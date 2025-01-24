@@ -32,6 +32,12 @@
   background: white;
 }
 
+.rightContainer {
+  align-items: center;
+  display: flex;
+  margin-left: auto;
+}
+
 .userContainer {
   display: flex;
   align-items: center;

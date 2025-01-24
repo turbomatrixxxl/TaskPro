@@ -3,6 +3,7 @@
   flex-grow: 1;
   height: 61px;
   justify-content: space-between;
+  gap: 8px;
   padding: 20px 0;
   padding-left: 14px;
   width: 100%;
@@ -27,7 +28,9 @@
 .leftCont {
   align-items: center;
   display: flex;
+  flex-grow: 1;
   gap: 4px;
+  width: fit-content;
 }
 
 .mainIcon {
@@ -62,6 +65,8 @@
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.28px;
+  overflow: hidden;
+  width: fit-content;
 }
 
 .mainTextNormal {
@@ -115,4 +120,18 @@
 
 .rightMarginViolet {
   background: #fff;
+}
+
+@media screen and (width >=768px) {
+  .nav {
+    padding-left: 20px;
+  }
+
+  .leftCont {
+    padding: 8px;
+  }
+
+  .rightCont {
+    gap: 24px;
+  }
 }

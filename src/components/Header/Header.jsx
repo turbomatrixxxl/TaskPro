@@ -11,6 +11,7 @@ import clsx from "clsx";
 
 
 import styles from "./Header.module.css";
+import ThemeSelector from "../ThemeSelector/ThemeSelector";
 
 const breakpoints = {
   mobile: "(max-width: 767px)",
@@ -52,11 +53,13 @@ function Header({ handleClick }) {
             <path d="M4 24H28" stroke={clsx(user?.theme === "dark" ? "white" : "#161616")} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>}
+        <div className={styles.rightContainer}>
+          <ThemeSelector />
+          <div className={clsx(styles.userContainer, user?.theme === "dark" ? styles.userContainerDark : styles.userContainer)}>
+            <p>{user ? user?.username : "User"}</p>
 
-        <div className={clsx(styles.userContainer, user?.theme === "dark" ? styles.userContainerDark : styles.userContainer)}>
-          <p>{user ? user?.username : "User"}</p>
-
-          <img src={imageUrl} alt="User Avatar" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
+            <img src={imageUrl} alt="User Avatar" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
+          </div>
         </div>
       </header>
     </>

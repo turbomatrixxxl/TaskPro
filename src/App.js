@@ -45,7 +45,7 @@ function App() {
     <React.Suspense fallback={<Loader />}>
       <Routes>
         {/* Public Routes */}
-        <Route path="/welcome" element={<LazyWelcomePage />} />
+        <Route path="/TaskPro" element={<LazyWelcomePage />} />
         <Route
           path="/auth/register"
           element={

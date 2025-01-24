@@ -1,0 +1,105 @@
+.selector {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+  margin-right: 14px;
+  position: relative;
+  width: fit-content;
+}
+
+.button {
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  gap: 4px;
+  height: fit-content;
+  justify-content: center;
+  outline: none;
+  outline: none;
+  width: fit-content;
+}
+
+.span {
+  color: rgba(22, 22, 22, 0.8);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.28px;
+}
+
+.spanDark {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.svg {
+  width: 16px;
+  height: 16px;
+  fill: rgba(22, 22, 22, 0.8);
+}
+
+.svgDark {
+  fill: rgba(255, 255, 255, 0.8);
+}
+
+.options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin: 8px 0 0;
+  list-style: none;
+  display: inline-flex;
+  padding: 18px 44px 18px 18px;
+  flex-direction: column;
+  justify-content: center;
+
+  border-radius: 8px;
+  border: 1px solid #bedbb0;
+  background: #fcfcfc;
+  box-shadow: 0px 4px 16px 0px rgba(17, 17, 17, 0.1);
+  z-index: 10;
+}
+
+.optionsDark {
+  background: #151515;
+}
+
+.optionsViolet {
+  border-color: #ecedfd;
+}
+
+.option {
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: #161616;
+  transition: all cubic-bezier(1.075, 0.82, 0.165, 1);
+}
+
+.optionDark {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.option:hover {
+  scale: 1.2;
+}
+
+.activeOption {
+  color: #bedbb0;
+  font-weight: bold;
+}
+
+.activeOptionViolet {
+  font-weight: bold;
+  color: #5255bc;
+}
