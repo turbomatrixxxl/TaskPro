@@ -10,8 +10,10 @@ import RestrictedLoginRoute from "./components/RestrictedLoginRoute/RestrictedLo
 
 import Loader from "./components/commonComponents/Loader";
 
-import "./App.css";
 import ProjectPage from "./pages/ProjectPage/ProjectPage";
+
+import "./styles/theme.css";
+import "./App.css";
 
 // Lazy-loaded components
 const LazyWelcomePage = lazy(() => import("./components/Welcome/Welcome"));
@@ -28,7 +30,9 @@ const LazyHomePage = lazy(() => import("./pages/HomePage"));
 const LazyScreenPage = lazy(() => import("./pages/ScreenPage"));
 
 function App() {
-  const { isRefreshing } = useAuth(); // Check user verification status
+  const { isRefreshing, user } = useAuth(); // Check user verification status
+  const theme = user?.theme || "light"; // Default to "light" theme
+
   const dispatch = useDispatch(); // To dispatch actions
 
   useEffect(() => {
@@ -36,6 +40,10 @@ function App() {
       dispatch(refreshUser());
     }
   }, [dispatch]);
+
+  useEffect(() => {
+    document.body.className = `theme-${theme}`;
+  }, [theme]);
 
   if (isRefreshing) {
     return <Loader />; // Loader while checking refresh status

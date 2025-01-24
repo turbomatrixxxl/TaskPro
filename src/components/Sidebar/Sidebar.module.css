@@ -16,6 +16,8 @@
 .projectsNav {
   display: flex;
   flex-direction: column;
+  height: 122px;
+  overflow: auto;
 }
 
 .link {
@@ -50,6 +52,7 @@
   width: fit-content;
   padding-bottom: 24px;
   padding-left: 14px;
+  margin-top: 15px;
 }
 
 .logoutButtonSpan {

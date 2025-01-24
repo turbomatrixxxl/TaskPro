@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
@@ -16,10 +16,12 @@ import Modal from "../commonComponents/Modal/Modal";
 import logoSmall from "../../images/cactus.png";
 import logoBig from "../../images/cactus@2x.png";
 
-import styles from "./Sidebar.module.css";
 import ProjectsLinks from "../ProjectsLinks/ProjectsLinks";
 import MyBoardsSection from "../MyBoardsSection";
 import LogoSection from "../LogoSection/LogoSection";
+import NeedHelpSection from "../NeedHelpSection/NeedHelpSection";
+
+import styles from "./Sidebar.module.css";
 
 const breakpoints = {
     mobile: "(max-width: 767px)",
@@ -182,6 +184,7 @@ export default function Sidebar({ sideBarRef }) {
                     )}
                 </nav>
             </div>
+            <NeedHelpSection />
             <button
                 onClick={toggleIsLogoutModalVisible}
                 className={styles.logoutButton}

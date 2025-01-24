@@ -6,7 +6,19 @@
   text-align: center;
 }
 
-.sharedLayout {
-  flex-grow: 1;
-  width: -webkit-fill-available;
+/* Default scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px; /* Width of vertical scrollbar */
+  height: 12px; /* Height of horizontal scrollbar */
+  background-color: var(--scrollbar-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+  background-color: var(--scrollbar-thumb-hover);
 }
