@@ -77,6 +77,15 @@ const ThemeChanger = () => {
     gap: "4px",
   };
 
+  // Stil pentru SVG
+  const svgStyles = {
+    stroke: theme === "dark" ? "#BEDBB0" : "#161616", // Culoare SVG pe tema dark
+    strokeOpacity: "0.8",
+    strokeWidth: "1.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+  };
+
   return (
     <div style={{ textAlign: "center", marginTop: "50px", position: "relative" }}>
       {/* Butonul principal */}
@@ -85,14 +94,9 @@ const ThemeChanger = () => {
         style={mainButtonStyles}
       >
         Theme
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none" style={svgStyles}>
           <path
             d="M4 6.5L8 10.5L12 6.5"
-            stroke="black" // Poți modifica în funcție de temă
-            strokeOpacity="0.8"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
           />
         </svg>
       </button>
