@@ -60,26 +60,29 @@ const ThemeChanger = () => {
     transition: "color 0.2s",
   };
 
+  // Butonul principal, acum cu stiluri pentru tema "dark"
+  const mainButtonStyles = {
+    color: theme === "dark" ? "rgba(255, 255, 255, 0.80)" : "rgba(0, 0, 0, 0.8)",
+    fontFamily: "Poppins",
+    fontSize: "14px",
+    fontStyle: "normal",
+    fontWeight: "500",
+    lineHeight: "normal",
+    letterSpacing: "-0.28px",
+    background: "transparent",
+    border: "none",
+    cursor: "pointer",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "4px",
+  };
+
   return (
     <div style={{ textAlign: "center", marginTop: "50px", position: "relative" }}>
       {/* Butonul principal */}
       <button
         onClick={() => setShowOptions(!showOptions)}
-        style={{
-          color: "rgba(0, 0, 0, 0.8)",
-          fontFamily: "Poppins",
-          fontSize: "14px",
-          fontStyle: "normal",
-          fontWeight: "500",
-          lineHeight: "normal",
-          letterSpacing: "-0.28px",
-          background: "transparent",
-          border: "none",
-          cursor: "pointer",
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "4px",
-        }}
+        style={mainButtonStyles}
       >
         Theme
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
