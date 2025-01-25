@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { reset } from "../auth/authSlice";
+
 import {
   updateTheme,
   addProject,
@@ -13,14 +15,17 @@ import {
   updateProjectAppearance,
 } from "./operationsPrivate";
 
+const initialState = {
+  user: null, // Will hold the full user object from the backend
+  isLoading: false,
+  error: null,
+  message: null,
+};
+
 // User slice
 const privateSlice = createSlice({
   name: "user",
-  initialState: {
-    user: null, // Will hold the full user object from the backend
-    isLoading: false,
-    error: null,
-  },
+  initialState: initialState,
   reducers: {
     setUser(state, action) {
       state.user = action.payload;
@@ -28,10 +33,16 @@ const privateSlice = createSlice({
     clearUser(state) {
       state.user = null;
       state.error = null;
+      state.message = null;
     },
   },
   extraReducers: (builder) => {
     builder
+      .addCase(reset, () => {
+        // Reset to initial state on reset action
+        return { ...initialState };
+      })
+
       // Update theme reducers
       .addCase(updateTheme.pending, (state) => {
         state.isLoading = true;
@@ -53,12 +64,15 @@ const privateSlice = createSlice({
       })
       .addCase(addProject.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload; // Update the entire user object, including projects
+        state.user = action.payload.projects;
+        // Update the entire user object, including projects
+        state.message = action.payload.message;
       })
       .addCase(addProject.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
+
       // Add column reducers
       .addCase(addColumn.pending, (state) => {
         state.isLoading = true;
@@ -68,13 +82,14 @@ const privateSlice = createSlice({
         state.isLoading = false;
 
         // Find and update the specific project with the new column
-        const updatedProject = action.payload;
+        const updatedProject = action.payload.project;
         const projectIndex = state.user.projects.findIndex(
           (project) => project.name === updatedProject.name
         );
         if (projectIndex !== -1) {
           state.user.projects[projectIndex] = updatedProject;
         }
+        state.message = action.payload.message;
       })
       .addCase(addColumn.rejected, (state, action) => {
         state.isLoading = false;
@@ -85,17 +100,19 @@ const privateSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
+
       .addCase(updateColumn.fulfilled, (state, action) => {
         state.isLoading = false;
 
         // Update the specific column in the correct project
-        const updatedProject = action.payload;
+        const updatedProject = action.payload.project;
         const projectIndex = state.user.projects.findIndex(
           (project) => project.name === updatedProject.name
         );
         if (projectIndex !== -1) {
           state.user.projects[projectIndex] = updatedProject;
         }
+        state.message = action.payload.message;
       })
       .addCase(updateColumn.rejected, (state, action) => {
         state.isLoading = false;
@@ -109,7 +126,8 @@ const privateSlice = createSlice({
       })
       .addCase(addTask.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload; // Update the full user object, including tasks within projects
+        state.user = action.payload.column; // Update the full user object, including tasks within projects
+        state.message = action.payload.message;
       })
       .addCase(addTask.rejected, (state, action) => {
         state.isLoading = false;
@@ -123,7 +141,8 @@ const privateSlice = createSlice({
       })
       .addCase(updateTask.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload; // The entire user object is returned after the task update
+        state.user = action.payload.task; // The entire user object is returned after the task update
+        state.message = action.payload.message;
       })
       .addCase(updateTask.rejected, (state, action) => {
         state.isLoading = false;
@@ -137,7 +156,8 @@ const privateSlice = createSlice({
       })
       .addCase(moveTask.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload; // Update the entire user object with new project and task data
+        state.user = action.payload.task; // Update the entire user object with new project and task data
+        state.message = action.payload.message;
       })
       .addCase(moveTask.rejected, (state, action) => {
         state.isLoading = false;
@@ -151,7 +171,8 @@ const privateSlice = createSlice({
       })
       .addCase(deleteTask.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload; // Update the entire user object, including updated projects
+        state.user = action.payload.column; // Update the entire user object, including updated projects
+        state.message = action.payload.message;
       })
       .addCase(deleteTask.rejected, (state, action) => {
         state.isLoading = false;
@@ -165,7 +186,8 @@ const privateSlice = createSlice({
       })
       .addCase(deleteColumn.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload; // Update the entire user object, including the updated projects
+        state.user = action.payload.project; // Update the entire user object, including the updated projects
+        state.message = action.payload.message;
       })
       .addCase(deleteColumn.rejected, (state, action) => {
         state.isLoading = false;
@@ -179,7 +201,8 @@ const privateSlice = createSlice({
       })
       .addCase(deleteProject.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload; // Update the entire user object, including the updated projects after deleting a project
+        state.user = action.payload.projects; // Update the entire user object, including the updated projects after deleting a project
+        state.message = action.payload.message;
       })
       .addCase(deleteProject.rejected, (state, action) => {
         state.isLoading = false;
@@ -193,7 +216,8 @@ const privateSlice = createSlice({
       })
       .addCase(updateProjectAppearance.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload; // Update the entire user object, including updated project appearance
+        state.user = action.payload.project; // Update the entire user object, including updated project appearance
+        state.message = action.payload.message;
       })
       .addCase(updateProjectAppearance.rejected, (state, action) => {
         state.isLoading = false;

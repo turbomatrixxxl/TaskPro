@@ -8,6 +8,7 @@ export default function Button({
   type,
   children,
   variant = "",
+  theme = "light",
   handleClick,
   disabled,
   className,
@@ -18,14 +19,16 @@ export default function Button({
       onClick={handleClick}
       type={type}
       className={clsx(
+        styles.button,
         variant === "auth"
           ? styles.button
-          : variant === "violet"
+          : variant === "send"
+          ? theme === "violet"
             ? styles.violet
-            : variant === "dark" ? styles.dark : variant === "light" ?? styles.light,
-        className
-      )}
-    >
+            : styles.button
+          : null, // If no match, fallback to no additional styles
+        className // Allow additional custom classes
+      )}>
       {children}
     </button>
   );

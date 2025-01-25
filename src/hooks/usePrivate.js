@@ -3,6 +3,7 @@ import {
   selectUser,
   selectIsLoading,
   selectError,
+  selectMessage,
 } from "../redux/private/selectorsPrivate";
 
 export const usePrivate = () => {
@@ -10,11 +11,13 @@ export const usePrivate = () => {
   const privateUser = useSelector(selectUser) || null;
   const privateLoading = useSelector(selectIsLoading);
   const privateError = useSelector(selectError) || null;
+  const privateMessage = useSelector(selectMessage) || null;
 
   return {
     privateDispatch,
     privateUser,
     privateLoading,
     privateError,
+    privateMessage,
   };
 };

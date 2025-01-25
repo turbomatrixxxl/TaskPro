@@ -12,6 +12,8 @@ import Loader from "./components/commonComponents/Loader";
 
 import ProjectPage from "./pages/ProjectPage/ProjectPage";
 
+import { ToastContainer } from "react-toastify";
+
 import "./styles/theme.css";
 import "./App.css";
 
@@ -50,68 +52,69 @@ function App() {
   }
 
   return (
-    <React.Suspense fallback={<Loader />}>
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/TaskPro" element={<LazyWelcomePage />} />
-        <Route
-          path="/auth/register"
-          element={
-            <RestrictedRoute
-              component={<LazyRegisterPage />}
-              redirectTo="/home"
-            />
-          }
-        />
-        <Route
-          path="/auth/login"
-          element={
-            <RestrictedLoginRoute
-              component={<LazyLoginPage />}
-              redirectTo="/home"
-            />
-          }
-        />
-        <Route path="/verify-email" element={<LazyVerifyEmailPage />} />
+    <>
+      <ToastContainer position="top-center" autoClose={3000} />
 
-        {/* Private Routes */}
-        <Route
-          path="/home"
-          element={
-            <PrivateRoute
-              component={<LazyHomePage />}
-              redirectTo="/auth/login"
-            />
-          }>
+      <React.Suspense fallback={<Loader />}>
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/TaskPro" element={<LazyWelcomePage />} />
           <Route
-            path="/home/:projectName"
+            path="/auth/register"
             element={
-              <PrivateRoute
-                redirectTo="/auth/login"
-                component={<ProjectPage />}
+              <RestrictedRoute
+                component={<LazyRegisterPage />}
+                redirectTo="/home"
               />
             }
           />
-          {/* Index Route */}
-          <Route index element={<LazyScreenPage />} />
-        </Route>
-
-        <Route
-          path="/home/screenPage"
-          element={
-            <PrivateRoute
-              component={<LazyScreenPage />}
-              redirectTo="/auth/login"
+          <Route
+            path="/auth/login"
+            element={
+              <RestrictedLoginRoute
+                component={<LazyLoginPage />}
+                redirectTo="/home"
+              />
+            }
+          />
+          <Route path="/verify-email" element={<LazyVerifyEmailPage />} />
+          {/* Private Routes */}
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute
+                component={<LazyHomePage />}
+                redirectTo="/auth/login"
+              />
+            }>
+            <Route
+              path="/home/:projectName"
+              element={
+                <PrivateRoute
+                  redirectTo="/auth/login"
+                  component={<ProjectPage />}
+                />
+              }
             />
-          }
-        />
-
-        <Route
-          path="*"
-          element={<LazyNotFoundPage />} // Catch-all for invalid routes
-        />
-      </Routes>
-    </React.Suspense>
+            {/* Index Route */}
+            <Route index element={<LazyScreenPage />} />
+          </Route>
+          <Route
+            path="/home/screenPage"
+            element={
+              <PrivateRoute
+                component={<LazyScreenPage />}
+                redirectTo="/auth/login"
+              />
+            }
+          />
+          <Route
+            path="*"
+            element={<LazyNotFoundPage />} // Catch-all for invalid routes
+          />
+        </Routes>
+      </React.Suspense>
+    </>
   );
 }
 

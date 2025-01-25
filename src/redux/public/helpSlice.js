@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { sendHelpEmail } from "./operationsHelp";
+import { reset } from "../auth/authSlice";
 
 const initialState = {
   email: "",
@@ -26,6 +27,11 @@ const helpMailSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(reset, () => {
+        // Reset to initial state on reset action
+        return { ...initialState };
+      })
+
       .addCase(sendHelpEmail.pending, (state) => {
         state.loading = true;
         state.error = null;

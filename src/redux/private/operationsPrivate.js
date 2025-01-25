@@ -42,7 +42,8 @@ export const addProject = createAsyncThunk(
         icon,
         background,
       });
-      return response.data.projects; // Extract the updated user object from the response
+
+      return response.data; // Extract the updated user object from the response
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
     }
@@ -61,7 +62,7 @@ export const addColumn = createAsyncThunk(
           columnName,
         }
       );
-      return response.data.project; // Extract the updated user object with the project
+      return response.data; // Extract the updated user object with the project
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
     }
@@ -78,7 +79,7 @@ export const updateColumn = createAsyncThunk(
         `/api/projects/${projectName}/column/${columnName}`,
         { name: newColumnName }
       );
-      return response.data.project; // Extract the updated user object with the project
+      return response.data; // Extract the updated user object with the project
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
     }
@@ -95,7 +96,7 @@ export const addTask = createAsyncThunk(
         `/api/projects/${projectName}/columns/${columnName}/tasks`,
         taskData
       );
-      return response.data.column; // Return the full user object from the response, which contains the updated projects
+      return response.data; // Return the full user object from the response, which contains the updated projects
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
     }
@@ -115,7 +116,7 @@ export const updateTask = createAsyncThunk(
         `/api/projects/${projectName}/column/${columnName}/tasks/${taskName}`,
         updates
       );
-      return response.data.task; // Extract the updated user object (which includes projects)
+      return response.data; // Extract the updated user object (which includes projects)
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
     }
@@ -139,7 +140,7 @@ export const moveTask = createAsyncThunk(
       );
 
       // Return the updated user object, which includes updated projects
-      return response.data.task;
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
     }
@@ -155,7 +156,7 @@ export const deleteTask = createAsyncThunk(
       const response = await axios.delete(
         `/api/projects/${projectName}/columns/${columnName}/tasks/${taskName}`
       );
-      return response.data.column; // Return the updated user object, which includes the projects
+      return response.data; // Return the updated user object, which includes the projects
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
     }
@@ -171,7 +172,7 @@ export const deleteColumn = createAsyncThunk(
       const response = await axios.delete(
         `/api/projects/${projectName}/columns/${columnName}`
       );
-      return response.data.project; // Return the updated user object, including the updated projects
+      return response.data; // Return the updated user object, including the updated projects
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
     }
@@ -185,7 +186,7 @@ export const deleteProject = createAsyncThunk(
     try {
       setAuthHeader(); // Ensure token is set in headers
       const response = await axios.delete(`/api/projects/${projectName}`);
-      return response.data.projects; // Return the updated user object, including the updated projects
+      return response.data; // Return the updated user object, including the updated projects
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
     }
@@ -198,11 +199,15 @@ export const updateProjectAppearance = createAsyncThunk(
   async ({ projectName, updates }, { rejectWithValue }) => {
     try {
       setAuthHeader(); // Ensure token is set in headers
+
+      // Convert projectName to a string to avoid any issues
+      const projectNameString = String(projectName);
+
       const response = await axios.patch(
-        `/api/projects/${projectName}/appearance`,
+        `/api/projects/${projectNameString}/appearance`,
         updates
       );
-      return response.data.project; // Return the updated user object, including the updated project
+      return response.data; // Return the updated user object, including the updated project
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
     }

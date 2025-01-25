@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import Input from "../commonComponents/Input/Input";
 import Button from "../commonComponents/Button";
 
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
@@ -75,9 +75,7 @@ function RegisterForm() {
   return (
     <div className={styles.cont}>
       <div className={styles.linkContainer}>
-        <p className={styles.login}>
-          Registration
-        </p>
+        <p className={styles.login}>Registration</p>
 
         <Link to="/auth/login" className={styles.navLinkTitle}>
           Log In
@@ -226,15 +224,13 @@ function RegisterForm() {
                   passwordStrength < 3
                     ? "red"
                     : passwordStrength < 4
-                      ? "orange"
-                      : "green",
-              }}
-            ></div>
+                    ? "orange"
+                    : "green",
+              }}></div>
           </div>
         </div>
         <div className={styles.buttonsContainer}>
           {errorMessage && <p className={styles.error}>{errorMessage}</p>}
-          <ToastContainer position="top-center" autoClose={5000} />
 
           <Button variant="auth" type="submit">
             Register Now

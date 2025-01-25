@@ -104,12 +104,13 @@
 }
 
 @media only screen and (max-width: 767px) {
-  .notfound .notfound-404 {
+  /* .notfound .notfound-404 {
     height: 142px;
-  }
+  } */
 
   .notfound .notfound-404 h1 {
     font-size: 112px;
+    margin-top: 100px;
   }
 
   .notfound h2 {

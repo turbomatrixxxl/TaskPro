@@ -55,6 +55,8 @@ function LoginForm() {
     }
   };
 
+  const isFormValid = fields.email.trim() !== "" && fields.password.length >= 6;
+
   return (
     <div className={styles.cont}>
       <div className={styles.linkContainer}>
@@ -62,9 +64,7 @@ function LoginForm() {
           Registration
         </Link>
 
-        <p className={styles.login}>
-          Log In
-        </p>
+        <p className={styles.login}>Log In</p>
       </div>
 
       <form onSubmit={handleSubmit} className={styles.form}>
@@ -140,22 +140,23 @@ function LoginForm() {
         <div className={styles.buttonsContainer}>
           {errorMessage && <p className={styles.error}>{errorMessage}</p>}
 
-          <Button variant="auth" type="submit">
-            Log in
+          <Button disabled={!isFormValid} variant="auth" type="submit">
+            Login
           </Button>
         </div>
-
-
 
         {user !== null && !isLoggedIn && (
           <div className={styles.errorCont}>
             <p className={styles.error}>
-              It seems that your email is not verified! Please click the Verify
-              button to be redirected to verify email page !
+              It seems that your authorisation token expired for security resons
+              or your email is not verified! Please click Login button or Verify
+              button if email not verified !
             </p>
-            <Button variant="auth" handleClick={() => {
-              navigate("/verify-email")
-            }}>
+            <Button
+              variant="auth"
+              handleClick={() => {
+                navigate("/verify-email");
+              }}>
               Verify
             </Button>
           </div>

@@ -3,8 +3,10 @@
 .button {
   align-items: center;
   background: #bedbb0;
+  border: none;
   border-radius: 8px;
   color: #161616;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   padding: 14px 0px;
@@ -28,39 +30,25 @@
 .button:focus {
   scale: 0.99;
   box-shadow: rgba(0, 0, 0, 0.5) 3px 5px 8px 3px;
-  background-color: black;
+  background-color: rgb(134, 221, 34);
   color: white;
 }
 
-.coloredButton {
-  background-color: var(--brand-color);
-  color: var(--white, #fbfbfb);
+.button:disabled:hover {
+  background-color: rgb(245, 77, 54);
 }
 
-.whiteButton,
-.button:disabled {
-  background-color: #fcfcfc;
-  border: 1px solid var(--brand-color);
-  color: var(--brand-color);
+.violet {
+  background: #5255bc;
+  color: #fff;
 }
 
 .button:disabled {
   cursor: not-allowed;
 }
 
-.plusButton {
-  border-radius: 50%;
-  border: 1px solid var(--brand-color);
-  color: var(--brand-color);
-  font-size: 18px;
-
-  flex-shrink: 0;
-  height: 40px;
-  width: 40px;
-}
-
 @media screen and (width >=768px) {
   .button {
-    width: 344px;
+    width: 352px;
   }
 }

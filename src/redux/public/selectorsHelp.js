@@ -1,8 +1,11 @@
 import { createSelector } from "@reduxjs/toolkit";
 
 // Selector to get the entire helpMail state
-export const selectHelpMailState = (state) => state.helpMail;
-
+export const selectHelpMailState = (state) => {
+  // console.log(state);
+  // Inspect the structure of the state
+  return state.helpSlice;
+};
 // Selector to get the email value from the state
 export const selectHelpEmail = createSelector(
   selectHelpMailState,

@@ -47,7 +47,12 @@ const handleRejected = (state, action) => {
 const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    reset: (state) => {
+      // Clear the entire auth state
+      return { ...initialState };
+    },
+  },
   extraReducers: (builder) => {
     builder
       // Log In
@@ -60,7 +65,6 @@ const authSlice = createSlice({
         state.isLoggedIn = payload.user.verify ? true : false;
         state.isLoading = false;
         state.error = null;
-        state.isRegistered = true;
         state.isLoggedOut = false;
       })
       .addCase(logIn.rejected, handleRejected)
@@ -87,7 +91,6 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.isLoading = false;
         state.error = null;
-        state.isRegistered = false;
         state.projects = [];
         state.isLoggedOut = true;
       })
@@ -111,7 +114,6 @@ const authSlice = createSlice({
         state.isRefreshing = false;
         state.isLoggedIn = false;
         state.error = action.payload;
-        state.isRegistered = true;
       })
 
       // Resend Verification Email
@@ -161,4 +163,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { reset } = authSlice.actions;
 export const authReducer = authSlice.reducer;
