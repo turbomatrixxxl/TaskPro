@@ -14,6 +14,9 @@ import useFormTouched from "../../hooks/useFormTouched";
 import { useAuth } from "../../hooks/useAuth";
 // import clsx from "clsx";
 
+import { toast } from "react-toastify"; // Import toast and ToastContainer
+import "react-toastify/dist/ReactToastify.css"; // Import styles
+
 import styles from "./LoginForm.module.css";
 
 function LoginForm() {
@@ -45,6 +48,17 @@ function LoginForm() {
 
     try {
       await dispatch(logIn(fields)).unwrap();
+
+      // Show success toast message after successful login
+      toast.success("Login successful!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (error) {
       setFields((prevFields) => ({
         ...prevFields,

@@ -184,7 +184,7 @@ export default function Sidebar({ sideBarRef }) {
                   projectName={project?.name}
                   icon={Number(project?.icon)}
                   theme={user?.theme}
-                  projectBackground={project?.background || "none"} // Default to "none" if background is undefined
+                  projectBackground={String(project?.background) || "none"} // Default to "none" if background is undefined
                 />
               );
             })}

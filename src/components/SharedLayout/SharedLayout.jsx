@@ -37,8 +37,6 @@ function SharedLayout({ handleClick }) {
 
   const [toastRegisteredShown, setToastRegisteredShown] = useState(false);
   const [logoutShown, setLogoutShown] = useState(false);
-  const [toastLoginShown, setToastLoginShown] = useState(false);
-  // console.log(toastLoginShown);
 
   useEffect(() => {
     if (!toastRegisteredShown) {
@@ -46,13 +44,6 @@ function SharedLayout({ handleClick }) {
     if (isRegistered) {
       toast.success("Registration successful!");
       setToastRegisteredShown(true);
-    }
-
-    if (!toastLoginShown) {
-      if (isLoggedIn) {
-        toast.success("Login successful!");
-        setToastLoginShown(true);
-      }
     }
 
     if (!logoutShown) {
@@ -96,7 +87,7 @@ function SharedLayout({ handleClick }) {
     isLoggedIn,
     isLoggedOut,
     toastRegisteredShown,
-    toastLoginShown,
+
     logoutShown,
     helpSuccessMessage,
     helpError,

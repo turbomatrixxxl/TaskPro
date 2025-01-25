@@ -83,7 +83,7 @@
   padding: 8px 16px;
   cursor: pointer;
   color: #161616;
-  transition: all cubic-bezier(1.075, 0.82, 0.165, 1);
+  transition: all 0.3s ease-in-out;
 }
 
 .optionDark {

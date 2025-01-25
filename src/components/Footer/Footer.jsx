@@ -7,14 +7,22 @@ import clsx from "clsx";
 
 const Footer = () => {
   const [modalOpen, setModalOpen] = useState(false); // Starea pentru a ține evidența dacă modalul este deschis sau nu
-  const { user } = useAuth()
+  const { user } = useAuth();
 
   const handleTextClick = () => {
     setModalOpen(true); // Deschide modalul la click
   };
 
   return (
-    <footer className={clsx(styles.footer, user?.theme === "dark" ? styles.dark : styles.footer)}>
+    <footer
+      className={clsx(
+        styles.footer,
+        user?.theme === "dark"
+          ? styles.dark
+          : user?.theme === "violet"
+          ? styles.violet
+          : styles.light
+      )}>
       <div onClick={handleTextClick} className={styles.footerText}>
         <p>℗ & © GoIT 2024</p>
         <p>Powered by Ultimate Team</p>

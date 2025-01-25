@@ -43,11 +43,14 @@
 }
 
 .text {
+  align-items: center;
+  display: flex;
+  justify-content: center;
   color: #161616;
   font-family: Poppins;
   font-size: 18px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 900;
   line-height: normal;
   letter-spacing: -0.36px;
 }
@@ -58,72 +61,6 @@
 
 .btn {
   margin-top: 24px;
-}
-
-.titles {
-  color: #161616;
-  font-family: Poppins;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  letter-spacing: -0.28px;
-  margin-top: 24px;
-  margin-bottom: 14px;
-}
-
-.titlesWhite {
-  color: #fff;
-}
-
-.icon-container {
-  align-items: center;
-  display: flex;
-  gap: 8px;
-}
-
-.icon {
-  cursor: pointer;
-  height: 18px;
-  fill: transparent;
-  stroke: #16161680;
-  width: 18px;
-}
-
-.white {
-  stroke: #ffffff80;
-}
-
-.btn {
-  margin-top: 40px;
-}
-
-.image-container {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  max-width: 248px;
-}
-
-.image-item {
-  background-size: cover;
-  background-color: transparent;
-  background-position: center;
-  border-radius: 8px;
-  cursor: pointer;
-  height: 28px;
-  margin-bottom: 4px;
-  width: 28px;
-}
-
-.error {
-  color: red;
-  font-family: Poppins;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  letter-spacing: -0.36px;
-  margin-top: 5px;
 }
 
 @media only screen and (min-width: 767px) {

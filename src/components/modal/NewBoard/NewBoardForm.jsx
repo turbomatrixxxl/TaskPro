@@ -8,9 +8,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import Input from "../../InputAdi/Input";
 import Button from "../../commonComponents/Button/Button";
 
-// import { FaPlus } from 'react-icons/fa';
 import Sprite from "../../../images/projectIconsSprite.svg";
-// import { Pointer } from 'lucide-react';
 import image05 from "../../../images/bgImage-dark.jpg";
 import { images } from "../../../utils/backgrounds";
 
@@ -19,13 +17,15 @@ import clsx from "clsx";
 
 export default function NewBoardForm({ onClose }) {
   const { user } = useAuth();
-
   const formRef = useRef(null);
   const dispatch = useDispatch();
 
   const [title, setTitle] = useState("");
   const [icon, setIcon] = useState("");
   const [background, setBackground] = useState("");
+  const [isDuplicate, setIsDuplicate] = useState(false);
+
+  const debounceRef = useRef(null);
 
   useEffect(() => {
     const handleEscapeKey = (e) => {
@@ -50,7 +50,21 @@ export default function NewBoardForm({ onClose }) {
   }, [onClose]);
 
   const handleTitleChange = (e) => {
-    setTitle(e.target.value);
+    const value = e.target.value;
+    setTitle(value);
+
+    // Debounce the duplicate check
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+
+    debounceRef.current = setTimeout(() => {
+      const normalizedTitle = value.trim().toLowerCase();
+      const projectExists = user?.projects?.some(
+        (project) => project.name.trim().toLowerCase() === normalizedTitle
+      );
+      setIsDuplicate(projectExists);
+    }, 300); // Adjust debounce duration as needed
   };
 
   const handleSubmit = (e) => {
@@ -58,7 +72,7 @@ export default function NewBoardForm({ onClose }) {
 
     dispatch(
       addProject({
-        name: title === "" ? "New Project" : title,
+        name: title, // No fallback; the title must be provided
         icon: icon === "" ? 0 : icon,
         background: background === "" ? "none" : background,
       })
@@ -67,7 +81,7 @@ export default function NewBoardForm({ onClose }) {
     // Timeout to delay `refreshUser` to give backend time to update
     setTimeout(() => {
       dispatch(refreshUser());
-    }, 500); // Adjust timeout duration as necessary
+    }, 500);
 
     onClose();
   };
@@ -80,7 +94,6 @@ export default function NewBoardForm({ onClose }) {
           "modal-container-need",
           user?.theme === "dark" ? "contDark" : "modal-container-need"
         )}>
-        {/* Butonul de închidere */}
         <button type="button" className="close-btn" onClick={onClose}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -119,6 +132,12 @@ export default function NewBoardForm({ onClose }) {
             name="title"
             type="text"
           />
+          {isDuplicate && (
+            <p className="error">
+              A project with this name already exists ! Please choose another
+              name for the project !
+            </p>
+          )}
           <h3
             className={clsx(
               "titles",
@@ -175,7 +194,9 @@ export default function NewBoardForm({ onClose }) {
             className="btn"
             type="submit"
             theme={user?.theme}
-            variant="send">
+            variant="send"
+            disabled={isDuplicate || title.trim() === ""} // Disable button for invalid input
+          >
             Create
           </Button>
         </form>

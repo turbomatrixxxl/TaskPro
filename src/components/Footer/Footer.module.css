@@ -2,20 +2,41 @@
   border: solid 1px rgba(255, 255, 255, 0.2);
   text-align: center;
   padding: 12px;
-  color: rgba(255, 255, 255, 0.6);
+
   cursor: pointer;
-  background: linear-gradient(270deg, #2e1746 3.2%, #2e225f 99.98%);
+  background: #c0c1cf;
   width: -webkit-fill-available;
+  transition: all 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.footer:hover {
+  scale: 1.05;
+}
+
+.light {
+  color: #161616;
 }
 
 .dark {
+  color: rgba(255, 255, 255, 0.6);
   background: #161616;
+}
+
+.violet {
+  color: rgba(255, 255, 255, 0.6);
+  background: #0b108b;
 }
 
 .footerText {
   transition: all 0.3s ease 0s;
 }
-.footerText:hover {
+
+.light:hover {
+  color: #0b108b;
+}
+
+.dark:hover,
+.violet:hover {
   color: #bedbb0;
 }
 

@@ -73,7 +73,7 @@ export default function NewBoardForm({
     } else {
       console.log("Dispatching update with:", {
         projectName,
-        appearance: {
+        updates: {
           name: title || projectName,
           icon: icon || projectIcon,
           background: background || projectBackground,
@@ -83,7 +83,7 @@ export default function NewBoardForm({
       dispatch(
         updateProjectAppearance({
           projectName: `${projectName}`,
-          appearance: {
+          updates: {
             name: title || projectName,
             icon: icon || projectIcon,
             background: background || projectBackground,

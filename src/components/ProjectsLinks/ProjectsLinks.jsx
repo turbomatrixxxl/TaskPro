@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 
 import EditBoardForm from "../modal/EditBoardForm/EditBoardForm";
+import DeleteProject from "../modal/DeleteProject/DeleteProject";
 
 import GetProjectIcons from "../../utils/GetProjectIcon";
 import iconsSvg from "../../images/sprite.svg";
@@ -19,9 +20,14 @@ export default function ProjectsLinks({
   theme,
 }) {
   const [showModalBoard, setShowModalBoard] = useState(false);
+  const [showDeleteModalBoard, setShowDeleteModalBoard] = useState(false);
 
   const handleclose = () => {
     setShowModalBoard(false);
+  };
+
+  const handlecloseDelete = () => {
+    setShowDeleteModalBoard(false);
   };
 
   return (
@@ -33,6 +39,10 @@ export default function ProjectsLinks({
           projectBackground={projectBackground}
           onClose={handleclose}
         />
+      )}
+
+      {showDeleteModalBoard && (
+        <DeleteProject onClose={handlecloseDelete} projectName={projectName} />
       )}
 
       <NavLink
@@ -106,6 +116,9 @@ export default function ProjectsLinks({
                     <use href={`${iconsSvg}#pencil`} />
                   </svg>
                   <svg
+                    onClick={() => {
+                      setShowDeleteModalBoard(true);
+                    }}
                     className={clsx(
                       styles.projectIcon,
                       theme === "light"
