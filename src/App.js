@@ -1,44 +1,44 @@
-import React, { lazy, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { refreshUser } from "./redux/auth/operationsAuth";
-import { useAuth } from "./hooks/useAuth"; // Import custom hook
+import React, { lazy, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { refreshUser } from './redux/auth/operationsAuth';
+import { useAuth } from './hooks/useAuth'; // Import custom hook
 
-import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
-import RestrictedLoginRoute from "./components/RestrictedLoginRoute/RestrictedLoginRoute";
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import RestrictedRoute from './components/RestrictedRoute/RestrictedRoute';
+import RestrictedLoginRoute from './components/RestrictedLoginRoute/RestrictedLoginRoute';
 
-import Loader from "./components/commonComponents/Loader";
+import Loader from './components/commonComponents/Loader';
 
-import ProjectPage from "./pages/ProjectPage/ProjectPage";
+import ProjectPage from './pages/ProjectPage/ProjectPage';
 
-import { ToastContainer } from "react-toastify";
+import { ToastContainer } from 'react-toastify';
 
-import "./styles/theme.css";
-import "./App.css";
+import './styles/theme.css';
+import './App.css';
 
 // Lazy-loaded components
-const LazyWelcomePage = lazy(() => import("./components/Welcome/Welcome"));
+const LazyWelcomePage = lazy(() => import('./components/Welcome/Welcome'));
 const LazyVerifyEmailPage = lazy(() =>
-  import("./pages/VerifyEmailPageComponent/VerifyEmailPageComponent")
+  import('./pages/VerifyEmailPageComponent/VerifyEmailPageComponent')
 );
-const LazyNotFoundPage = lazy(() => import("./pages/NotFoundPage"));
-const LazyRegisterPage = lazy(() => import("./pages/RegisterPage"));
-const LazyLoginPage = lazy(() => import("./pages/LoginPage"));
-const LazyHomePage = lazy(() => import("./pages/HomePage"));
+const LazyNotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const LazyRegisterPage = lazy(() => import('./pages/RegisterPage'));
+const LazyLoginPage = lazy(() => import('./pages/LoginPage'));
+const LazyHomePage = lazy(() => import('./pages/HomePage'));
 // const LazySharedLayout = lazy(() =>
 //   import("./components/SharedLayout/SharedLayout")
 // );
-const LazyScreenPage = lazy(() => import("./pages/ScreenPage"));
+const LazyScreenPage = lazy(() => import('./pages/ScreenPage'));
 
 function App() {
   const { isRefreshing, user } = useAuth(); // Check user verification status
-  const theme = user?.theme || "light"; // Default to "light" theme
+  const theme = user?.theme || 'light'; // Default to "light" theme
 
   const dispatch = useDispatch(); // To dispatch actions
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem('token')) {
       dispatch(refreshUser());
     }
   }, [dispatch]);
@@ -86,7 +86,8 @@ function App() {
                 component={<LazyHomePage />}
                 redirectTo="/auth/login"
               />
-            }>
+            }
+          >
             <Route
               path="/home/:projectName"
               element={
