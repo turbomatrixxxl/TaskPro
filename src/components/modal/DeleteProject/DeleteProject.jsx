@@ -82,49 +82,55 @@ export default function NeedHelp({ onClose, projectName }) {
           </svg>
         </button>
 
-        <p
-          className={clsx(
-            "text",
-            user?.theme === "dark" ? "textDark" : "text"
-          )}>
-          Are you sure that you want to delete
-        </p>
+        <div>
+          <p
+            className={clsx(
+              "textd",
+              user?.theme === "dark" ? "textDark" : "textd"
+            )}>
+            Are you sure that you want to delete
+          </p>
+          <h2
+            className={clsx(
+              "textd",
+              "h2"
+              //   user?.theme === "dark" ? "textDark" : "textd"
+            )}>
+            {projectName}
+          </h2>
+          <p
+            className={clsx(
+              "textd",
+              user?.theme === "dark" ? "textDark" : "textd"
+            )}>
+            an it's contents...?
+          </p>
+        </div>
+        <div>
+          <Button
+            handleClick={handleDelete}
+            theme={user?.theme}
+            className={clsx(
+              "btn",
+              "red",
+              user?.theme === "violet" ? "green" : "blue"
+            )}
+            type="submit"
+            variant="send">
+            Delete
+          </Button>
 
-        <h2
-          className={clsx(
-            "text",
-            user?.theme === "dark" ? "textDark" : "text"
-          )}>
-          {projectName}
-        </h2>
-
-        <p
-          className={clsx(
-            "text",
-            user?.theme === "dark" ? "textDark" : "text"
-          )}>
-          an it's contents...?
-        </p>
-
-        <Button
-          handleClick={handleDelete}
-          theme={user?.theme}
-          className="btn"
-          type="submit"
-          variant="send">
-          Delete
-        </Button>
-
-        <Button
-          handleClick={() => {
-            onClose();
-          }}
-          theme={user?.theme}
-          className="btn"
-          type="submit"
-          variant="send">
-          Cancel
-        </Button>
+          <Button
+            handleClick={() => {
+              onClose();
+            }}
+            theme={user?.theme}
+            className="btnd"
+            type="submit"
+            variant="send">
+            Cancel
+          </Button>
+        </div>
       </div>
     </div>
   );

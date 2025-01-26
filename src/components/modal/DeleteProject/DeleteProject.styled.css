@@ -32,7 +32,7 @@
   height: fit-content;
   justify-content: space-between;
   position: relative;
-  padding: 24px;
+  /* padding: 24px; */
   width: 335px;
   z-index: 100000;
 }
@@ -42,11 +42,11 @@
   border: 1px solid rgba(190, 219, 176, 0.5);
 }
 
-.text {
+.textd {
   align-items: center;
   display: flex;
   justify-content: center;
-  color: #161616;
+  color: #151515;
   font-family: Poppins;
   font-size: 18px;
   font-style: normal;
@@ -55,12 +55,31 @@
   letter-spacing: -0.36px;
 }
 
+.h2 {
+  font-size: 24px;
+  margin: 24px 0;
+  color: red;
+}
+
 .textDark {
   color: #fff;
 }
 
-.btn {
-  margin-top: 24px;
+.btnd {
+  margin-top: 14px;
+}
+
+.red:hover {
+  background: red;
+}
+
+.green {
+  background: #bedbb0;
+  color: red;
+}
+
+.blue {
+  background: #5255bc;
 }
 
 @media only screen and (min-width: 767px) {
