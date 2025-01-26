@@ -1,0 +1,19 @@
+.iconPlus {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 6px;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+    margin-right: 8px; 
+}
+  
+.iconViolet {
+    background: white;
+}
