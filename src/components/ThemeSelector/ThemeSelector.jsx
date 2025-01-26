@@ -56,7 +56,7 @@ export default function ThemeSelector() {
             styles.span,
             user?.theme === "dark" ? styles.spanDark : styles.span
           )}>
-          Theme
+          Filters
         </span>
         {!isOpen ? (
           <HiChevronDown

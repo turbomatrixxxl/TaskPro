@@ -16,7 +16,9 @@ import {
 } from "./operationsPrivate";
 
 const initialState = {
-  user: null, // Will hold the full user object from the backend
+  user: null,
+  // Will hold the full user object from the backend
+  filter: "Show all",
   isLoading: false,
   error: null,
   message: null,
@@ -29,6 +31,9 @@ const privateSlice = createSlice({
   reducers: {
     setUser(state, action) {
       state.user = action.payload;
+    },
+    filterUser(state, action) {
+      state.filter = action.payload;
     },
     clearUser(state) {
       state.user = null;
@@ -226,6 +231,6 @@ const privateSlice = createSlice({
   },
 });
 
-export const { setUser, clearUser } = privateSlice.actions;
+export const { setUser, clearUser, filterUser } = privateSlice.actions;
 
 export const privateReducer = privateSlice.reducer;

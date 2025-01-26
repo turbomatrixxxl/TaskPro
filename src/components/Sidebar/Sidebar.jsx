@@ -73,7 +73,9 @@ export default function Sidebar({ sideBarRef }) {
   }, [isLogoutModalVisible, toggleIsLogoutModalVisible]);
 
   const closeOnClickOutside = (event) => {
-    if (event.target === event.currentTarget) {
+    // console.log("close");
+
+    if (event.target !== event.currentTarget) {
       toggleIsLogoutModalVisible();
     }
   };
@@ -90,11 +92,11 @@ export default function Sidebar({ sideBarRef }) {
           : styles.asideLight
       )}>
       {isLogoutModalVisible && (
-        <div
-          ref={modalRef}
-          className={styles.modalOverlay}
-          onClick={closeOnClickOutside}>
-          <div className={styles.modalContent}>
+        <div className={styles.modalOverlay}>
+          <div
+            ref={modalRef}
+            className={styles.modalContent}
+            onClick={closeOnClickOutside}>
             <Modal
               variant={user?.theme}
               closeButton={styles.closeButton}
@@ -174,7 +176,7 @@ export default function Sidebar({ sideBarRef }) {
         <nav className={styles.projectsNav}>
           {user?.projects?.length > 0 &&
             user?.projects.map((project, index) => {
-              console.log(project); // Log each project for debugging
+              //   console.log(project); // Log each project for debugging
 
               return (
                 <ProjectsLinks

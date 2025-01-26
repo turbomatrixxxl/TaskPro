@@ -1,7 +1,66 @@
 .cont {
-  align-items: center;
   display: flex;
+  flex-direction: column;
+  gap: 39px;
   height: 100%;
+  overflow-x: auto;
+  padding: 20px;
+  padding-bottom: 24px;
+}
+
+.upperCont {
+  display: flex;
+  justify-content: space-between;
+}
+
+.projectName {
+  color: #161616;
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.36px;
+}
+
+.projectNameDark {
+  color: #fff;
+}
+
+.backgroundLight {
+  align-items: center;
+  background: #fcfcfc;
+  border-radius: 8px;
+  display: flex;
   justify-content: center;
-  color: red;
+  padding: 4px 8px;
+}
+
+.backgroundDark {
+  align-items: center;
+  border-radius: 8px;
+  background: #151515;
+  display: flex;
+  justify-content: center;
+  padding: 4px 8px;
+}
+
+.downCont {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+@media screen and (width >=768px) {
+  .cont {
+    gap: 26px;
+    padding: 32px;
+  }
+}
+
+@media screen and (width >=1024px) {
+  .cont {
+    gap: 10px;
+    padding: 10px 24px 8px;
+  }
 }

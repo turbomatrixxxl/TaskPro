@@ -1,0 +1,256 @@
+.selector {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+  margin-right: 14px;
+  position: relative;
+  width: fit-content;
+}
+
+.button {
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  gap: 8px;
+  height: fit-content;
+  justify-content: center;
+  outline: none;
+  outline: none;
+  width: fit-content;
+}
+
+.backgroundLight {
+  align-items: center;
+  background: #fcfcfc;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  padding: 4px 8px;
+}
+
+.backgroundDark {
+  align-items: center;
+  border-radius: 8px;
+  background: #151515;
+  display: flex;
+  justify-content: center;
+  padding: 4px 8px;
+}
+
+.span {
+  color: rgba(22, 22, 22, 0.8);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.28px;
+}
+
+.spanDark {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.svg {
+  width: 13.333px;
+  height: 12px;
+  stroke-width: 1.5px;
+  stroke: rgba(22, 22, 22, 0.8);
+}
+
+.svgDark {
+  stroke: rgba(255, 255, 255, 0.8);
+}
+
+.selections {
+  background: #fcfcfc;
+  border-radius: 8px;
+  box-shadow: 0px 4px 16px 0px rgba(22, 22, 22, 0.05);
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  margin: 8px 0 0;
+  padding: 24px;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 300px;
+  /* z-index: 100000; */
+}
+
+.selectionsDark {
+  background: #151515;
+}
+
+.close {
+  cursor: pointer;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 18px;
+  height: 18px;
+}
+
+.titleName {
+  color: #161616;
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.36px;
+}
+
+.titleNameDark {
+  color: #fff;
+}
+
+.line {
+  border-bottom: 1px solid rgba(22, 22, 22, 0.1);
+  display: flex;
+  margin: 14px 0;
+  width: 100%;
+}
+
+.lineDark {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.labelCont {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.labelTitle {
+  color: #161616;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.28px;
+}
+
+.labelTitleDark {
+  color: #fff;
+}
+
+.showAllButton {
+  align-items: center;
+  border: none;
+  color: rgba(22, 22, 22, 0.5);
+  cursor: pointer;
+  display: flex;
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  height: fit-content;
+  justify-content: center;
+  line-height: normal;
+  letter-spacing: -0.24px;
+  outline: none;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+  width: fit-content;
+  transition: all 0.3s ease-in-out;
+}
+
+.showAllButton:hover {
+  scale: 1.2;
+}
+
+.showAllButtonDark {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.showAllButtonChecked {
+  color: #bedbb0;
+  font-weight: bold;
+  scale: 1.2;
+}
+
+.showAllButtonCheckedViolet {
+  color: #5255bc;
+  font-weight: bold;
+  scale: 1.2;
+}
+
+.filterCont {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option {
+  align-items: center;
+  color: #161616;
+  cursor: pointer;
+  display: flex;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  gap: 8px;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  padding: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.optionDark {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.option:hover {
+  scale: 1.05;
+}
+
+.activeOption {
+  color: #bedbb0;
+  font-weight: bold;
+}
+
+.activeOptionViolet {
+  font-weight: bold;
+  color: #5255bc;
+}
+
+.radioButton {
+  appearance: none;
+  /* border: 2px solid gray; Default border for unchecked state */
+  border-radius: 50%;
+  cursor: pointer;
+  height: 20px; /* Outer circle size */
+  width: 20px; /* Outer circle size */
+  background-color: var(--radio-color); /* Default background */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 0;
+}
+
+.radioButton:checked {
+  border: 2px solid var(--radio-color); /* Dynamic border color */
+  background-color: white; /* White background for checked state */
+}
+
+.radioButton:checked::after {
+  content: "";
+  width: 10px; /* Inner circle size */
+  height: 10px; /* Inner circle size */
+  background-color: var(--radio-color); /* Dynamic inner circle color */
+  border-radius: 50%;
+  position: absolute;
+}
