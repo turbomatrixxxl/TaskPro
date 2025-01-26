@@ -8,11 +8,9 @@ import "animate.css";
 
 // Corectarea importului imaginii
 import Radu from "../../images/teamMembersPhoto/Radu.webp";
-import Adrian from '../../images/teamMembersPhoto/Adrian.jpg'
-import Sara from '../../images/teamMembersPhoto/Sara.png'
-import catalin from '../../images/teamMembersPhoto/catalin.webp'
-
-
+import Adrian from "../../images/teamMembersPhoto/Adrian.jpg";
+import Sara from "../../images/teamMembersPhoto/Sara.png";
+import catalin from "../../images/teamMembersPhoto/catalin.webp";
 
 const ModalFooter = ({ closeModal }) => {
   const modalRef = useRef();
@@ -92,9 +90,7 @@ const ModalFooter = ({ closeModal }) => {
                 alt="Secara Adrian"
                 className={styles.teamMemberImage}
               />
-              <span className={styles.footerTeamName}>
-                Secara Adrian
-              </span>
+              <span className={styles.footerTeamName}>Secara Adrian</span>
               <em className={styles.footerTeamFunction}>Scrum Master</em>
               <div className={styles.socialLinks}>
                 <a
@@ -124,9 +120,7 @@ const ModalFooter = ({ closeModal }) => {
                 alt="Smarandoiu Sara"
                 className={styles.teamMemberImage}
               />
-              <span className={styles.footerTeamName}>
-                Smarandoiu Sara
-              </span>
+              <span className={styles.footerTeamName}>Smarandoiu Sara</span>
               <em className={styles.footerTeamFunction}>Frontend Developer</em>
               <div className={styles.socialLinks}>
                 <a
@@ -148,24 +142,6 @@ const ModalFooter = ({ closeModal }) => {
               </div>
             </div>
 
-            {/* Card pentru Catalin */}
-            <div className={`${styles.footerTeamCard} ${animation} ${styles.catalin}`}>
-              <img
-                src={catalin} // Folosește variabila corectă pentru imagine
-                alt="Catalin"
-                className={styles.teamMemberImage}
-              />
-              <span className={styles.footerTeamName}>Catalin Negoita</span>
-              <em className={styles.footerTeamFunction}>Frontend Developer</em>
-              <div className={styles.socialLinks}>
-                <a href="https://github.com/PNM24" className={styles.footerGithubIcon} aria-label="GitHub profile" target="_blank" rel="noreferrer noopener">
-                  <FaGithub />
-                </a>
-                <a href="https://www.linkedin.com/" className={styles.footerLinkedinIcon} aria-label="LinkedIn profile" target="_blank" rel="noreferrer noopener">
-                  <FaLinkedin />
-                </a>
-              </div>
-            </div>
             {/* Adaugă alte carduri pentru membrii echipei dacă este necesar */}
           </div>
 
