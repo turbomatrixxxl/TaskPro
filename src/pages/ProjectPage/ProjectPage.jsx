@@ -14,6 +14,7 @@ import clsx from "clsx";
 import AddColumnPlus from "../../components/AddColumnPlus";
 
 import styles from "./ProjectPage.module.css";
+import AddColumn from "../../components/modal/Addcolumn/AddColumn";
 
 export default function ProjectPage() {
   const navigate = useNavigate();
@@ -86,50 +87,61 @@ export default function ProjectPage() {
     transition: "background 0.3s ease", // Smooth transition when changing backgrounds
   };
 
-  const handleAddColumn = () => {
+  const handleOpenAddColumnModal = () => {
     setIsOpenAddModal(true);
   };
 
+  const handleCloseAddColumnModal = () => {
+    setIsOpenAddModal(false);
+  };
+
   return (
-    <div
-      style={sectionStyle} // Apply dynamic background
-      className={styles.cont}>
-      <div className={styles.upperCont}>
-        <h1
-          className={clsx(
-            styles.projectName,
-            user.theme === "dark" ? styles.projectNameDark : null,
-            project?.background !== "none"
-              ? user.theme === "dark"
-                ? styles.backgroundDark
-                : styles.backgroundLight
-              : null
-          )}>
-          {project?.name || "project"}
-        </h1>
-        <Filters background={project.background} />
-      </div>
-      <div></div>
-      <div className={styles.downCont}>
-        <button
-          onClick={handleAddColumn}
-          className={clsx(
-            styles.addColumnBtn,
-            user.theme === "dark" ? styles.addColumnBtnDark : null
-          )}>
-          <AddColumnPlus />
-          <span>Add another column</span>
-        </button>
-        {project?.columns.map((column) => {
-          if (column.length === 0) {
-            return null;
-          }
-          return (
-            <div className={styles.columnsCont}>
-              <div className={styles.columnCont}>{column.name}</div>
-            </div>
-          );
-        })}
+    <div className={styles.mainCont}>
+      {isOpenAddModal && (
+        <AddColumn
+          onClose={handleCloseAddColumnModal}
+          projectName={projectName}
+        />
+      )}
+      <div
+        style={sectionStyle} // Apply dynamic background
+        className={styles.cont}>
+        <div className={styles.upperCont}>
+          <h1
+            className={clsx(
+              styles.projectName,
+              user.theme === "dark" ? styles.projectNameDark : null,
+              project?.background !== "none"
+                ? user.theme === "dark"
+                  ? styles.backgroundDark
+                  : styles.backgroundLight
+                : null
+            )}>
+            {project?.name || "project"}
+          </h1>
+          <Filters background={project.background} />
+        </div>
+        <div className={styles.downCont}>
+          {project?.columns.map((column, index) => {
+            if (column.length === 0) {
+              return null;
+            }
+            return (
+              <div key={column.name || index} className={styles.columnsCont}>
+                <div className={styles.columnCont}>{column.name}</div>
+              </div>
+            );
+          })}
+          <button
+            onClick={handleOpenAddColumnModal}
+            className={clsx(
+              styles.addColumnBtn,
+              user.theme === "dark" ? styles.addColumnBtnDark : null
+            )}>
+            <AddColumnPlus />
+            <span>Add another column</span>
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -85,38 +85,28 @@ const privateSlice = createSlice({
       })
       .addCase(addColumn.fulfilled, (state, action) => {
         state.isLoading = false;
+        console.log(action.payload);
 
-        // Find and update the specific project with the new column
-        const updatedProject = action.payload.project;
-        const projectIndex = state.user.projects.findIndex(
-          (project) => project.name === updatedProject.name
-        );
-        if (projectIndex !== -1) {
-          state.user.projects[projectIndex] = updatedProject;
-        }
+        state.user = action.payload.project;
+
         state.message = action.payload.message;
       })
       .addCase(addColumn.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
+
       // Update column reducers
       .addCase(updateColumn.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-
       .addCase(updateColumn.fulfilled, (state, action) => {
         state.isLoading = false;
 
         // Update the specific column in the correct project
-        const updatedProject = action.payload.project;
-        const projectIndex = state.user.projects.findIndex(
-          (project) => project.name === updatedProject.name
-        );
-        if (projectIndex !== -1) {
-          state.user.projects[projectIndex] = updatedProject;
-        }
+        state.user = action.payload.project;
+
         state.message = action.payload.message;
       })
       .addCase(updateColumn.rejected, (state, action) => {

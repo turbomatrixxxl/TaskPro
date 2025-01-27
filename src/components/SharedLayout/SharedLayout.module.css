@@ -3,6 +3,7 @@
   flex-direction: column;
   flex-grow: 1;
   height: 100vh;
+  width: -webkit-fill-available;
 }
 
 .main {
@@ -25,7 +26,10 @@
 }
 
 /* @media screen and (width >=768px) {
-}
+} */
 
 @media screen and (width >=1024px) {
-} */
+  .cont {
+    width: auto;
+  }
+}

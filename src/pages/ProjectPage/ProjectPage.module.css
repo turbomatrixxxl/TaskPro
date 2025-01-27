@@ -1,3 +1,10 @@
+.mainCont {
+  display: flex;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+  flex-shrink: 1;
+}
+
 .cont {
   display: flex;
   flex-direction: column;
@@ -51,6 +58,7 @@
   gap: 18px;
   overflow-x: auto;
   width: 100%;
+  /* margin-bottom: 16px; */
 }
 .addColumnBtn {
   align-items: center;
@@ -64,6 +72,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
+  flex-shrink: 0;
   gap: 8px;
   height: fit-content;
   justify-content: center;
@@ -101,6 +110,10 @@
 }
 
 @media screen and (width >=1024px) {
+  .mainCont {
+    width: calc(100vw - 260px);
+  }
+
   .cont {
     gap: 10px;
     padding: 10px 24px 8px;
