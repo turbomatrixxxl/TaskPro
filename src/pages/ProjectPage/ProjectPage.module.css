@@ -47,8 +47,50 @@
 
 .downCont {
   display: flex;
+  height: 100%;
+  gap: 18px;
+  overflow-x: auto;
+  width: 100%;
+}
+.addColumnBtn {
+  align-items: center;
+  background: #fcfcfc;
+  border: none;
+  border-radius: 8px;
+  color: #161616;
+  cursor: pointer;
+  display: flex;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  gap: 8px;
+  height: fit-content;
+  justify-content: center;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  padding: 14px 0;
+  width: 334px;
+}
+
+.addColumnBtnDark {
+  background: #121212;
+  color: #fff;
+}
+
+.columnsCont {
+  display: flex;
+  gap: 18px;
+  height: 100%;
+  width: fit-content;
+}
+
+.columnCont {
+  display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  height: 100%;
+  overflow-y: auto;
+  width: 334px;
 }
 
 @media screen and (width >=768px) {

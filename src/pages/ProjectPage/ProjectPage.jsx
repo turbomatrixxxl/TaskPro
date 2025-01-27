@@ -1,17 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
-import { usePrivate } from "../../hooks/usePrivate";
+// import { usePrivate } from "../../hooks/usePrivate";
 
 import Filters from "../../components/Filters";
 
 import { getBackground } from "../../utils/backgrounds";
 
-import styles from "./ProjectPage.module.css";
 import clsx from "clsx";
+import AddColumnPlus from "../../components/AddColumnPlus";
+
+import styles from "./ProjectPage.module.css";
 
 export default function ProjectPage() {
   const navigate = useNavigate();
@@ -21,8 +23,10 @@ export default function ProjectPage() {
 
   const { user } = useAuth();
   // console.log(user);
-  const { privateFilter } = usePrivate();
-  console.log(privateFilter);
+  // const { privateFilter } = usePrivate();
+  // console.log(privateFilter);
+
+  const [isOpenAddModal, setIsOpenAddModal] = useState(false);
 
   // Media Queries for Responsive Backgrounds
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
@@ -82,8 +86,12 @@ export default function ProjectPage() {
     transition: "background 0.3s ease", // Smooth transition when changing backgrounds
   };
 
+  const handleAddColumn = () => {
+    setIsOpenAddModal(true);
+  };
+
   return (
-    <section
+    <div
       style={sectionStyle} // Apply dynamic background
       className={styles.cont}>
       <div className={styles.upperCont}>
@@ -101,12 +109,28 @@ export default function ProjectPage() {
         </h1>
         <Filters background={project.background} />
       </div>
-      {project?.columns.map((column) => {
-        if (column.length === 0) {
-          return null;
-        }
-        return <div className={styles.downCont}>column.name</div>;
-      })}
-    </section>
+      <div></div>
+      <div className={styles.downCont}>
+        <button
+          onClick={handleAddColumn}
+          className={clsx(
+            styles.addColumnBtn,
+            user.theme === "dark" ? styles.addColumnBtnDark : null
+          )}>
+          <AddColumnPlus />
+          <span>Add another column</span>
+        </button>
+        {project?.columns.map((column) => {
+          if (column.length === 0) {
+            return null;
+          }
+          return (
+            <div className={styles.columnsCont}>
+              <div className={styles.columnCont}>{column.name}</div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }

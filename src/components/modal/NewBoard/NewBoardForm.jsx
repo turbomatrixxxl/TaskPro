@@ -14,6 +14,7 @@ import { images } from "../../../utils/backgrounds";
 
 import "./NewBoardForm.styled.css";
 import clsx from "clsx";
+import ReusablePlus from "../../commonComponents/ReusablePlus/ReusablePlus";
 
 export default function NewBoardForm({ onClose }) {
   const { user } = useAuth();
@@ -87,14 +88,14 @@ export default function NewBoardForm({ onClose }) {
   };
 
   return (
-    <div className="modal-overlay-need">
+    <div className="modal-overlay-neednb">
       <div
         ref={formRef}
         className={clsx(
-          "modal-container-need",
-          user?.theme === "dark" ? "contDark" : "modal-container-need"
+          "modal-container-neednb",
+          user?.theme === "dark" ? "contDarknb" : null
         )}>
-        <button type="button" className="close-btn" onClick={onClose}>
+        <button type="button" className="close-btnnb" onClick={onClose}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -118,12 +119,12 @@ export default function NewBoardForm({ onClose }) {
         </button>
         <h2
           className={clsx(
-            "text",
-            user?.theme === "dark" ? "textDark" : "text"
+            "textnb",
+            user?.theme === "dark" ? "textDarknb" : null
           )}>
           New board
         </h2>
-        <form onSubmit={handleSubmit} className="div-container">
+        <form onSubmit={handleSubmit} className="div-containernb">
           <Input
             theme={user?.theme}
             value={title}
@@ -133,26 +134,26 @@ export default function NewBoardForm({ onClose }) {
             type="text"
           />
           {isDuplicate && (
-            <p className="error">
+            <p className="errornb">
               A project with this name already exists ! Please choose another
               name for the project !
             </p>
           )}
           <h3
             className={clsx(
-              "titles",
-              user?.theme === "dark" ? "titlesWhite" : "titles"
+              "titlesnb",
+              user?.theme === "dark" ? "titlesWhitenb" : null
             )}>
             Icons
           </h3>
-          <div className="icon-container">
+          <div className="icon-containernb">
             {[...Array(8)].map((_, index) => (
               <svg
                 key={index}
                 onClick={() => setIcon(index)}
                 className={clsx(
-                  "icon",
-                  user?.theme === "dark" ? "white" : "icon"
+                  "iconnb",
+                  user?.theme === "dark" ? "whitenb" : null
                 )}>
                 <use href={`${Sprite}#${index}`} />
               </svg>
@@ -161,15 +162,15 @@ export default function NewBoardForm({ onClose }) {
           <div>
             <h3
               className={clsx(
-                "titles",
-                user?.theme === "dark" ? "titlesWhite" : "titles"
+                "titlesnb",
+                user?.theme === "dark" ? "titlesWhitenb" : null
               )}>
               Background
             </h3>
-            <div className="image-container">
+            <div className="image-containernb">
               <div
                 onClick={() => setBackground("none")}
-                className="image-item"
+                className="image-itemnb"
                 style={{
                   backgroundImage: `url(${image05})`,
                   backgroundSize: "cover",
@@ -180,7 +181,7 @@ export default function NewBoardForm({ onClose }) {
                 <div
                   onClick={() => setBackground(`${index}`)}
                   key={index}
-                  className="image-item"
+                  className="image-itemnb"
                   style={{
                     backgroundImage: `url(${image.jpgVersion || image.min})`,
                     backgroundSize: "cover",
@@ -191,13 +192,14 @@ export default function NewBoardForm({ onClose }) {
             </div>
           </div>
           <Button
-            className="btn"
+            className="btnnb"
             type="submit"
             theme={user?.theme}
             variant="send"
             disabled={isDuplicate || title.trim() === ""} // Disable button for invalid input
           >
-            Create
+            <ReusablePlus />
+            <span>Create</span>
           </Button>
         </form>
       </div>

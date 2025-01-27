@@ -19,6 +19,7 @@ import image05 from "../../../images/bgImage-dark.jpg";
 import { images } from "../../../utils/backgrounds";
 
 import "./EditBoardForm.styled.css";
+import ReusablePlus from "../../commonComponents/ReusablePlus/ReusablePlus";
 
 export default function NewBoardForm({
   onClose,
@@ -101,15 +102,15 @@ export default function NewBoardForm({
   };
 
   return (
-    <div className="modal-overlay-need">
+    <div className="modal-overlay-needed">
       <div
         ref={formRef}
         className={clsx(
-          "modal-container-need",
-          user?.theme === "dark" ? "contDark" : "modal-container-need"
+          "modal-container-needed",
+          user?.theme === "dark" ? "contDarked" : null
         )}>
         {/* Butonul de închidere */}
-        <button type="button" className="close-btn" onClick={onClose}>
+        <button type="button" className="close-btned" onClick={onClose}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -133,12 +134,12 @@ export default function NewBoardForm({
         </button>
         <h2
           className={clsx(
-            "text",
-            user?.theme === "dark" ? "textDark" : "text"
+            "texted",
+            user?.theme === "dark" ? "textDarked" : "texted"
           )}>
           Edit board
         </h2>
-        <form onSubmit={handleSubmit} className="div-container">
+        <form onSubmit={handleSubmit} className="div-containered">
           <Input
             theme={user?.theme}
             value={title}
@@ -149,19 +150,19 @@ export default function NewBoardForm({
           />
           <h3
             className={clsx(
-              "titles",
-              user?.theme === "dark" ? "titlesWhite" : "titles"
+              "titlesed",
+              user?.theme === "dark" ? "titlesWhiteed" : null
             )}>
             Icons
           </h3>
-          <div className="icon-container">
+          <div className="icon-containered">
             {[...Array(8)].map((_, index) => (
               <svg
                 key={index}
                 onClick={() => setIcon(index)}
                 className={clsx(
-                  "icon",
-                  user?.theme === "dark" ? "white" : "icon"
+                  "iconed",
+                  user?.theme === "dark" ? "whiteed" : null
                 )}>
                 <use href={`${Sprite}#${index}`} />
               </svg>
@@ -170,12 +171,12 @@ export default function NewBoardForm({
           <div>
             <h3
               className={clsx(
-                "titles",
-                user?.theme === "dark" ? "titlesWhite" : "titles"
+                "titlesed",
+                user?.theme === "dark" ? "titlesWhiteed" : null
               )}>
               Background
             </h3>
-            <div className="image-container">
+            <div className="image-containered">
               <div
                 onClick={() => setBackground("none")}
                 className="image-item"
@@ -189,7 +190,7 @@ export default function NewBoardForm({
                 <div
                   onClick={() => setBackground(`${index}`)}
                   key={index}
-                  className="image-item"
+                  className="image-itemed"
                   style={{
                     backgroundImage: `url(${image.jpgVersion || image.min})`,
                     backgroundSize: "cover",
@@ -200,11 +201,12 @@ export default function NewBoardForm({
             </div>
           </div>
           <Button
-            className="btn"
+            className="btned"
             type="submit"
             theme={user?.theme}
             variant="send">
-            Edit
+            <ReusablePlus />
+            <span>Edit</span>
           </Button>
         </form>
       </div>

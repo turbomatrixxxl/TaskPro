@@ -1,4 +1,4 @@
-.modal-overlay-need {
+.modal-overlay-needed {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,7 +12,7 @@
   backdrop-filter: blur(5px);
 }
 
-.close-btn {
+.close-btned {
   background: transparent;
   outline: none;
   border: none;
@@ -22,7 +22,7 @@
   right: 14px;
 }
 
-.modal-container-need {
+.modal-container-needed {
   background: #fcfcfc;
   box-shadow: 0px 4px 16px 0px rgba(22, 22, 22, 0.05);
   border-radius: 8px;
@@ -37,12 +37,12 @@
   z-index: 100000;
 }
 
-.contDark {
+.contDarked {
   background: #151515;
   border: 1px solid rgba(190, 219, 176, 0.5);
 }
 
-.text {
+.texted {
   color: #161616;
   font-family: Poppins;
   font-size: 18px;
@@ -52,15 +52,15 @@
   letter-spacing: -0.36px;
 }
 
-.textDark {
+.textDarked {
   color: #fff;
 }
 
-.btn {
+.btned {
   margin-top: 24px;
 }
 
-.titles {
+.titlesed {
   color: #161616;
   font-family: Poppins;
   font-size: 14px;
@@ -72,17 +72,17 @@
   margin-bottom: 14px;
 }
 
-.titlesWhite {
+.titlesWhiteed {
   color: #fff;
 }
 
-.icon-container {
+.icon-containered {
   align-items: center;
   display: flex;
   gap: 8px;
 }
 
-.icon {
+.iconed {
   cursor: pointer;
   height: 18px;
   fill: transparent;
@@ -90,21 +90,21 @@
   width: 18px;
 }
 
-.white {
+.whiteed {
   stroke: #ffffff80;
 }
 
-.btn {
+.btned {
   margin-top: 40px;
 }
 
-.image-container {
+.image-containered {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   max-width: 248px;
 }
 
-.image-item {
+.image-itemed {
   background-size: cover;
   background-color: transparent;
   background-position: center;
@@ -116,7 +116,7 @@
 }
 
 @media only screen and (min-width: 767px) {
-  .modal-container-need {
+  .modal-container-needed {
     width: 400px;
   }
 }
