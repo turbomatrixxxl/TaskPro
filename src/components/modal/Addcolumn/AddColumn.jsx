@@ -46,7 +46,7 @@ export default function AddColumn({ onClose, projectName }) {
     };
   }, [onClose]);
 
-  // Verificare pentru titluri duplicate cu debounce
+  // Verificare pentru titluri duplicate
   const handleAddName = (e) => {
     const value = e.target.value;
     setColumnName(value);
@@ -60,6 +60,7 @@ export default function AddColumn({ onClose, projectName }) {
 
     setIsDuplicate(columnExists);
   };
+
   // Submit formular
   const handleSubmit = (e) => {
     e.preventDefault();

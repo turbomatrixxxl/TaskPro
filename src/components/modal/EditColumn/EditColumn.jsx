@@ -1,20 +1,27 @@
 import React, { useEffect, useRef, useState } from "react";
-// import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+
+import { useDispatch } from "react-redux";
 import { useAuth } from "../../../hooks/useAuth";
 import Input from "../../InputAdi/Input";
 import Button from "../../commonComponents/Button/Button";
 import "./EditColumn.styled.css";
 import clsx from "clsx";
+import { refreshUser } from "../../../redux/auth/operationsAuth";
+import { updateColumn } from "../../../redux/private/operationsPrivate";
 
-export default function AddColumn({ onClose }) {
+export default function AddColumn({ onClose, columnName, projectName }) {
   const { user } = useAuth();
-  const formRef = useRef(null);
-  // const dispatch = useDispatch();
-  const [title, setTitle] = useState("");
+  const formRef = useRef(null); // Ref for modal content
+  const modalRef = useRef(null); // Ref for modal overlay
+  const dispatch = useDispatch();
+  const [newColumnName, setNewColumnName] = useState("");
   const [isDuplicate, setIsDuplicate] = useState(false);
-  const debounceRef = useRef(null);
 
-  // Event listeners pentru Escape și click în afara modalului
+  // console.log(projectName);
+  // console.log(columnName);
+
+  // Event listeners for Escape and click outside modal
   useEffect(() => {
     const handleEscapeKey = (e) => {
       if (e.key === "Escape") {
@@ -23,13 +30,15 @@ export default function AddColumn({ onClose }) {
     };
 
     const handleClickOutside = (e) => {
-      if (formRef.current && !formRef.current.contains(e.target)) {
-        onClose();
+      // Check if the click is outside of modal content
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
+        console.log("Outside click detected");
+        // onClose();
       }
     };
 
     document.addEventListener("keydown", handleEscapeKey);
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside); // Listen for mousedown
 
     return () => {
       document.removeEventListener("keydown", handleEscapeKey);
@@ -37,46 +46,59 @@ export default function AddColumn({ onClose }) {
     };
   }, [onClose]);
 
-  // Verificare pentru titluri duplicate cu debounce
-  const handleTitleChange = (e) => {
+  // Verificare pentru titluri duplicate
+  const handleAddName = (e) => {
     const value = e.target.value;
-    setTitle(value);
+    setNewColumnName(value);
 
-    if (debounceRef.current) {
-      clearTimeout(debounceRef.current);
-    }
-
-    debounceRef.current = setTimeout(() => {
-      const normalizedTitle = value.trim().toLowerCase();
-      const projectExists = user?.projects?.some(
-        (project) => project.name.trim().toLowerCase() === normalizedTitle
+    const normalizedTitle = value.trim().toLowerCase();
+    const columnExists = user?.projects
+      ?.find((project) => project.name === projectName)
+      ?.columns.some(
+        (column) => column.name.trim().toLowerCase() === normalizedTitle
       );
-      setIsDuplicate(projectExists);
-    }, 300);
+
+    setIsDuplicate(columnExists);
   };
 
   // Submit formular
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (isDuplicate || title.trim() === "") return;
+    if (isDuplicate || newColumnName.trim() === "") return;
 
-    // Aici trimiteți acțiunea de adăugare proiect
-    // dispatch(addProject({ name: title }));
+    dispatch(updateColumn({ projectName, columnName, newColumnName }));
 
-    // După trimitere, închideți modalul
+    setTimeout(() => {
+      dispatch(refreshUser());
+    }, 500); // Adjust timeout duration as necessary
+
     onClose();
   };
 
+  // Prevent clicks inside modal content from closing it
+  const handleModalClick = (e) => {
+    e.stopPropagation(); // This prevents the click from bubbling up to the overlay
+  };
+
   return (
-    <div className="modal-overlay-need">
+    <div
+      ref={modalRef}
+      className="modal-overlay-needec"
+      onClick={(e) => {
+        if (!formRef.current.contains(e.target)) {
+          onClose(); // Close modal if click is outside the form
+        }
+      }}>
       <div
         ref={formRef}
         className={clsx(
-          "modal-container-need",
-          user?.theme === "dark" ? "contDark" : "modal-container-need"
-        )}>
-        <button type="button" className="close-btn" onClick={onClose}>
+          "modal-container-needec",
+          user?.theme === "dark" ? "contDarkec" : "modal-container-needec"
+        )}
+        onClick={handleModalClick} // Prevent click inside modal content from triggering onClose
+      >
+        <button type="button" className="close-btnec" onClick={onClose}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -100,32 +122,33 @@ export default function AddColumn({ onClose }) {
         </button>
         <h2
           className={clsx(
-            "text",
-            user?.theme === "dark" ? "textDark" : "text"
+            "textec",
+            user?.theme === "dark" ? "textDarkec" : null
           )}>
           Edit column
         </h2>
-        <form className="div-container" onSubmit={handleSubmit}>
+        <form className="div-containerec" onSubmit={handleSubmit}>
           <Input
+            className={user?.theme !== "dark" ? "notDark" : null}
             theme={user?.theme}
-            value={title}
-            handleChange={handleTitleChange}
-            placeholder="To Do"
+            value={newColumnName}
+            handleChange={handleAddName}
+            placeholder={`Initial name: ${columnName || "Untitled Column"}`}
             name="ToDo"
             type="text"
           />
           {isDuplicate && (
-            <p className="error">
+            <p className="errorec">
               A project with this name already exists! Please choose another
               name.
             </p>
           )}
           <Button
-            className="btn"
+            className="btnec"
             type="submit"
             theme={user?.theme}
             variant="send"
-            disabled={isDuplicate || title.trim() === ""}>
+            disabled={isDuplicate || newColumnName.trim() === ""}>
             Add
           </Button>
         </form>
@@ -133,3 +156,9 @@ export default function AddColumn({ onClose }) {
     </div>
   );
 }
+
+AddColumn.propTypes = {
+  onClose: PropTypes.func.isRequired, // Function to close the modal
+  projectName: PropTypes.string.isRequired, // Name of the project as a string
+  columnName: PropTypes.string.isRequired,
+};

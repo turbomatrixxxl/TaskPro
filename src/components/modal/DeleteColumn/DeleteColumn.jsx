@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 
-import { deleteProject } from "../../../redux/private/operationsPrivate";
+import { deleteColumn } from "../../../redux/private/operationsPrivate";
 import { refreshUser } from "../../../redux/auth/operationsAuth";
 
 import { useAuth } from "../../../hooks/useAuth";
@@ -10,16 +10,16 @@ import clsx from "clsx";
 
 import Button from "../../commonComponents/Button";
 
-import "./DeleteProject.styled.css";
+import "./DeleteColumn.styled.css";
 
-export default function DeleteProject({ onClose, projectName }) {
+export default function DeleteColumn({ onClose, projectName, columnName }) {
   const { user } = useAuth();
   const dispatch = useDispatch();
 
   const formRef = useRef(null);
 
   const handleDelete = (e) => {
-    dispatch(deleteProject({ projectName: `${projectName}` }));
+    dispatch(deleteColumn({ projectName, columnName }));
 
     // Timeout to delay `refreshUser` to give backend time to update
     setTimeout(() => {
@@ -52,14 +52,14 @@ export default function DeleteProject({ onClose, projectName }) {
   }, [onClose]);
 
   return (
-    <div className="modal-overlay-needp">
+    <div className="modal-overlay-needc">
       <div
         ref={formRef}
         className={clsx(
-          "modal-container-needp",
-          user?.theme === "dark" ? "contDark" : null
+          "modal-container-needc",
+          user?.theme === "dark" ? "contDarkc" : null
         )}>
-        <button type="button" className="close-btnp" onClick={onClose}>
+        <button type="button" className="close-btnc" onClick={onClose}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -85,23 +85,23 @@ export default function DeleteProject({ onClose, projectName }) {
         <div>
           <p
             className={clsx(
-              "textdp",
-              user?.theme === "dark" ? "textDarkp" : null
+              "textdc",
+              user?.theme === "dark" ? "textDarkc" : null
             )}>
             Are you sure that you want to delete
           </p>
           <h2
             className={clsx(
-              "textdp",
-              "h2p"
+              "textdc",
+              "h2c"
               //   user?.theme === "dark" ? "textDark" : "textd"
             )}>
-            {projectName}
+            {columnName}
           </h2>
           <p
             className={clsx(
-              "textdp",
-              user?.theme === "dark" ? "textDarkp" : null
+              "textdc",
+              user?.theme === "dark" ? "textDarkc" : null
             )}>
             an it's contents...?
           </p>
@@ -111,9 +111,9 @@ export default function DeleteProject({ onClose, projectName }) {
             handleClick={handleDelete}
             theme={user?.theme}
             className={clsx(
-              "btnp",
-              "redp",
-              user?.theme === "violet" ? "greenp" : "bluep"
+              "btnc",
+              "redc",
+              user?.theme === "violet" ? "greenc" : "bluec"
             )}
             type="submit"
             variant="send">
@@ -125,7 +125,7 @@ export default function DeleteProject({ onClose, projectName }) {
               onClose();
             }}
             theme={user?.theme}
-            className="btndp"
+            className="btndc"
             type="submit"
             variant="send">
             Cancel

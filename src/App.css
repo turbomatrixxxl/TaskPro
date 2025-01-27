@@ -10,6 +10,9 @@
 ::-webkit-scrollbar {
   width: 8px; /* Width of vertical scrollbar */
   height: 12px; /* Height of horizontal scrollbar */
+  border-radius: 8px;
+
+  margin-top: 16px; /* Adds space above the scrollbar */
   background-color: var(--scrollbar-bg);
 }
 

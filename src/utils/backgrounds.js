@@ -163,8 +163,8 @@ const images = [
 ];
 
 const getBackground = (backgroundId) => {
-  if (backgroundId === "none") {
-    return null; // Return null if the background is "none"
+  if (backgroundId === "none" || "") {
+    return "none"; // Return null if the background is "none"
   }
 
   const index = parseInt(backgroundId, 10); // Convert the backgroundId to a number

@@ -85,7 +85,7 @@ const privateSlice = createSlice({
       })
       .addCase(addColumn.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log(action.payload);
+        // console.log(action.payload);
 
         state.user = action.payload.project;
 
