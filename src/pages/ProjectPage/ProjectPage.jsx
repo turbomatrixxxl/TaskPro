@@ -19,6 +19,9 @@ import AddCardSara from "../../components/modal/AddCardSara/AddCardSara";
 import Button from "../../components/commonComponents/Button";
 import ReusablePlus from "../../components/commonComponents/ReusablePlus/ReusablePlus";
 
+import { toast } from "react-toastify"; // Import toast from react-toastify
+import "react-toastify/dist/ReactToastify.css"; // Include toast styles
+
 import iconsSvg from "../../images/sprite.svg";
 
 import styles from "./ProjectPage.module.css";
@@ -126,6 +129,60 @@ export default function ProjectPage() {
     setIsOpenAddCardModal(false);
   };
 
+  const getPriorityColor = (priority) => {
+    if (priority === "Low") {
+      return "#8FA1D0";
+    }
+
+    if (priority === "Medium") {
+      return "#E09CB5";
+    }
+
+    if (priority === "High") {
+      return "#BEDBB0";
+    }
+
+    if (priority === "Without priority") {
+      return "#808080";
+    }
+  };
+
+  function TaskAlert(task) {
+    const today = new Date();
+    const dueDate = new Date(task.dueDate); // Ensure task.dueDate is in a valid Date format
+    const diffInTime = dueDate - today;
+    const remainingDays = Math.ceil(diffInTime / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+
+    // Define styles dynamically
+    const iconStyle = {
+      display: remainingDays <= 5 ? "block" : "none",
+      stroke: remainingDays < 2 ? "red" : "inherit",
+    };
+
+    const handleClick = () => {
+      if (remainingDays <= 5) {
+        toast.warning(
+          `Warning, there are ${remainingDays} days left to finish this task...!`
+        );
+      }
+    };
+
+    return (
+      <svg
+        width="16"
+        height="16"
+        onClick={handleClick}
+        style={iconStyle}
+        className={styles.taskBell}>
+        <use
+          href={`${iconsSvg}#${clsx(
+            user?.theme === "violet" ? "bell-violet" : "bell-green"
+          )}`}
+        />
+      </svg>
+    );
+  }
+
   return (
     <div className={styles.mainCont}>
       {isOpenAddColumnModal && (
@@ -214,8 +271,151 @@ export default function ProjectPage() {
                       .map((task, taskIndex) => (
                         <div
                           key={`task-${taskIndex}`}
-                          className={styles.taskItem}>
-                          <span>{task.title || `Task ${taskIndex + 1}`}</span>
+                          className={clsx(
+                            styles.taskItemCont,
+                            user.theme === "dark"
+                              ? styles.taskItemContDark
+                              : null
+                          )}>
+                          <div
+                            style={{
+                              background: `${getPriorityColor(task.priority)}`,
+                            }}
+                            className={styles.priorityColor}></div>
+                          <div className={styles.taskItem}>
+                            <h3
+                              className={clsx(
+                                styles.taskTitle,
+                                user.theme === "dark"
+                                  ? styles.taskTitleDark
+                                  : null
+                              )}>
+                              {task.title || `Task ${taskIndex + 1}`}
+                            </h3>
+                            <p
+                              className={clsx(
+                                styles.taskDesc,
+                                user.theme === "dark"
+                                  ? styles.taskDescDark
+                                  : null
+                              )}>
+                              {task?.description}
+                            </p>
+                            <div
+                              className={clsx(
+                                styles.taskLine,
+                                user.theme === "dark"
+                                  ? styles.taskLineDark
+                                  : null
+                              )}></div>
+                            <div className={styles.taskDownCont}>
+                              <div className={styles.taskDownLeftCont}>
+                                <div className={styles.taskDownLeftLCont}>
+                                  <p
+                                    className={clsx(
+                                      styles.taskPriorityTitle,
+                                      user.theme === "dark"
+                                        ? styles.taskPriorityTitleDark
+                                        : null
+                                    )}>
+                                    Priority
+                                  </p>
+                                  <div className={styles.taskPriorityItems}>
+                                    <span
+                                      style={{
+                                        background: `${getPriorityColor(
+                                          task.priority
+                                        )}`,
+                                      }}
+                                      className={
+                                        styles.taskPriorityColor
+                                      }></span>
+                                    <p
+                                      className={clsx(
+                                        styles.taskPriorityDesc,
+                                        user.theme === "dark"
+                                          ? styles.taskPriorityDescDark
+                                          : null
+                                      )}>
+                                      {task?.priority === "Without priority"
+                                        ? "Without"
+                                        : task.priority}
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className={styles.taskDownLeftRCont}>
+                                  <p
+                                    className={clsx(
+                                      styles.taskDeadlineTitle,
+                                      user.theme === "dark"
+                                        ? styles.taskDeadlineTitleDark
+                                        : null
+                                    )}>
+                                    Deadline
+                                  </p>
+                                  <div
+                                    className={clsx(
+                                      styles.taskDeadlineDate,
+                                      user.theme === "dark"
+                                        ? styles.taskDeadlineDateDark
+                                        : null
+                                    )}>
+                                    {
+                                      new Date(task?.dueDate)
+                                        .toISOString()
+                                        .split("T")[0]
+                                    }
+                                  </div>
+                                </div>
+                              </div>
+                              <div className={styles.taskDownRightCont}>
+                                <TaskAlert
+                                  task={{ dueDate: `${task?.dueDate}` }}
+                                />
+                                <div className={styles.columnIconCont}>
+                                  <svg
+                                    className={styles.columnIcon}
+                                    width="16"
+                                    height="16"
+                                    onClick={() => {
+                                      // Add your click logic here, like showing a modal or triggering a toast
+                                    }}>
+                                    <use
+                                      href={`${iconsSvg}#${clsx(
+                                        user?.theme === "violet"
+                                          ? "move-violet"
+                                          : user?.theme === "light"
+                                          ? "move-green"
+                                          : "move-black"
+                                      )}`}
+                                    />
+                                  </svg>
+                                  <svg
+                                    onClick={() => {}}
+                                    className={clsx(
+                                      styles.columnIcon,
+                                      user.theme === "dark"
+                                        ? styles.columnIconLight
+                                        : null
+                                    )}>
+                                    <use href={`${iconsSvg}#pencil`} />
+                                  </svg>
+                                  <svg
+                                    onClick={() =>
+                                      handleOpenDeleteColumnModal(column.name)
+                                    }
+                                    className={clsx(
+                                      styles.columnIcon,
+                                      user.theme === "dark"
+                                        ? styles.columnIconLight
+                                        : null
+                                    )}>
+                                    <use href={`${iconsSvg}#trash`} />
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       ))}
                   </div>

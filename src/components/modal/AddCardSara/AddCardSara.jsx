@@ -23,7 +23,8 @@ export default function AddCard({ onClose, projectName, columnName }) {
   const { user } = useAuth();
   const dispatch = useDispatch();
 
-  const formRef = useRef(null);
+  const formRef = useRef(); // Ref for modal content
+  // const modalRef = useRef(); // Ref for modal overlay
 
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
   const [title, setTitle] = useState("");
@@ -80,18 +81,18 @@ export default function AddCard({ onClose, projectName, columnName }) {
       }
     };
 
-    const handleClickOutside = (e) => {
-      if (formRef.current && !formRef.current.contains(e.target)) {
-        // onClose();
-      }
-    };
+    // const handleClickOutside = (e) => {
+    //   if (formRef.current && !formRef.current.contains(e.target)) {
+    //     onClose();
+    //   }
+    // };
 
     document.addEventListener("keydown", handleEscapeKey);
-    document.addEventListener("mousedown", handleClickOutside);
+    // document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
       document.removeEventListener("keydown", handleEscapeKey);
-      document.removeEventListener("mousedown", handleClickOutside);
+      // document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [onClose]);
 
@@ -100,9 +101,22 @@ export default function AddCard({ onClose, projectName, columnName }) {
     setIsOpenCalendar((prev) => !prev);
   };
 
+  // Prevent clicks inside modal content from closing it
+  const handleModalClick = (e) => {
+    e.stopPropagation(); // This prevents the click from bubbling up to the overlay
+  };
+
   return (
-    <div className={styles["modal-overlay-need"]}>
+    <div
+      // ref={modalRef}
+      // onClick={(e) => {
+      //   if (!formRef.current.contains(e.target)) {
+      //     onClose(); // Close modal if click is outside the form
+      //   }
+      // }}
+      className={styles["modal-overlay-need"]}>
       <div
+        onClick={handleModalClick} // Prevent click inside modal content from triggering onClose
         ref={formRef}
         className={clsx(
           "modal-container-need",
@@ -179,6 +193,15 @@ export default function AddCard({ onClose, projectName, columnName }) {
               fill="none">
               <circle cx="7" cy="7" r="7" fill="#8FA1D0" />
             </svg>
+            <span
+              className={clsx(
+                styles.span,
+                clsx(styles["label-text"], {
+                  [styles["labelDark"]]: user?.theme === "dark",
+                })
+              )}>
+              Low
+            </span>
             <svg
               className={clsx(styles["circle-icon"], {
                 [styles["circle-selected"]]: selectedColor === "Medium",
@@ -191,6 +214,15 @@ export default function AddCard({ onClose, projectName, columnName }) {
               fill="none">
               <circle cx="7" cy="7" r="7" fill="#E09CB5" />
             </svg>
+            <span
+              className={clsx(
+                styles.span,
+                clsx(styles["label-text"], {
+                  [styles["labelDark"]]: user?.theme === "dark",
+                })
+              )}>
+              Medium
+            </span>
             <svg
               className={clsx(styles["circle-icon"], {
                 [styles["circle-selected"]]: selectedColor === "High",
@@ -203,6 +235,15 @@ export default function AddCard({ onClose, projectName, columnName }) {
               fill="none">
               <circle cx="7" cy="7" r="7" fill="#BEDBB0" />
             </svg>
+            <span
+              className={clsx(
+                styles.span,
+                clsx(styles["label-text"], {
+                  [styles["labelDark"]]: user?.theme === "dark",
+                })
+              )}>
+              High
+            </span>
             <svg
               className={clsx(styles["circle-icon"], {
                 [styles["circle-selected"]]:
@@ -216,6 +257,15 @@ export default function AddCard({ onClose, projectName, columnName }) {
               fill="none">
               <circle cx="7" cy="7" r="7" fill="#808080" />
             </svg>
+            <span
+              className={clsx(
+                styles.span,
+                clsx(styles["label-text"], {
+                  [styles["labelDark"]]: user?.theme === "dark",
+                })
+              )}>
+              Without priority
+            </span>
           </div>
 
           <div

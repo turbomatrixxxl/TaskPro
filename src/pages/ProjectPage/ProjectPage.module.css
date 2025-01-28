@@ -9,8 +9,8 @@
   display: flex;
   flex-direction: column;
   gap: 39px;
-  height: 100%;
-  overflow-x: auto;
+  height: -webkit-fill-available;
+  /* overflow-x: auto; */
   padding: 20px;
   padding-bottom: 24px;
   width: -webkit-fill-available;
@@ -131,13 +131,186 @@
   flex-direction: column;
   flex-grow: 1;
   gap: 8px;
+  height: 150px;
   overflow-y: auto;
+  margin-right: 4px;
+  width: -webkit-fill-available;
+}
+
+.taskItemCont {
+  background: #fff;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  flex-shrink: 0;
+  height: 154px;
   width: 100%;
 }
 
+.taskItemContDark {
+  background: #121212;
+}
+
+.priorityColor {
+  width: 4px;
+  height: 154px;
+  flex-shrink: 0;
+
+  border-radius: 4px 0px 0px 4px;
+  background: #8fa1d0;
+}
+
 .taskItem {
-  font-size: 18px;
-  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 20px 14px 24px;
+}
+
+.taskTitle {
+  color: #161616;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.28px;
+}
+
+.taskTitleDark {
+  color: #fff;
+}
+
+.taskDesc {
+  width: 290px;
+  height: 38px;
+  flex-shrink: 0;
+
+  overflow: hidden;
+  color: rgba(22, 22, 22, 0.7);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+  letter-spacing: -0.24px;
+  margin-top: 8px;
+  margin-bottom: 14px;
+}
+
+.taskDescDark {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.taskLine {
+  border: none;
+  border-bottom: 1px solid rgba(22, 22, 22, 0.1);
+}
+
+.taskLineDark {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.taskDownCont {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+  width: 100%;
+}
+
+.taskDownLeftCont {
+  display: flex;
+  gap: 14px;
+}
+
+.taskDownLeftLCont,
+.taskDownLeftRCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.taskDownLeftLCont {
+  gap: 5.5px;
+}
+
+.taskPriorityTitle {
+  color: rgba(22, 22, 22, 0.5);
+  font-family: Poppins;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.16px;
+}
+
+.taskPriorityTitleDark {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.taskPriorityItems {
+  display: flex;
+  gap: 4px;
+}
+
+.taskPriorityColor {
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+}
+
+.taskPriorityDesc {
+  color: #161616;
+  font-family: Poppins;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.2px;
+}
+
+.taskPriorityDescDark {
+  color: #fff;
+}
+
+.taskDeadlineTitle {
+  color: rgba(22, 22, 22, 0.5);
+  font-family: Poppins;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.2px;
+}
+
+.taskDeadlineTitleDark {
+  color: #fff;
+}
+
+.taskDeadlineDate {
+  color: #161616;
+  font-family: Poppins;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.2px;
+}
+
+.taskDeadlineDateDark {
+  color: #fff;
+}
+
+.taskDownRightCont {
+  align-items: end;
+  display: flex;
+}
+
+.taskBell {
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
 }
 
 .btn {
