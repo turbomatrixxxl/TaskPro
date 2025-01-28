@@ -1,17 +1,21 @@
 .footer {
-  border: solid 1px rgba(255, 255, 255, 0.2);
   text-align: center;
   padding: 12px;
   color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
   background: linear-gradient(270deg, #2e1746 3.2%, #2e225f 99.98%);
+  width: -webkit-fill-available;
+}
+
+.dark {
+  background: #161616;
 }
 
 .footerText {
   transition: all 0.3s ease 0s;
 }
 .footerText:hover {
-  color: #ff868d;
+  color: #bedbb0;
 }
 
 @media screen and (min-width: 768px) {

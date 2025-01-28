@@ -1,0 +1,142 @@
+.nav {
+  display: flex;
+  flex-grow: 1;
+  height: 61px;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 20px 0;
+  padding-left: 14px;
+  width: 100%;
+}
+
+.link {
+  background: transparent;
+}
+
+.activeLinkLight {
+  background: #f6f6f7;
+}
+
+.activeLinkDark {
+  background: #1f1f1f;
+}
+
+.activeLinkViolet {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.leftCont {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  gap: 4px;
+  width: fit-content;
+}
+
+.mainIcon {
+  width: 18px;
+  height: 18px;
+  fill: transparent;
+}
+
+.mainIconNormal {
+  stroke: #ffffff80;
+  stroke-opacity: 0.5;
+}
+
+.mainIconNormalActive {
+  stroke: white;
+  fill: transparent;
+}
+
+.mainIconLight {
+  stroke: #161616;
+  stroke-opacity: 0.5;
+}
+
+.mainIconLightActive {
+  stroke: #161616;
+}
+
+.mainText {
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.mainTextNormal {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.mainTextNormalActive {
+  color: #fff;
+}
+
+.mainTextLight {
+  color: rgba(22, 22, 22, 0.5);
+}
+
+.mainTextLightActive {
+  color: #161616;
+}
+
+.rightCont {
+  align-items: center;
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+}
+
+.projectIconCont {
+  display: flex;
+  fill: transparent;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.projectIcon {
+  stroke: #ffffff80;
+  width: 16px;
+  height: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.projectIcon:hover {
+  scale: 1.1;
+}
+
+.projectIconLight {
+  stroke: #16161680;
+}
+
+.rightMargin {
+  width: 4px;
+  height: 61px;
+  flex-shrink: 0;
+
+  border-radius: 4px 0px 0px 4px;
+  background: #bedbb0;
+}
+
+.rightMarginViolet {
+  background: #fff;
+}
+
+@media screen and (width >=768px) {
+  .nav {
+    padding-left: 20px;
+  }
+
+  .leftCont {
+    padding: 8px;
+  }
+
+  .rightCont {
+    gap: 24px;
+  }
+}

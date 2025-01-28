@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { logIn } from "../../redux/auth/operationsAuth";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../commonComponents/Input/Input";
 import Button from "../commonComponents/Button";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import useToggle from "../../hooks/useToggle";
@@ -15,7 +12,10 @@ import validateLogin from "../../hooks/validateLogin";
 import useFormTouched from "../../hooks/useFormTouched";
 
 import { useAuth } from "../../hooks/useAuth";
-import clsx from "clsx";
+// import clsx from "clsx";
+
+import { toast } from "react-toastify"; // Import toast and ToastContainer
+import "react-toastify/dist/ReactToastify.css"; // Import styles
 
 import styles from "./LoginForm.module.css";
 
@@ -27,6 +27,8 @@ function LoginForm() {
     },
     validateLogin
   );
+
+  const navigate = useNavigate();
 
   const { user, isLoggedIn } = useAuth();
 
@@ -46,6 +48,17 @@ function LoginForm() {
 
     try {
       await dispatch(logIn(fields)).unwrap();
+
+      // Show success toast message after successful login
+      toast.success("Login successful!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (error) {
       setFields((prevFields) => ({
         ...prevFields,
@@ -56,109 +69,114 @@ function LoginForm() {
     }
   };
 
+  const isFormValid = fields.email.trim() !== "" && fields.password.length >= 6;
+
   return (
-    <>
+    <div className={styles.cont}>
+      <div className={styles.linkContainer}>
+        <Link to="/auth/register" className={styles.navLinkTitle}>
+          Registration
+        </Link>
+
+        <p className={styles.login}>Log In</p>
+      </div>
+
       <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.inputContainer}>
-          <div className={styles.inputWrapper}>
-            <FontAwesomeIcon icon={faEnvelope} className={styles.inputIcon} />
-
-            <Input
-              autoComplete="on"
-              paddingLeft="53.5px"
-              width="100%"
-              type="email"
-              value={fields.email}
-              handleChange={(e) => {
-                setFields({ ...fields, email: e.target.value });
-              }}
-              handleBlur={handleBlur("email")}
-              placeholder="Email *"
-              required={true}
-            />
-          </div>
-          {touched.email && !fields.email && (
-            <p className={styles.inputError}>Required</p>
-          )}
-        </div>
-        <div styles={styles.inputContainer}>
-          <div className={styles.inputWrapper}>
-            <FontAwesomeIcon icon={faLock} className={styles.inputIcon} />
-
-            {eyeVisible && (
-              <VscEye
-                onClick={() => {
-                  toggleEyeVisible();
-                  toggleClosedEyeVisible();
-                  setType("text");
+        <div className={styles.inputsCont}>
+          <div className={styles.inputContainer}>
+            <div className={styles.inputWrapper}>
+              <Input
+                autoComplete="on"
+                paddingLeft="18px"
+                width="100%"
+                type="email"
+                value={fields.email}
+                handleChange={(e) => {
+                  setFields({ ...fields, email: e.target.value });
                 }}
-                size="24px"
-                className={styles.eyeIcon}
+                handleBlur={handleBlur("email")}
+                placeholder="Enter your email"
+                required={true}
               />
+            </div>
+            {touched.email && !fields.email && (
+              <p className={styles.inputError}>Required</p>
             )}
-
-            {closedEyeVisible && (
-              <VscEyeClosed
-                onClick={() => {
-                  toggleEyeVisible();
-                  toggleClosedEyeVisible();
-                  setType("password");
-                }}
-                size="24px"
-                className={styles.eyeIcon}
-              />
-            )}
-
-            <Input
-              autoComplete="on"
-              paddingLeft="53.5px"
-              width="100%"
-              type={type}
-              value={fields.password}
-              handleChange={(e) => {
-                setFields({ ...fields, password: e.target.value });
-              }}
-              handleBlur={handleBlur("password")}
-              placeholder="Password"
-              required={true}
-            />
           </div>
-          {touched.password && fields.password.length < 6 && (
-            <p className={styles.inputError}>
-              Password must be at least 6 characters!
-            </p>
-          )}
+
+          <div styles={styles.inputContainer}>
+            <div className={styles.inputWrapper}>
+              {eyeVisible && (
+                <VscEye
+                  onClick={() => {
+                    toggleEyeVisible();
+                    toggleClosedEyeVisible();
+                    setType("text");
+                    console.log("click");
+                  }}
+                  size="24px"
+                  className={styles.eyeIcon}
+                />
+              )}
+              {closedEyeVisible && (
+                <VscEyeClosed
+                  onClick={() => {
+                    toggleEyeVisible();
+                    toggleClosedEyeVisible();
+                    setType("password");
+                  }}
+                  size="24px"
+                  className={styles.eyeIcon}
+                />
+              )}
+              <Input
+                autoComplete="on"
+                paddingLeft="14px"
+                width="100%"
+                type={type}
+                value={fields.password}
+                handleChange={(e) => {
+                  setFields({ ...fields, password: e.target.value });
+                }}
+                handleBlur={handleBlur("password")}
+                placeholder="Password"
+                required={true}
+              />
+            </div>
+            {touched.password && fields.password.length < 6 && (
+              <p className={styles.inputError}>
+                Password must be at least 6 characters!
+              </p>
+            )}
+          </div>
         </div>
+
         <div className={styles.buttonsContainer}>
-          <Button variant="colored" type="submit">
-            Log in
-          </Button>
-          {/* {errorMessage && <p className={styles.error}>{errorMessage}</p>} */}
-          <Link to="/register" className={styles.navLink}>
-            <Button className={styles.button} type="button">
-              Register
-            </Button>
-          </Link>{" "}
           {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+
+          <Button disabled={!isFormValid} variant="auth" type="submit">
+            Login
+          </Button>
         </div>
+
         {user !== null && !isLoggedIn && (
           <div className={styles.errorCont}>
             <p className={styles.error}>
-              It seems that your email is not verified! Please click the Verify
-              button to be redirected to verify email page !
+              It seems that your authorisation token expired for security resons
+              or your email is not verified! Please click Login button or Verify
+              button if email not verified !
             </p>
-            <Button>
-              <Link
-                to="/verify-email"
-                className={clsx(styles.navLink, styles.link)}
-              >
-                Verify
-              </Link>
+            <Button
+              variant="auth"
+              handleClick={() => {
+                navigate("/verify-email");
+              }}>
+              Verify
             </Button>
           </div>
         )}
       </form>
-    </>
+    </div>
   );
 }
 

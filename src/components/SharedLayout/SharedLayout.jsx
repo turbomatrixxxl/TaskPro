@@ -1,87 +1,127 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+
 // import { useMediaQuery } from "react-responsive";
 
 import { Outlet } from "react-router-dom";
-import Header from "../Header/Header";
+
 import Footer from "../Footer/Footer";
+import Header from "../Header";
+
 import { useAuth } from "../../hooks/useAuth";
 import { usePrivate } from "../../hooks/usePrivate";
 
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+// import clsx from "clsx";
 
 import clsx from "clsx";
 
+// import ScreenPage from "../../pages/ScreenPage";
+
+import { usePublic } from "../../hooks/usePublic";
+import { useDispatch } from "react-redux";
+
 import styles from "./SharedLayout.module.css";
+import { reset } from "../../redux/auth/authSlice";
+import { resetHelpForm } from "../../redux/public/helpSlice";
+import { clearUser } from "../../redux/private/privateSlice";
 
-function SharedLayout() {
-  const { isLoggedIn, isLoggedOut, isRegistered } = useAuth();
-  const { message } = usePrivate();
+function SharedLayout({ handleClick }) {
+  const { isLoggedIn, isLoggedOut, errorAuth, isRegistered, user } = useAuth();
+  const { privateError, privateMessage } = usePrivate();
+  const { helpError, helpSuccessMessage } = usePublic();
 
-  const [toastShown, setToastShown] = useState(false);
+  const dispatch = useDispatch();
+
+  const [toastRegisteredShown, setToastRegisteredShown] = useState(false);
   const [logoutShown, setLogoutShown] = useState(false);
 
   useEffect(() => {
+    if (!toastRegisteredShown) {
+    }
     if (isRegistered) {
       toast.success("Registration successful!");
+      setToastRegisteredShown(true);
     }
-  }, [isRegistered]);
 
-  useEffect(() => {
-    if (isLoggedIn && !toastShown) {
-      toast.success("Login successful!");
-      setToastShown(true);
-      setLogoutShown(false);
+    if (!logoutShown) {
+      if (isLoggedOut) {
+        toast.success("Logout successful!");
+        setLogoutShown(true);
+        dispatch(reset());
+      }
     }
-  }, [isLoggedIn, toastShown]);
 
-  useEffect(() => {
-    if (isLoggedOut && !logoutShown) {
-      toast.success("You are not Logged in!");
-      setLogoutShown(true);
-      setToastShown(false);
+    if (helpSuccessMessage) {
+      toast.success(helpSuccessMessage);
     }
-  }, [isLoggedOut, logoutShown]);
 
-  // useEffect(() => {
-  //   if (error) {
-  //     toast.error(error);
-  //   }
-  // }, [error]);
-
-  useEffect(() => {
-    if (message) {
-      toast.success(message);
+    if (helpError) {
+      toast.success(helpError);
+      dispatch(resetHelpForm());
     }
-  }, [message]);
 
-  // console.log({
-  //   isLoggedIn: isLoggedIn,
-  //   toastShown: toastShown,
-  //   logoutShown: logoutShown,
-  //   isLoggedOut: isLoggedOut,
-  //   error: error,
-  //   errorAuth: errorAuth,
-  //   message: message,
-  //   isRegistered: isRegistered,
-  // });
+    if (errorAuth) {
+      toast.error(errorAuth);
+    }
+
+    if (privateError) {
+      toast.error(privateError);
+    }
+
+    if (privateMessage) {
+      toast.success(privateMessage);
+    }
+
+    setTimeout(() => {
+      dispatch(resetHelpForm());
+    }, 7000);
+
+    setTimeout(() => {
+      dispatch(clearUser());
+    }, 5000);
+  }, [
+    isRegistered,
+    isLoggedIn,
+    isLoggedOut,
+    toastRegisteredShown,
+
+    logoutShown,
+    helpSuccessMessage,
+    helpError,
+    errorAuth,
+    privateError,
+    privateMessage,
+    dispatch,
+  ]);
 
   return (
     <div className={styles.cont}>
-      <ToastContainer position="top-center" autoClose={5000} />
-      <div
-        className={
-          isLoggedIn ? styles.content : clsx(styles.content, styles.notLoggedIn)
-        }
-      >
-        <Header />
-        <main className={styles.main}>
-          <Outlet />
-        </main>
-      </div>
+      <Header handleClick={handleClick} />
+
+      <main
+        className={clsx(
+          styles.main,
+          user?.theme === "dark"
+            ? styles.mainDark
+            : user?.theme === "violet"
+            ? styles.mainViolet
+            : user?.theme === "light"
+            ? styles.mainLight
+            : styles.mainLight
+        )}>
+        <Outlet />
+      </main>
+
       <Footer />
     </div>
   );
 }
+
+SharedLayout.propTypes = {
+  handleClick: PropTypes.func,
+};
 
 export default SharedLayout;

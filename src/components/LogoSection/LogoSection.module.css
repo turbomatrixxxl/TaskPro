@@ -1,0 +1,40 @@
+.logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #fff;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  gap: 8px;
+  line-height: normal;
+  letter-spacing: -0.64px;
+  padding-top: 14px;
+  padding-left: 14px;
+}
+
+.lightLogo {
+  color: #161616;
+}
+
+.svg {
+  color: #ffffff;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.64px;
+}
+
+.lightSvg {
+  color: #161616;
+}
+
+@media screen and (width >=768px) {
+  .logo {
+    padding-top: 24px;
+    padding-left: 24px;
+  }
+}

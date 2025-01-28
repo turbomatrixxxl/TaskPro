@@ -13,6 +13,7 @@ function Modal({
   contRef,
   modalContentClassName,
   closeButton,
+  variant,
 }) {
   if (!isModalVisible) {
     return;
@@ -23,7 +24,7 @@ function Modal({
       <section ref={dialogRef} className={styles.modalClassName}>
         <div
           ref={contRef}
-          className={clsx(styles.content, modalContentClassName)}
+          className={clsx(styles.content, variant === "dark" ? styles.darkContent : styles.content)}
         >
           <button
             className={clsx(styles.closeModal, closeButton)}
@@ -56,6 +57,7 @@ Modal.propTypes = {
     PropTypes.array,
   ]), modalContentClassName: PropTypes.string,
   closeButton: PropTypes.string,
+  variant: PropTypes.string,
 };
 
 export default Modal;

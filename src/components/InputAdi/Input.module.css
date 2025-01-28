@@ -1,0 +1,60 @@
+/* Stil pentru containerul inputului */
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Stiluri pentru inputul de tip text */
+.input {
+  align-items: center;
+  background: transparent;
+  border-radius: 8px;
+  border: 1px solid #bedbb0;
+  display: flex;
+  flex-shrink: 0;
+  font-size: 14px;
+  padding: 14px;
+  padding-left: 18px;
+
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.light::placeholder,
+.violetBorder::placeholder {
+  color: #161616;
+}
+
+.darkColor::placeholder {
+  color: #ffffff;
+}
+
+/* Stiluri pentru inputul de tip comentarii (textarea) */
+.commentInput {
+  height: 120px;
+  box-shadow: 0px 4px 16px 0px rgba(22, 22, 22, 0.08);
+}
+
+.violetBorder {
+  border-color: #5255bc;
+  box-shadow: 0px 4px 16px 0px rgba(22, 22, 22, 0.08);
+}
+
+.darkColor {
+  color: #ffffff;
+}
+
+.darkColor + .input::placeholder {
+  color: white;
+}
+
+.normalColor {
+  color: #161616;
+}
+
+/* Stiluri pentru input-ul centrat */
+.inputCenter {
+  text-align: center;
+  margin: 0 auto;
+}

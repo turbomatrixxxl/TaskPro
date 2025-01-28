@@ -1,25 +1,24 @@
-@import '../../../styles/variables.css';
+@import "../../../styles/variables.css";
 
 .button {
   align-items: center;
+  background: #bedbb0;
+  border: none;
+  border-radius: 8px;
+  color: #161616;
   cursor: pointer;
   display: flex;
   justify-content: center;
-  width: 182px;
-  height: 44px;
-  flex-shrink: 1;
-  border: none;
-  outline: none;
-  border-radius: 30px;
-  padding: 13px 0;
+  padding: 14px 0px;
+  width: 287px;
 
-  text-align: center;
-  font-family: Verdana;
+  font-family: Poppins;
   font-size: 14px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
+  letter-spacing: -0.28px;
   line-height: normal;
-  letter-spacing: 0.56px;
+  text-align: center;
 
   /* Button shadow */
   box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2);
@@ -31,42 +30,25 @@
 .button:focus {
   scale: 0.99;
   box-shadow: rgba(0, 0, 0, 0.5) 3px 5px 8px 3px;
-  background-color: var(--brand-color);
+  background-color: rgb(134, 221, 34);
   color: white;
 }
 
-.coloredButton {
-  background-color: var(--brand-color);
-  color: var(--white, #fbfbfb);
+.button:disabled:hover {
+  background-color: rgb(245, 77, 54);
 }
 
-.whiteButton,
-.button:disabled {
-  background-color: #fcfcfc;
-  border: 1px solid var(--brand-color);
-  color: var(--brand-color);
+.violet {
+  background: #5255bc;
+  color: #fff;
 }
 
 .button:disabled {
   cursor: not-allowed;
 }
 
-.plusButton {
-  border-radius: 50%;
-  border: 1px solid var(--brand-color);
-  color: var(--brand-color);
-  font-size: 18px;
-
-  flex-shrink: 0;
-  height: 40px;
-  width: 40px;
-}
-
 @media screen and (width >=768px) {
-  .plusButton {
-    font-size: 22px;
-
-    height: 48px;
-    width: 48px;
+  .button {
+    width: 352px;
   }
 }

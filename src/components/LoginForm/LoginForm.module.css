@@ -1,39 +1,84 @@
-@import "../../styles/variables.css";
-
 .form {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 40px;
+  flex-grow: 1;
+  gap: 14px;
+  justify-content: space-between;
   width: 100%;
+}
+.cont {
+  align-items: center;
+  width: 335px;
+  height: fit-content;
+  flex-shrink: 0;
+  gap: 40px;
+  border-radius: 8px;
+  background: #151515;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.linkContainer {
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-right: auto;
+}
+
+.navLinkTitle {
+  color: rgba(255, 255, 255, 0.3);
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.36px;
+}
+
+.navLinkTitle:hover,
+.navLinkTitle:focus {
+  color: #fff;
+}
+
+.login {
+  color: #fff;
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.36px;
+}
+
+.inputsCont {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  justify-content: center;
 }
 
 .inputWrapper {
   position: relative;
 }
 
-.inputIcon {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  color: var(--gray-text-color);
-  font-size: 18px;
-}
-
 .inputError {
   margin: 2px 0 0 0;
-  color: var(--brand-color);
+  color: red;
 }
 
 .eyeIcon {
   cursor: pointer;
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: 18px;
   transform: translateY(-50%);
-  color: var(--gray-text-color);
+  color: #ffffff;
   font-size: 24px;
+  z-index: 1000;
 }
 
 .errorCont {
@@ -45,26 +90,18 @@
 }
 
 .error {
-  color: var(--brand-color);
-  margin-top: 10px;
+  color: red;
   font-size: 14px;
   font-weight: 500;
-  text-align: center;
-  margin-bottom: 10px;
+  padding: 0 5px;
+  width: 287px;
 }
 
 .buttonsContainer {
-  align-items: center;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.button,
-.navLink {
-  color: var(--brand-color);
+  justify-content: space-between;
 }
 
 .button:hover,
@@ -74,26 +111,14 @@
   color: white;
 }
 
-a {
-  text-decoration: none;
-}
-
 @media screen and (width >=768px) {
-  .form {
-    align-items: flex-start;
-    gap: 52px;
-  }
-
-  .buttonsContainer {
-    flex-direction: row;
-    gap: 32px;
-  }
-
-  .errorCont {
-    align-items: flex-start;
+  .cont {
+    width: fit-content;
+    height: fit-content;
+    padding: 40px;
   }
 
   .error {
-    font-size: 20px;
+    width: 344px;
   }
 }

@@ -1,0 +1,89 @@
+.modal-overlay-needcc {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(5px);
+}
+
+.close-btncc {
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 0;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+
+.modal-container-needcc {
+  background: #fcfcfc;
+  box-shadow: 0px 4px 16px 0px rgba(22, 22, 22, 0.05);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: fit-content;
+  justify-content: space-between;
+  position: relative;
+  padding: 24px;
+  width: 335px;
+  z-index: 100000;
+}
+
+.contDarkcc {
+  background: #151515;
+  border: 1px solid rgba(190, 219, 176, 0.5);
+}
+
+.textdcc {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  color: #151515;
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  letter-spacing: -0.36px;
+}
+
+.h2cc {
+  font-size: 24px;
+  margin: 24px 0;
+  color: red;
+}
+
+.textDarkcc {
+  color: #fff;
+}
+
+.btndcc {
+  margin-top: 14px;
+}
+
+.redcc:hover {
+  background: red;
+}
+
+.greencc {
+  background: #bedbb0;
+  color: red;
+}
+
+.bluecc {
+  background: #5255bc;
+}
+
+@media only screen and (min-width: 767px) {
+  .modal-container-needcc {
+    width: 400px;
+  }
+}
