@@ -1,13 +1,13 @@
 /* Light Theme */
 .theme-light {
-  --scrollbar-bg: #fff;
-  --scrollbar-thumb: #e8e8e8;
-  --scrollbar-thumb-hover: #b0b0b0;
+  --scrollbar-bg: #ddc7c7;
+  --scrollbar-thumb: #c5acac;
+  --scrollbar-thumb-hover: #978a8a;
 }
 
 /* Dark Theme */
 .theme-dark {
-  --scrollbar-bg: #161616;
+  --scrollbar-bg: #3d3939;
   --scrollbar-thumb: rgba(255, 255, 255, 0.1);
   --scrollbar-thumb-hover: #8a8787;
 }

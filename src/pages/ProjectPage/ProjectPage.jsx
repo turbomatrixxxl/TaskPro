@@ -25,21 +25,30 @@ import "react-toastify/dist/ReactToastify.css"; // Include toast styles
 import iconsSvg from "../../images/sprite.svg";
 
 import styles from "./ProjectPage.module.css";
+import EditCard from "../../components/modal/EditCard/EditCard";
+import DeleteCard from "../../components/modal/DeleteCard/DeleteCard";
 
 export default function ProjectPage() {
   const navigate = useNavigate();
   const { projectName } = useParams();
   const { user } = useAuth();
-  console.log(user);
+  // console.log(user);
 
   const { privateFilter } = usePrivate();
 
   const [isOpenAddColumnModal, setIsOpenAddColumnModal] = useState(false);
   const [isOpenEditColumnModal, setIsOpenEditColumnModal] = useState(false);
   const [isOpenDeleteColumnModal, setIsOpenDeletColumnModal] = useState(false);
-  const [selectedColumn, setSelectedColumn] = useState(null);
-
   const [isOpenAddCardModal, setIsOpenAddCardModal] = useState(false);
+  const [isOpenEditTaskModal, setIsOpenEditTaskModal] = useState(false);
+  const [isOpenDeleteTaskModal, setIsOpenDeleteTaskModal] = useState(false);
+
+  const [selectedColumn, setSelectedColumn] = useState(null);
+  const [selectedTaskName, setSelectedTaskName] = useState(null);
+  const [selectedTaskNameDescription, setSelectedTaskDescription] =
+    useState(null);
+  const [selectedTaskNamePriority, setSelectedTaskPriority] = useState(null);
+  const [selectedTaskNameDueDate, setSelectedTaskDueDate] = useState(null);
 
   // Media Queries for Responsive Backgrounds
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
@@ -91,6 +100,67 @@ export default function ProjectPage() {
     transition: "background 0.3s ease",
   };
 
+  const getPriorityColor = (priority) => {
+    if (priority === "Low") {
+      return "#8FA1D0";
+    }
+
+    if (priority === "Medium") {
+      return "#E09CB5";
+    }
+
+    if (priority === "High") {
+      return "#BEDBB0";
+    }
+
+    if (priority === "Without priority") {
+      return "#808080";
+    }
+  };
+
+  function TaskAlert(task) {
+    const today = new Date();
+    const dueDate = new Date(task.dueDate); // Ensure task.dueDate is in a valid Date format
+    const diffInTime = dueDate - today;
+    // console.log(diffInTime);
+
+    const remainingDays = Math.ceil(diffInTime / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+
+    // Define styles dynamically
+    const iconStyle = {
+      display: remainingDays <= 5 ? "block" : "none",
+      stroke: remainingDays < 3 ? "red" : "inherit",
+    };
+
+    const handleClick = () => {
+      if (remainingDays <= 5) {
+        toast.warning(
+          `Warning, there are ${remainingDays} days left to finish this task...!`
+        );
+      }
+      // console.log(remainingDays);
+      // console.log(diffInTime);
+    };
+
+    return (
+      <svg
+        width="16"
+        height="16"
+        onClick={handleClick}
+        style={iconStyle}
+        className={clsx(
+          styles.taskBell,
+          remainingDays <= 2 && styles.highPriorityBell
+        )}>
+        <use
+          href={`${iconsSvg}#${clsx(
+            user?.theme === "violet" ? "bell-violet" : "bell-green"
+          )}`}
+        />
+      </svg>
+    );
+  }
+
   const handleOpenAddColumnModal = () => {
     setIsOpenAddColumnModal(true);
   };
@@ -126,62 +196,46 @@ export default function ProjectPage() {
   };
 
   const handleCloseAddCardModal = () => {
+    setSelectedColumn(null);
+
     setIsOpenAddCardModal(false);
   };
 
-  const getPriorityColor = (priority) => {
-    if (priority === "Low") {
-      return "#8FA1D0";
-    }
+  const handleOpenEditTaskModal = (columnName, task) => {
+    setSelectedColumn(columnName);
 
-    if (priority === "Medium") {
-      return "#E09CB5";
-    }
+    setSelectedTaskName(task.title);
+    setSelectedTaskDescription(task.description);
+    setSelectedTaskPriority(task.priority);
+    setSelectedTaskDueDate(task.dueDate);
 
-    if (priority === "High") {
-      return "#BEDBB0";
-    }
-
-    if (priority === "Without priority") {
-      return "#808080";
-    }
+    setIsOpenEditTaskModal(true);
   };
 
-  function TaskAlert(task) {
-    const today = new Date();
-    const dueDate = new Date(task.dueDate); // Ensure task.dueDate is in a valid Date format
-    const diffInTime = dueDate - today;
-    const remainingDays = Math.ceil(diffInTime / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+  const handleCloseEditTaskModal = () => {
+    setSelectedColumn(null);
 
-    // Define styles dynamically
-    const iconStyle = {
-      display: remainingDays <= 5 ? "block" : "none",
-      stroke: remainingDays < 2 ? "red" : "inherit",
-    };
+    setSelectedTaskName(null);
+    setSelectedTaskDescription(null);
+    setSelectedTaskPriority(null);
+    setSelectedTaskDueDate(null);
 
-    const handleClick = () => {
-      if (remainingDays <= 5) {
-        toast.warning(
-          `Warning, there are ${remainingDays} days left to finish this task...!`
-        );
-      }
-    };
+    setIsOpenEditTaskModal(false);
+  };
 
-    return (
-      <svg
-        width="16"
-        height="16"
-        onClick={handleClick}
-        style={iconStyle}
-        className={styles.taskBell}>
-        <use
-          href={`${iconsSvg}#${clsx(
-            user?.theme === "violet" ? "bell-violet" : "bell-green"
-          )}`}
-        />
-      </svg>
-    );
-  }
+  const handleOpenDeleteTaskModal = (columnName, taskName) => {
+    setSelectedColumn(columnName);
+    setSelectedTaskName(taskName);
+
+    setIsOpenDeleteTaskModal(true);
+  };
+
+  const handleCloseDeleteTaskModal = () => {
+    setSelectedColumn(null);
+    setSelectedTaskName(null);
+
+    setIsOpenDeleteTaskModal(false);
+  };
 
   return (
     <div className={styles.mainCont}>
@@ -203,6 +257,32 @@ export default function ProjectPage() {
           projectName={projectName}
           columnName={selectedColumn}
           onClose={handleCloseDeleteColumnModal}
+        />
+      )}
+      {isOpenAddCardModal && selectedColumn && (
+        <AddCardSara
+          onClose={handleCloseAddCardModal}
+          projectName={projectName}
+          columnName={selectedColumn}
+        />
+      )}
+      {isOpenEditTaskModal && (
+        <EditCard
+          onClose={handleCloseEditTaskModal}
+          projectName={projectName}
+          columnName={selectedColumn}
+          taskName={selectedTaskName}
+          taskDescription={selectedTaskNameDescription}
+          taskPriority={selectedTaskNamePriority}
+          taskDueDate={selectedTaskNameDueDate}
+        />
+      )}
+      {isOpenDeleteTaskModal && selectedTaskName && (
+        <DeleteCard
+          projectName={projectName}
+          columnName={selectedColumn}
+          taskName={selectedTaskName}
+          onClose={handleCloseDeleteTaskModal}
         />
       )}
 
@@ -228,13 +308,6 @@ export default function ProjectPage() {
               if (column.length === 0) return null;
               return (
                 <div key={`column-${colIndex}`} className={styles.columnCont}>
-                  {isOpenAddCardModal && selectedColumn && (
-                    <AddCardSara
-                      onClose={handleCloseAddCardModal}
-                      projectName={projectName}
-                      columnName={column.name}
-                    />
-                  )}
                   <div
                     className={clsx(
                       styles.columnEditCont,
@@ -263,7 +336,7 @@ export default function ProjectPage() {
                   <div className={styles.tasksCont}>
                     {column.cards
                       .filter((task) => {
-                        console.log(task);
+                        // console.log(task);
 
                         if (privateFilter === "Show all") return true;
                         return task.priority === privateFilter;
@@ -292,7 +365,7 @@ export default function ProjectPage() {
                               )}>
                               {task.title || `Task ${taskIndex + 1}`}
                             </h3>
-                            <p
+                            <div
                               className={clsx(
                                 styles.taskDesc,
                                 user.theme === "dark"
@@ -300,7 +373,7 @@ export default function ProjectPage() {
                                   : null
                               )}>
                               {task?.description}
-                            </p>
+                            </div>
                             <div
                               className={clsx(
                                 styles.taskLine,
@@ -369,17 +442,17 @@ export default function ProjectPage() {
                                 </div>
                               </div>
                               <div className={styles.taskDownRightCont}>
-                                <TaskAlert
-                                  task={{ dueDate: `${task?.dueDate}` }}
-                                />
+                                {TaskAlert(task)}
                                 <div className={styles.columnIconCont}>
                                   <svg
-                                    className={styles.columnIcon}
+                                    className={clsx(
+                                      styles.columnIcon,
+                                      user.theme !== "dark" && styles.moveIcon,
+                                      user.theme === "dark" && styles.darkMove
+                                    )}
                                     width="16"
                                     height="16"
-                                    onClick={() => {
-                                      // Add your click logic here, like showing a modal or triggering a toast
-                                    }}>
+                                    onClick={() => {}}>
                                     <use
                                       href={`${iconsSvg}#${clsx(
                                         user?.theme === "violet"
@@ -391,7 +464,12 @@ export default function ProjectPage() {
                                     />
                                   </svg>
                                   <svg
-                                    onClick={() => {}}
+                                    onClick={() => {
+                                      handleOpenEditTaskModal(
+                                        column.name,
+                                        task
+                                      );
+                                    }}
                                     className={clsx(
                                       styles.columnIcon,
                                       user.theme === "dark"
@@ -402,7 +480,10 @@ export default function ProjectPage() {
                                   </svg>
                                   <svg
                                     onClick={() =>
-                                      handleOpenDeleteColumnModal(column.name)
+                                      handleOpenDeleteTaskModal(
+                                        column.name,
+                                        task.title
+                                      )
                                     }
                                     className={clsx(
                                       styles.columnIcon,
@@ -420,7 +501,9 @@ export default function ProjectPage() {
                       ))}
                   </div>
                   <Button
-                    handleClick={handleOpenAddCardModal}
+                    handleClick={() => {
+                      handleOpenAddCardModal(column.name);
+                    }}
                     className={styles.btn}
                     type="submit"
                     theme={user?.theme}

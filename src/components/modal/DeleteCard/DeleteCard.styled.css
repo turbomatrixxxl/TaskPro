@@ -1,4 +1,4 @@
-.modal-overlay-needc {
+.modal-overlay-needcc {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,7 +12,7 @@
   backdrop-filter: blur(5px);
 }
 
-.close-btnc {
+.close-btncc {
   background: transparent;
   outline: none;
   border: none;
@@ -22,7 +22,7 @@
   right: 14px;
 }
 
-.modal-container-needc {
+.modal-container-needcc {
   background: #fcfcfc;
   box-shadow: 0px 4px 16px 0px rgba(22, 22, 22, 0.05);
   border-radius: 8px;
@@ -37,12 +37,12 @@
   z-index: 100000;
 }
 
-.contDarkc {
+.contDarkcc {
   background: #151515;
   border: 1px solid rgba(190, 219, 176, 0.5);
 }
 
-.textdc {
+.textdcc {
   align-items: center;
   display: flex;
   justify-content: center;
@@ -55,35 +55,35 @@
   letter-spacing: -0.36px;
 }
 
-.h2c {
+.h2cc {
   font-size: 24px;
   margin: 24px 0;
   color: red;
 }
 
-.textDarkc {
+.textDarkcc {
   color: #fff;
 }
 
-.btndc {
+.btndcc {
   margin-top: 14px;
 }
 
-.redc:hover {
+.redcc:hover {
   background: red;
 }
 
-.greenc {
+.greencc {
   background: #bedbb0;
   color: red;
 }
 
-.bluec {
+.bluecc {
   background: #5255bc;
 }
 
 @media only screen and (min-width: 767px) {
-  .modal-container-needc {
+  .modal-container-needcc {
     width: 400px;
   }
 }

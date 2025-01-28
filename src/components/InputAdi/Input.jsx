@@ -48,7 +48,8 @@ export default function Input({
       onChange={handleChange}
       name={name || ""}
       className={clsx(
-        styles.input, // Clasa generală pentru input
+        styles.input,
+        styles.light, // Clasa generală pentru input
         variant === "center" ? styles.inputCenter : styles.input,
         theme === "violet" ? styles.violetBorder : styles.input,
         theme === "dark" ? styles.darkColor : styles.normalColor,

@@ -21,6 +21,15 @@
   width: 100%;
 }
 
+.light::placeholder,
+.violetBorder::placeholder {
+  color: #161616;
+}
+
+.darkColor::placeholder {
+  color: #ffffff;
+}
+
 /* Stiluri pentru inputul de tip comentarii (textarea) */
 .commentInput {
   height: 120px;
@@ -34,6 +43,10 @@
 
 .darkColor {
   color: #ffffff;
+}
+
+.darkColor + .input::placeholder {
+  color: white;
 }
 
 .normalColor {

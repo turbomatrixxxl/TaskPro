@@ -4,7 +4,7 @@ import { useAuth } from "../../../hooks/useAuth";
 
 import { useDispatch } from "react-redux";
 import { refreshUser } from "../../../redux/auth/operationsAuth";
-import { addTask } from "../../../redux/private/operationsPrivate";
+import { updateTask } from "../../../redux/private/operationsPrivate";
 
 import clsx from "clsx";
 
@@ -17,9 +17,17 @@ import ReusablePlus from "../../commonComponents/ReusablePlus/ReusablePlus";
 
 import { HiChevronDown, HiChevronUp } from "react-icons/hi";
 
-import styles from "./AddCardSara.module.css";
+import styles from "./EditCard.module.css";
 
-export default function AddCard({ onClose, projectName, columnName }) {
+export default function EditCard({
+  onClose,
+  projectName,
+  columnName,
+  taskName,
+  taskDescription,
+  taskPriority,
+  taskDueDate,
+}) {
   const { user } = useAuth();
   const dispatch = useDispatch();
 
@@ -29,43 +37,67 @@ export default function AddCard({ onClose, projectName, columnName }) {
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(new Date(taskDueDate));
+  const [selectedColor, setSelectedColor] = useState("");
 
   const today = new Date().toISOString().split("T")[0];
 
-  const newDay = new Date(selectedDate).toISOString().split("T")[0];
-  // console.log(newDay);
+  let newDay = null;
+
+  if (selectedDate && !isNaN(new Date(selectedDate))) {
+    newDay = new Date(selectedDate).toISOString().split("T")[0];
+  } else {
+    // Fallback to today's date if selectedDate is invalid
+    newDay = new Date().toISOString().split("T")[0];
+    console.warn("Invalid selectedDate. Falling back to today's date:", newDay);
+  } //   console.log(newDay);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
   const handleColorSelect = (color) => setSelectedColor(color);
 
-  const isFormValid =
-    title.trim() !== "" && description.trim() !== "" && selectedColor !== null;
+  //   const isFormValid =
+  //     title.trim() !== "" && description.trim() !== "" && selectedColor !== null;
 
   const formData = {
-    title: String(title),
-    description: description ? String(description) : "Description",
-    priority: selectedColor ? String(selectedColor) : "Without priority",
-    dueDate: selectedDate ? newDay : today,
+    title: title || null,
+    description: description || null,
+    priority: selectedColor || null,
+    dueDate: newDay || null,
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!isFormValid) {
-      // alert("Please fill in all fields and select a label color.");
-      return;
-    }
+    // if (!isFormValid) {
+    //   // alert("Please fill in all fields and select a label color.");
+    //   return;
+    // }
     // console.log("Form submitted", {
     //   title,
     //   description,
     //   newDay,
     //   selectedColor,
     // });
+    console.log(formData);
+    console.log("title:", title);
+    console.log("description", description);
+    console.log("priority", selectedColor);
+    console.log("selectedDate", selectedDate);
+
+    // console.log("taskName:", taskName);
+    // console.log("taskDescription", taskDescription);
+    // console.log("taskPriority", taskPriority);
+    // console.log("taskDueDate", taskDueDate);
 
     // Dispatch the async thunk (addTask)
-    dispatch(addTask({ projectName, columnName, taskData: formData }));
+    dispatch(
+      updateTask({
+        projectName,
+        columnName,
+        taskName,
+        updates: formData, // Pass updates separately
+      })
+    );
 
     setTimeout(() => {
       dispatch(refreshUser());
@@ -149,14 +181,14 @@ export default function AddCard({ onClose, projectName, columnName }) {
           className={clsx(styles.text, {
             [styles.textDark]: user?.theme === "dark",
           })}>
-          Add card
+          Edit card
         </h2>
 
         <form onSubmit={handleSubmit} className={styles["div-container"]}>
           <Input
             className={styles.textarea}
             theme={user?.theme}
-            value={title}
+            value={title === "" ? taskName : title}
             handleChange={handleTitleChange}
             placeholder="Title"
             name="title"
@@ -165,7 +197,7 @@ export default function AddCard({ onClose, projectName, columnName }) {
           <Input
             className={styles.textarea}
             theme={user?.theme}
-            value={description}
+            value={description === "" ? taskDescription : description}
             handleChange={handleDescriptionChange}
             placeholder="Description"
             name="Description"
@@ -281,7 +313,11 @@ export default function AddCard({ onClose, projectName, columnName }) {
               "datepicker-toggle-dark": user?.theme === "dark",
             })}>
             <DatePicker
-              selected={selectedDate}
+              selected={
+                selectedDate === (null || "" || undefined)
+                  ? new Date(taskDueDate)
+                  : newDay
+              }
               onChange={(date) => setSelectedDate(date)}
               className={clsx(
                 styles["datepicker-input"],
@@ -327,10 +363,10 @@ export default function AddCard({ onClose, projectName, columnName }) {
             theme={user?.theme}
             className={styles.btn}
             type="submit"
-            disabled={!isFormValid}
+            // disabled={!isFormValid}
             variant="send">
             <ReusablePlus />
-            Add
+            Edit
           </Button>
         </form>
       </div>
