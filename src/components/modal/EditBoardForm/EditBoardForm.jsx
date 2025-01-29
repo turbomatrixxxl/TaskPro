@@ -65,21 +65,22 @@ export default function NewBoardForm({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(`${projectName}`);
-    console.log("Type of Project Name:", typeof projectName);
-    console.log("Type of Project Name:", typeof `${projectName}`);
+    // console.log(`${projectName}`);
+    // console.log("Type of Project Name:", typeof projectName);
+    // console.log("Type of Project Name:", typeof `${projectName}`);
 
     if (!projectName) {
       console.error("Error: projectName is undefined or invalid!");
+      return;
     } else {
-      console.log("Dispatching update with:", {
-        projectName,
-        updates: {
-          name: title || projectName,
-          icon: icon || projectIcon,
-          background: background || projectBackground,
-        },
-      });
+      // console.log("Dispatching update with:", {
+      //   projectName,
+      //   updates: {
+      //     name: title || projectName,
+      //     icon: icon || projectIcon,
+      //     background: background || projectBackground,
+      //   },
+      // });
 
       dispatch(
         updateProjectAppearance({
@@ -217,7 +218,7 @@ export default function NewBoardForm({
 // Define PropTypes for NewBoardForm
 NewBoardForm.propTypes = {
   onClose: PropTypes.func.isRequired, // Function to close the form, required
-  projectName: PropTypes.string.isRequired, // The name of the project, required
-  projectIcon: PropTypes.number.isRequired,
-  projectBackground: PropTypes.string.isRequired,
+  projectName: PropTypes.string, // The name of the project, required
+  projectIcon: PropTypes.number,
+  projectBackground: PropTypes.string,
 };

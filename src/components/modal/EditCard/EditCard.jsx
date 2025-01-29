@@ -34,13 +34,13 @@ export default function EditCard({
   const formRef = useRef(); // Ref for modal content
   const modalRef = useRef(); // Ref for modal overlay
 
-  const [isOpenCalendar, setIsOpenCalendar] = useState(false);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [selectedDate, setSelectedDate] = useState(new Date(taskDueDate));
-  const [selectedColor, setSelectedColor] = useState("");
-
   const today = new Date().toISOString().split("T")[0];
+
+  const [isOpenCalendar, setIsOpenCalendar] = useState(false);
+  const [title, setTitle] = useState(taskName || "");
+  const [description, setDescription] = useState(taskDescription || "");
+  const [selectedDate, setSelectedDate] = useState(taskDueDate || today);
+  const [selectedPriority, setSelectedPriority] = useState(taskPriority || "");
 
   let newDay = null;
 
@@ -50,44 +50,24 @@ export default function EditCard({
     // Fallback to today's date if selectedDate is invalid
     newDay = new Date().toISOString().split("T")[0];
     console.warn("Invalid selectedDate. Falling back to today's date:", newDay);
-  } //   console.log(newDay);
+  }
+  //   console.log("selectedDate :", selectedDate);
+
+  //   console.log("newDay:", newDay);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
-  const handleColorSelect = (color) => setSelectedColor(color);
-
-  //   const isFormValid =
-  //     title.trim() !== "" && description.trim() !== "" && selectedColor !== null;
+  const handleColorSelect = (color) => setSelectedPriority(color);
 
   const formData = {
     title: title || null,
     description: description || null,
-    priority: selectedColor || null,
+    priority: selectedPriority || null,
     dueDate: newDay || null,
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (!isFormValid) {
-    //   // alert("Please fill in all fields and select a label color.");
-    //   return;
-    // }
-    // console.log("Form submitted", {
-    //   title,
-    //   description,
-    //   newDay,
-    //   selectedColor,
-    // });
-    // console.log(formData);
-    // console.log("title:", title);
-    // console.log("description", description);
-    // console.log("priority", selectedColor);
-    // console.log("selectedDate", selectedDate);
-
-    // console.log("taskName:", taskName);
-    // console.log("taskDescription", taskDescription);
-    // console.log("taskPriority", taskPriority);
-    // console.log("taskDueDate", taskDueDate);
 
     // Dispatch the async thunk (addTask)
     dispatch(
@@ -215,7 +195,7 @@ export default function EditCard({
           <div className={styles["svg-circle"]}>
             <svg
               className={clsx(styles["circle-icon"], {
-                [styles["circle-selected"]]: selectedColor === "Low",
+                [styles["circle-selected"]]: selectedPriority === "Low",
               })}
               onClick={() => handleColorSelect("Low")}
               xmlns="http://www.w3.org/2000/svg"
@@ -236,7 +216,7 @@ export default function EditCard({
             </span>
             <svg
               className={clsx(styles["circle-icon"], {
-                [styles["circle-selected"]]: selectedColor === "Medium",
+                [styles["circle-selected"]]: selectedPriority === "Medium",
               })}
               onClick={() => handleColorSelect("Medium")}
               xmlns="http://www.w3.org/2000/svg"
@@ -257,7 +237,7 @@ export default function EditCard({
             </span>
             <svg
               className={clsx(styles["circle-icon"], {
-                [styles["circle-selected"]]: selectedColor === "High",
+                [styles["circle-selected"]]: selectedPriority === "High",
               })}
               onClick={() => handleColorSelect("High")}
               xmlns="http://www.w3.org/2000/svg"
@@ -279,7 +259,7 @@ export default function EditCard({
             <svg
               className={clsx(styles["circle-icon"], {
                 [styles["circle-selected"]]:
-                  selectedColor === "Without priority",
+                  selectedPriority === "Without priority",
               })}
               onClick={() => handleColorSelect("Without priority")}
               xmlns="http://www.w3.org/2000/svg"

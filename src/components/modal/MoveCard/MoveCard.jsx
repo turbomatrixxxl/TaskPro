@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import PropTypes from "prop-types";
+import PropTypes, { oneOfType } from "prop-types";
 
 import { useAuth } from "../../../hooks/useAuth";
 import { useDispatch } from "react-redux";
@@ -217,5 +217,12 @@ export default function MoveCard({ projectName, columnName, taskName }) {
 MoveCard.propTypes = {
   projectName: PropTypes.string.isRequired,
   columnName: PropTypes.string.isRequired,
-  takName: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/no-typos
+  taskName: PropTypes.oneOfType([
+    PropTypes.string,
+    // eslint-disable-next-line react/no-typos
+    PropTypes.undefined,
+    // eslint-disable-next-line react/no-typos
+    PropTypes.null,
+  ]),
 };

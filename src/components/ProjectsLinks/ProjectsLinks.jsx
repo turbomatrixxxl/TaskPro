@@ -147,8 +147,8 @@ export default function ProjectsLinks({
 
 // Define propTypes for the component
 ProjectsLinks.propTypes = {
-  to: PropTypes.string.isRequired, // Required string for the navigation path
-  projectName: PropTypes.string.isRequired, // Required string for the project name
+  to: PropTypes.string, // Required string for the navigation path
+  projectName: PropTypes.string, // Required string for the project name
   icon: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6, 7]), // Valid range for the icon number
   theme: PropTypes.oneOf(["light", "dark", "violet"]), // Theme options
   projectBackground: PropTypes.oneOf([

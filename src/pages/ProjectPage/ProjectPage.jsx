@@ -43,7 +43,6 @@ export default function ProjectPage() {
   const [isOpenAddCardModal, setIsOpenAddCardModal] = useState(false);
   const [isOpenEditTaskModal, setIsOpenEditTaskModal] = useState(false);
   const [isOpenDeleteTaskModal, setIsOpenDeleteTaskModal] = useState(false);
-  // const [isOpenMoveTaskModal, setIsOpenMoveTaskModal] = useState(false);
 
   const [selectedColumn, setSelectedColumn] = useState(null);
   const [selectedTaskName, setSelectedTaskName] = useState(null);
@@ -203,13 +202,19 @@ export default function ProjectPage() {
     setIsOpenAddCardModal(false);
   };
 
-  const handleOpenEditTaskModal = (columnName, task) => {
+  const handleOpenEditTaskModal = (
+    columnName,
+    title,
+    description,
+    priority,
+    dueDate
+  ) => {
     setSelectedColumn(columnName);
 
-    setSelectedTaskName(task.title);
-    setSelectedTaskDescription(task.description);
-    setSelectedTaskPriority(task.priority);
-    setSelectedTaskDueDate(task.dueDate);
+    setSelectedTaskName(title);
+    setSelectedTaskDescription(description);
+    setSelectedTaskPriority(priority);
+    setSelectedTaskDueDate(dueDate);
 
     setIsOpenEditTaskModal(true);
   };
@@ -238,20 +243,6 @@ export default function ProjectPage() {
 
     setIsOpenDeleteTaskModal(false);
   };
-
-  // const handleOpenMoveTaskModal = (columnName, taskName) => {
-  //   setSelectedColumn(columnName);
-  //   setSelectedTaskName(taskName);
-
-  //   setIsOpenMoveTaskModal(true);
-  // };
-
-  // const handleCloseMoveTaskModal = () => {
-  //   setSelectedColumn(null);
-  //   setSelectedTaskName(null);
-
-  //   setIsOpenMoveTaskModal(false);
-  // };
 
   return (
     <div className={styles.mainCont}>
@@ -468,8 +459,11 @@ export default function ProjectPage() {
                                   <svg
                                     onClick={() => {
                                       handleOpenEditTaskModal(
-                                        column.name,
-                                        task.title
+                                        column?.name,
+                                        task?.title,
+                                        task?.description,
+                                        task?.priority,
+                                        task?.dueDate
                                       );
                                     }}
                                     className={clsx(
@@ -521,7 +515,7 @@ export default function ProjectPage() {
             onClick={handleOpenAddColumnModal}
             className={clsx(
               styles.addColumnBtn,
-              user.theme === "dark" ? styles.addColumnBtnDark : null
+              user?.theme === "dark" ? styles.addColumnBtnDark : null
             )}>
             <AddColumnPlus />
             <span>Add another column</span>

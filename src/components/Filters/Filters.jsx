@@ -79,7 +79,7 @@ export default function Filters({ background }) {
         className={clsx(
           styles.button,
           background !== "none"
-            ? user.theme === "dark"
+            ? user?.theme === "dark"
               ? styles.backgroundDark
               : styles.backgroundLight
             : null
