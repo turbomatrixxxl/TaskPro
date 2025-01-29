@@ -119,7 +119,7 @@
 
 .taskBell,
 .columnIcon:hover {
-  scale: 1.1;
+  scale: 1.3;
 }
 
 .columnIconLight {
@@ -328,6 +328,15 @@
   scale: 1.35;
   stroke-width: 1.5;
   stroke-opacity: 1;
+}
+
+.moveCont {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+  position: relative;
+  width: fit-content;
 }
 
 .moveIcon {

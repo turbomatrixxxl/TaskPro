@@ -32,9 +32,9 @@ export default function NewBoardForm({
   const formRef = useRef(null);
   const dispatch = useDispatch();
 
-  const [title, setTitle] = useState("");
-  const [icon, setIcon] = useState("");
-  const [background, setBackground] = useState("");
+  const [title, setTitle] = useState(projectName);
+  const [icon, setIcon] = useState(projectIcon);
+  const [background, setBackground] = useState(projectBackground);
 
   useEffect(() => {
     const handleEscapeKey = (e) => {

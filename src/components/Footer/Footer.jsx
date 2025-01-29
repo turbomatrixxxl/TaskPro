@@ -21,9 +21,18 @@ const Footer = () => {
           ? styles.dark
           : user?.theme === "violet"
           ? styles.violet
-          : styles.light
+          : null
       )}>
-      <div onClick={handleTextClick} className={styles.footerText}>
+      <div
+        onClick={handleTextClick}
+        className={clsx(
+          styles.footerText,
+          user?.theme === "light"
+            ? styles.lightText
+            : user?.theme === "violet"
+            ? styles.violetText
+            : null
+        )}>
         <p>℗ & © GoIT 2024</p>
         <p>Powered by Ultimate Team</p>
       </div>

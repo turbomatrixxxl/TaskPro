@@ -30,12 +30,12 @@
 .button:focus {
   scale: 0.99;
   box-shadow: rgba(0, 0, 0, 0.5) 3px 5px 8px 3px;
-  background-color: rgb(134, 221, 34);
+  background-color: #76ad5a;
   color: white;
 }
 
 .button:disabled:hover {
-  background-color: rgb(245, 77, 54);
+  background-color: rgb(231, 89, 70);
 }
 
 .violet {

@@ -69,11 +69,18 @@
   cursor: pointer;
   font-size: 24px;
   color: white;
+  transition: all 0.3s ease-in-out;
 }
 
 .iconPlusViolet {
   background: #b8bcfd;
 }
+
+.iconPlus:hover {
+  box-shadow: 0 4px 25px rgba(40, 167, 69, 0.7), 0 0 15px rgba(40, 167, 69, 0.9); /* Glow effect on hover */
+  scale: 1.12;
+}
+
 @media screen and (width >=768px) {
   .cont {
     padding: 0 24px;

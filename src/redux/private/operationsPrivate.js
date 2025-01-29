@@ -136,7 +136,7 @@ export const moveTask = createAsyncThunk(
       // Send a patch request to move the task
       const response = await axios.patch(
         `/api/projects/${projectName}/column/${columnName}/tasks/${taskName}/move`,
-        { toColumnName }
+        { toColumnName: toColumnName }
       );
 
       // Return the updated user object, which includes updated projects

@@ -1,0 +1,77 @@
+.moveMainCont {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+  position: relative;
+  width: fit-content;
+}
+
+.moveCont {
+  align-items: center;
+  border-radius: 8px;
+  background: #fcfcfc;
+  box-shadow: 0px 4px 16px 0px rgba(17, 17, 17, 0.1);
+  display: flex;
+  height: 86px;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  padding: 18px;
+  overflow-y: auto;
+  position: absolute;
+  right: 0;
+  top: 135%;
+  width: 135px;
+}
+
+.contDark {
+  background: #1f1f1f;
+}
+
+.moveCont .columnName:first-child {
+  margin-top: 40px;
+}
+
+.columnName {
+  align-items: center;
+  cursor: pointer;
+  color: #161616;
+  display: flex;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  gap: 8px;
+  justify-content: space-between;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  width: 100%;
+
+  transition: all 0.3s ease-in-out;
+}
+
+.columnName:hover {
+  scale: 1.1;
+}
+
+.columnNameDark {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.selectedColumnName {
+  color: #bedbb0;
+}
+
+.selectedColumnNameViolet {
+  color: #5255bc;
+}
+
+.move {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.move:hover {
+  scale: 1.3;
+}

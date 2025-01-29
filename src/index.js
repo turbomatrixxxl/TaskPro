@@ -9,7 +9,7 @@ import { store } from "./redux/store";
 import { BrowserRouter } from "react-router-dom";
 
 // Use the correct basename based on the environment
-const basename = process.env.NODE_ENV === "production" ? "/TaskPro/home" : "/";
+const basename = process.env.NODE_ENV === "production" ? "/TaskPro" : "/";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
