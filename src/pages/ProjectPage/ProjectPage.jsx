@@ -227,7 +227,7 @@ export default function ProjectPage() {
 
   const handleOpenDeleteTaskModal = (columnName, task) => {
     setSelectedColumn(columnName);
-    setSelectedTaskName(task.title);
+    setSelectedTaskName(task);
 
     setIsOpenDeleteTaskModal(true);
   };
@@ -469,7 +469,7 @@ export default function ProjectPage() {
                                     onClick={() => {
                                       handleOpenEditTaskModal(
                                         column.name,
-                                        task
+                                        task.title
                                       );
                                     }}
                                     className={clsx(
