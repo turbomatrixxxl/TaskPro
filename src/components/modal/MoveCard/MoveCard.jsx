@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import PropTypes, { oneOfType } from "prop-types";
+import PropTypes from "prop-types";
 
 import { useAuth } from "../../../hooks/useAuth";
 import { useDispatch } from "react-redux";
