@@ -15,7 +15,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter basename={basename}>
+      <BrowserRouter
+        future={{
+          v7_startTransition: true, // Enable startTransition for state updates
+          v7_relativeSplatPath: true, // Enable relative path handling for splats
+        }}
+        basename={basename}>
         <App />
       </BrowserRouter>
     </Provider>
