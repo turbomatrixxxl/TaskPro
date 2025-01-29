@@ -49,11 +49,11 @@ export default function MoveCard({ projectName, columnName, taskName }) {
 
   // Handle column selection
   const handleSelect = (toColumn) => {
-    console.log("projectName", projectName);
-    console.log("columnName", columnName);
-    console.log("taskName", taskName);
-    console.log("toColumn", toColumn);
-    console.log("Is true :", toColumn === columnName);
+    // console.log("projectName", projectName);
+    // console.log("columnName", columnName);
+    // console.log("taskName", taskName);
+    // console.log("toColumn", toColumn);
+    // console.log("Is true :", toColumn === columnName);
 
     if (toColumn !== columnName) {
       // Dispatch action to move the task

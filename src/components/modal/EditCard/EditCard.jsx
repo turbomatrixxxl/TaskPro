@@ -78,11 +78,11 @@ export default function EditCard({
     //   newDay,
     //   selectedColor,
     // });
-    console.log(formData);
-    console.log("title:", title);
-    console.log("description", description);
-    console.log("priority", selectedColor);
-    console.log("selectedDate", selectedDate);
+    // console.log(formData);
+    // console.log("title:", title);
+    // console.log("description", description);
+    // console.log("priority", selectedColor);
+    // console.log("selectedDate", selectedDate);
 
     // console.log("taskName:", taskName);
     // console.log("taskDescription", taskDescription);
