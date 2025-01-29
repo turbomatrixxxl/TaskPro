@@ -1,48 +1,43 @@
 import React, { useState, useEffect, useRef } from "react";
-
 import { useAuth } from "../../../hooks/useAuth";
-
 import { useDispatch } from "react-redux";
 import { refreshUser } from "../../../redux/auth/operationsAuth";
 import { addTask } from "../../../redux/private/operationsPrivate";
-
 import clsx from "clsx";
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
 import Input from "../../InputAdi/Input";
 import Button from "../../commonComponents/Button";
 import ReusablePlus from "../../commonComponents/ReusablePlus/ReusablePlus";
-
 import { HiChevronDown, HiChevronUp } from "react-icons/hi";
-
 import styles from "./AddCardSara.module.css";
 
 export default function AddCard({ onClose, projectName, columnName }) {
   const { user } = useAuth();
   const dispatch = useDispatch();
 
-  const formRef = useRef(); // Ref for modal content
-  const modalRef = useRef(); // Ref for modal overlay
+  const formRef = useRef();
+  const modalRef = useRef();
 
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedColor, setSelectedColor] = useState(null);
+  const [isDuplicate, setIsDuplicate] = useState(false); // State for checking duplicate card
 
   const today = new Date().toISOString().split("T")[0];
-
   const newDay = new Date(selectedDate).toISOString().split("T")[0];
-  // console.log(newDay);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
   const handleColorSelect = (color) => setSelectedColor(color);
 
   const isFormValid =
-    title.trim() !== "" && description.trim() !== "" && selectedColor !== null;
+    title.trim() !== "" &&
+    description.trim() !== "" &&
+    selectedColor !== null &&
+    !isDuplicate; // Disable the button if card is duplicate
 
   const formData = {
     title: String(title),
@@ -54,56 +49,39 @@ export default function AddCard({ onClose, projectName, columnName }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!isFormValid) {
-      // alert("Please fill in all fields and select a label color.");
-      return;
+      return; // Do not submit if form is invalid or duplicate exists
     }
-    // console.log("Form submitted", {
-    //   title,
-    //   description,
-    //   newDay,
-    //   selectedColor,
-    // });
 
-    // Dispatch the async thunk (addTask)
     dispatch(addTask({ projectName, columnName, taskData: formData }));
 
     setTimeout(() => {
       dispatch(refreshUser());
-    }, 500); // Adjust timeout duration as necessary
+    }, 500);
 
     onClose();
   };
 
   useEffect(() => {
-    const handleEscapeKey = (e) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
+    const normalizedTitle = title.trim().toLowerCase();
 
-    // const handleClickOutside = (e) => {
-    //   if (formRef.current && !formRef.current.contains(e.target)) {
-    //     onClose();
-    //   }
-    // };
+    // Check if any card with the same title already exists in any column of the project
+    const cardExists = user?.projects
+      ?.find((project) => project.name === projectName)
+      ?.columns.some((column) =>
+        column.cards.some(
+          (card) => card.title.trim().toLowerCase() === normalizedTitle
+        )
+      );
 
-    document.addEventListener("keydown", handleEscapeKey);
-    // document.addEventListener("mousedown", handleClickOutside);
+    setIsDuplicate(cardExists); // Update duplicate state
+  }, [title, user?.projects, projectName]);
 
-    return () => {
-      document.removeEventListener("keydown", handleEscapeKey);
-      // document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [onClose]);
-
-  // Toggle the calendar open/close state when button is clicked
   const toggleCalendar = () => {
     setIsOpenCalendar((prev) => !prev);
   };
 
-  // Prevent clicks inside modal content from closing it
   const handleModalClick = (e) => {
-    e.stopPropagation(); // This prevents the click from bubbling up to the overlay
+    e.stopPropagation();
   };
 
   return (
@@ -116,7 +94,7 @@ export default function AddCard({ onClose, projectName, columnName }) {
       }}
       className={styles["modal-overlay-need"]}>
       <div
-        onClick={handleModalClick} // Prevent click inside modal content from triggering onClose
+        onClick={handleModalClick}
         ref={formRef}
         className={clsx(
           "modal-container-need",
@@ -162,6 +140,10 @@ export default function AddCard({ onClose, projectName, columnName }) {
             name="title"
             type="text"
           />
+          {isDuplicate && (
+            <p className={styles.errorMessage}>Card name already exists!</p>
+          )}
+
           <Input
             className={styles.textarea}
             theme={user?.theme}
