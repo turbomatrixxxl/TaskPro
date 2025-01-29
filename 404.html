@@ -6,7 +6,7 @@
     <title>Redirecting...</title>
     <script>
       // Redirect all unknown paths to the React app
-      var pathname = window.location.pathname.replace("/TaskPro", "");
+      var pathname = window.location.pathname.replace("/TaskPro/home", "");
       var redirectTo = "/TaskPro/index.html" + (pathname ? "#" + pathname : "");
       window.location.replace(redirectTo);
     </script>
