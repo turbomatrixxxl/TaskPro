@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Redirecting...</title>
     <script>
-      // GitHub Pages needs to redirect to the root of the app (index.html)
-      window.location.replace("/TaskPro/index.html");
+      // Redirect unknown paths to the React app
+      var pathname = window.location.pathname.replace("/TaskPro", "");
+      var redirectTo = "/TaskPro/index.html" + (pathname ? "#" + pathname : "");
+      window.location.replace(redirectTo);
     </script>
   </head>
   <body>
