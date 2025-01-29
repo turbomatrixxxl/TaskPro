@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { useMediaQuery } from "react-responsive";
@@ -9,6 +9,7 @@ import clsx from "clsx";
 
 import styles from "./Header.module.css";
 import ThemeSelector from "../ThemeSelector/ThemeSelector";
+import UpdateUser from "../modal/UpdateUser/UpdateUser";
 
 const breakpoints = {
   mobile: "(max-width: 767px)",
@@ -19,9 +20,20 @@ const breakpoints = {
 function Header({ handleClick }) {
   const { user } = useAuth();
 
+  const [isUpdateUserModalVisible, setIsUpdateUserModalVisible] =
+    useState(false);
+
+  const handleOpenUpdateModal = () => {
+    setIsUpdateUserModalVisible(true);
+  };
+
+  const handleCloseUpdateModal = () => {
+    setIsUpdateUserModalVisible(false);
+  };
+
   const imageUrl = user?.avatarURL?.startsWith("http")
-    ? user.avatarURL
-    : `https://taskpro-nodejs.onrender.com/${user.avatarURL}`;
+    ? user?.avatarURL
+    : `https://taskpro-nodejs.onrender.com/${user?.avatarURL}`;
 
   const isMobile = useMediaQuery({ query: breakpoints.mobile });
   const isTablet = useMediaQuery({ query: breakpoints.tablet });
@@ -29,6 +41,9 @@ function Header({ handleClick }) {
 
   return (
     <>
+      {isUpdateUserModalVisible && (
+        <UpdateUser onClose={handleCloseUpdateModal} />
+      )}
       <header
         className={clsx(
           styles.header,
@@ -114,9 +129,14 @@ function Header({ handleClick }) {
                 ? styles.userContainerDark
                 : styles.userContainer
             )}>
-            <p>{user ? user?.username : "User"}</p>
+            <p className={styles.userName} onClick={handleOpenUpdateModal}>
+              {user ? user?.username : "User"}
+            </p>
 
             <img
+              className={
+                user?.theme === "violet" ? styles.imgViolet : styles.img
+              }
               src={imageUrl}
               alt="User Avatar"
               style={{ width: "32px", height: "32px", borderRadius: "8px" }}

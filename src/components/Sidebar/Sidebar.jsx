@@ -40,8 +40,8 @@ export default function Sidebar({ sideBarRef }) {
   const isMobile = useMediaQuery({ query: breakpoints.mobile });
 
   const imageUrl = user?.avatarURL?.startsWith("http")
-    ? user.avatarURL
-    : `https://taskpro-nodejs.onrender.com/${user.avatarURL}`;
+    ? user?.avatarURL
+    : `https://taskpro-nodejs.onrender.com/${user?.avatarURL}`;
 
   const handleLogout = async () => {
     try {

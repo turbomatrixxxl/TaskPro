@@ -78,6 +78,7 @@ function App() {
             }
           />
           <Route path="/verify-email" element={<LazyVerifyEmailPage />} />
+
           {/* Private Routes */}
           <Route
             path="/home"
@@ -91,14 +92,14 @@ function App() {
               path="/home/:projectName"
               element={
                 <PrivateRoute
-                  redirectTo="/auth/login"
                   component={<ProjectPage />}
+                  redirectTo="/auth/login"
                 />
               }
             />
-            {/* Index Route */}
             <Route index element={<LazyScreenPage />} />
           </Route>
+
           <Route
             path="/home/screenPage"
             element={
@@ -108,10 +109,9 @@ function App() {
               />
             }
           />
-          <Route
-            path="*"
-            element={<LazyNotFoundPage />} // Catch-all for invalid routes
-          />
+
+          {/* Catch-All */}
+          <Route path="*" element={<LazyNotFoundPage />} />
         </Routes>
       </React.Suspense>
     </>

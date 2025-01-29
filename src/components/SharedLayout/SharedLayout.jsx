@@ -29,7 +29,14 @@ import { resetHelpForm } from "../../redux/public/helpSlice";
 import { clearUser } from "../../redux/private/privateSlice";
 
 function SharedLayout({ handleClick }) {
-  const { isLoggedIn, isLoggedOut, errorAuth, isRegistered, user } = useAuth();
+  const {
+    isLoggedIn,
+    isLoggedOut,
+    errorAuth,
+    isRegistered,
+    user,
+    emailResendStatus,
+  } = useAuth();
   const { privateError, privateMessage } = usePrivate();
   const { helpError, helpSuccessMessage } = usePublic();
 
@@ -56,6 +63,10 @@ function SharedLayout({ handleClick }) {
 
     if (helpSuccessMessage) {
       toast.success(helpSuccessMessage);
+    }
+
+    if (emailResendStatus) {
+      toast.success(emailResendStatus);
     }
 
     if (helpError) {
@@ -87,7 +98,7 @@ function SharedLayout({ handleClick }) {
     isLoggedIn,
     isLoggedOut,
     toastRegisteredShown,
-
+    emailResendStatus,
     logoutShown,
     helpSuccessMessage,
     helpError,

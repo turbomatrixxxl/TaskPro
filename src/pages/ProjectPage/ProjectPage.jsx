@@ -15,6 +15,8 @@ import AddColumn from "../../components/modal/Addcolumn/AddColumn";
 import EditColumn from "../../components/modal/EditColumn/EditColumn";
 import DeleteColumn from "../../components/modal/DeleteColumn/DeleteColumn";
 import AddCardSara from "../../components/modal/AddCardSara/AddCardSara";
+import EditCard from "../../components/modal/EditCard/EditCard";
+import DeleteCard from "../../components/modal/DeleteCard/DeleteCard";
 
 import Button from "../../components/commonComponents/Button";
 import ReusablePlus from "../../components/commonComponents/ReusablePlus/ReusablePlus";
@@ -25,8 +27,7 @@ import "react-toastify/dist/ReactToastify.css"; // Include toast styles
 import iconsSvg from "../../images/sprite.svg";
 
 import styles from "./ProjectPage.module.css";
-import EditCard from "../../components/modal/EditCard/EditCard";
-import DeleteCard from "../../components/modal/DeleteCard/DeleteCard";
+import MoveCard from "../../components/modal/MoveCard/MoveCard";
 
 export default function ProjectPage() {
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ export default function ProjectPage() {
   const [isOpenAddCardModal, setIsOpenAddCardModal] = useState(false);
   const [isOpenEditTaskModal, setIsOpenEditTaskModal] = useState(false);
   const [isOpenDeleteTaskModal, setIsOpenDeleteTaskModal] = useState(false);
+  // const [isOpenMoveTaskModal, setIsOpenMoveTaskModal] = useState(false);
 
   const [selectedColumn, setSelectedColumn] = useState(null);
   const [selectedTaskName, setSelectedTaskName] = useState(null);
@@ -223,9 +225,9 @@ export default function ProjectPage() {
     setIsOpenEditTaskModal(false);
   };
 
-  const handleOpenDeleteTaskModal = (columnName, taskName) => {
+  const handleOpenDeleteTaskModal = (columnName, task) => {
     setSelectedColumn(columnName);
-    setSelectedTaskName(taskName);
+    setSelectedTaskName(task.title);
 
     setIsOpenDeleteTaskModal(true);
   };
@@ -236,6 +238,20 @@ export default function ProjectPage() {
 
     setIsOpenDeleteTaskModal(false);
   };
+
+  // const handleOpenMoveTaskModal = (columnName, taskName) => {
+  //   setSelectedColumn(columnName);
+  //   setSelectedTaskName(taskName);
+
+  //   setIsOpenMoveTaskModal(true);
+  // };
+
+  // const handleCloseMoveTaskModal = () => {
+  //   setSelectedColumn(null);
+  //   setSelectedTaskName(null);
+
+  //   setIsOpenMoveTaskModal(false);
+  // };
 
   return (
     <div className={styles.mainCont}>
@@ -444,25 +460,11 @@ export default function ProjectPage() {
                               <div className={styles.taskDownRightCont}>
                                 {TaskAlert(task)}
                                 <div className={styles.columnIconCont}>
-                                  <svg
-                                    className={clsx(
-                                      styles.columnIcon,
-                                      user.theme !== "dark" && styles.moveIcon,
-                                      user.theme === "dark" && styles.darkMove
-                                    )}
-                                    width="16"
-                                    height="16"
-                                    onClick={() => {}}>
-                                    <use
-                                      href={`${iconsSvg}#${clsx(
-                                        user?.theme === "violet"
-                                          ? "move-violet"
-                                          : user?.theme === "light"
-                                          ? "move-green"
-                                          : "move-black"
-                                      )}`}
-                                    />
-                                  </svg>
+                                  <MoveCard
+                                    projectName={projectName}
+                                    columnName={column.name}
+                                    taskName={task.title}
+                                  />
                                   <svg
                                     onClick={() => {
                                       handleOpenEditTaskModal(
