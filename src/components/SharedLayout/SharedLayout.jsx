@@ -24,7 +24,11 @@ import { usePublic } from "../../hooks/usePublic";
 import { useDispatch } from "react-redux";
 
 import styles from "./SharedLayout.module.css";
-import { reset } from "../../redux/auth/authSlice";
+import {
+  clearIsRegistered,
+  clearUpdateUser,
+  reset,
+} from "../../redux/auth/authSlice";
 import { resetHelpForm } from "../../redux/public/helpSlice";
 import { clearUser } from "../../redux/private/privateSlice";
 
@@ -42,15 +46,13 @@ function SharedLayout({ handleClick }) {
 
   const dispatch = useDispatch();
 
-  const [toastRegisteredShown, setToastRegisteredShown] = useState(false);
   const [logoutShown, setLogoutShown] = useState(false);
 
   useEffect(() => {
-    if (!toastRegisteredShown) {
-    }
     if (isRegistered) {
       toast.success("Registration successful!");
-      setToastRegisteredShown(true);
+
+      dispatch(clearIsRegistered());
     }
 
     if (!logoutShown) {
@@ -67,6 +69,8 @@ function SharedLayout({ handleClick }) {
 
     if (emailResendStatus) {
       toast.success(emailResendStatus);
+
+      dispatch(clearUpdateUser());
     }
 
     if (helpError) {
@@ -97,7 +101,6 @@ function SharedLayout({ handleClick }) {
     isRegistered,
     isLoggedIn,
     isLoggedOut,
-    toastRegisteredShown,
     emailResendStatus,
     logoutShown,
     helpSuccessMessage,
