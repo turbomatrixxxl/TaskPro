@@ -309,7 +309,7 @@ export default function ProjectPage() {
               styles.projectName,
               user?.theme === "dark" ? styles.projectNameDark : null,
               project?.background !== "none"
-                ? user.theme === "dark"
+                ? user?.theme === "dark"
                   ? styles.backgroundDark
                   : styles.backgroundLight
                 : null
