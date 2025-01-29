@@ -56,6 +56,27 @@
   color: #fff;
 }
 
+.userName {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.userName:hover {
+  scale: 1.1;
+}
+
+.img {
+  border: 1px solid #bedbb0;
+}
+
+.img {
+  border: 1px solid #bedbb0;
+}
+
+.imgViolet {
+  border: 1px solid #5255bc;
+}
+
 @media screen and (width >=768px) {
   .header {
     height: 68px;

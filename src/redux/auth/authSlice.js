@@ -66,6 +66,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.isLoggedOut = false;
+        state.isRegistered = false;
       })
       .addCase(logIn.rejected, handleRejected)
 
@@ -132,12 +133,13 @@ const authSlice = createSlice({
       // Update User Info
       .addCase(updateUserInfo.pending, handlePending)
       .addCase(updateUserInfo.fulfilled, (state, { payload }) => {
-        state.user = payload.data.user;
-        state.avatarURL = payload.data.user.avatarURL || null; // Set the avatar URL
-        state.projects = payload.data.user.projects || []; // Populate projects
+        state.user = payload?.data?.user;
+        state.avatarURL = payload?.data?.user?.avatarURL || null; // Set the avatar URL
+        state.projects = payload?.data?.user?.projects || []; // Populate projects
         state.isLoading = false;
         state.error = null;
         state.isLoggedOut = false;
+        state.emailResendStatus = "User updated suscesfully...!";
       })
       .addCase(updateUserInfo.rejected, (state, action) => {
         state.isLoading = false;
