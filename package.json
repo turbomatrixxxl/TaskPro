@@ -2,7 +2,7 @@
   "name": "my-react-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://turbomatrixxxl.github.io/TaskPro/",
+  "homepage": "https://turbomatrixxxl.github.io/TaskPro",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
