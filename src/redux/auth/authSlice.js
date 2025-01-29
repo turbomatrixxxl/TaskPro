@@ -52,6 +52,12 @@ const authSlice = createSlice({
       // Clear the entire auth state
       return { ...initialState };
     },
+    clearUpdateUser(state) {
+      state.emailResendStatus = null;
+    },
+    clearIsRegistered(state) {
+      state.isRegistered = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -165,5 +171,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { reset } = authSlice.actions;
+export const { reset, clearUpdateUser, clearIsRegistered } = authSlice.actions;
 export const authReducer = authSlice.reducer;
