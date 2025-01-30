@@ -66,7 +66,10 @@ export default function AddCard({ onClose, projectName, columnName }) {
 
     // Check if any card with the same title already exists in any column of the project
     const cardExists = user?.projects
-      ?.find((project) => project.name === projectName)
+      ?.find(
+        (project) =>
+          project.name.trim().toLowerCase() === projectName.trim().toLowerCase()
+      )
       ?.columns.some((column) =>
         column.cards.some(
           (card) => card.title.trim().toLowerCase() === normalizedTitle

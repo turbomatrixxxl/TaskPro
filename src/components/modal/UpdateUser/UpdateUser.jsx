@@ -44,11 +44,11 @@ export default function UpdateUser({ onClose }) {
       formData.append("avatar", file);
 
       dispatch(updateUserAvatar(formData)); // Dispatch action to update avatar
-    }
 
-    setTimeout(() => {
-      dispatch(refreshUser());
-    }, 5000);
+      setTimeout(() => {
+        dispatch(refreshUser());
+      }, 5000);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -92,7 +92,7 @@ export default function UpdateUser({ onClose }) {
     ? user?.avatarURL.startsWith("http")
       ? user?.avatarURL
       : `https://taskpro-nodejs.onrender.com/${user.avatarURL}`
-    : "/default-avatar.png"; // Default fallback image
+    : "/default-avatar.jpg"; // Default fallback image
 
   return (
     <div
