@@ -9,6 +9,7 @@
 
 .moveCont {
   align-items: center;
+  border: 1px solid #bedbb0;
   border-radius: 8px;
   background: #fcfcfc;
   box-shadow: 0px 4px 16px 0px rgba(17, 17, 17, 0.1);
@@ -23,10 +24,15 @@
   right: 0;
   top: 135%;
   width: 135px;
+  z-index: 1000000;
 }
 
 .contDark {
   background: #1f1f1f;
+}
+
+.contViolet {
+  border-color: #5255bc;
 }
 
 .moveCont .columnName:first-child {

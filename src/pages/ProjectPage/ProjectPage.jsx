@@ -57,19 +57,18 @@ export default function ProjectPage() {
   const isDesktop = !isMobile && !isTablet;
 
   const project = user?.projects?.find(
-    (project) => project?.name === projectName
+    (project) =>
+      project?.name.trim().toLowerCase() === projectName.trim().toLowerCase()
   );
 
+  // console.log(user?.projects);
+
+  // console.log("projectName :", projectName);
+
+  // console.log("project :", project);
+
   useEffect(() => {
-    if (
-      project === -1 ||
-      !project ||
-      project === null ||
-      undefined ||
-      null ||
-      projectName === undefined ||
-      null
-    ) {
+    if (projectName === undefined) {
       navigate("/home");
     }
   }, [navigate, project, projectName]);
@@ -453,8 +452,8 @@ export default function ProjectPage() {
                                 <div className={styles.columnIconCont}>
                                   <MoveCard
                                     projectName={projectName}
-                                    columnName={column.name}
-                                    taskName={task.title}
+                                    columnName={column?.name}
+                                    taskName={task?.title}
                                   />
                                   <svg
                                     onClick={() => {

@@ -23,7 +23,6 @@ import clsx from "clsx";
 import { usePublic } from "../../hooks/usePublic";
 import { useDispatch } from "react-redux";
 
-import styles from "./SharedLayout.module.css";
 import {
   clearIsRegistered,
   clearUpdateUser,
@@ -31,6 +30,8 @@ import {
 } from "../../redux/auth/authSlice";
 import { resetHelpForm } from "../../redux/public/helpSlice";
 import { clearUser } from "../../redux/private/privateSlice";
+
+import styles from "./SharedLayout.module.css";
 
 function SharedLayout({ handleClick }) {
   const {

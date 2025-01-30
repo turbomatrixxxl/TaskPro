@@ -78,7 +78,8 @@ export default function MoveCard({ projectName, columnName, taskName }) {
 
   // Find the project by name in the user's project list
   const projectTarget = user?.projects?.find(
-    (project) => project.name === projectName
+    (project) =>
+      project.name.trim().toLowerCase() === projectName.trim().toLowerCase()
   );
 
   return (
@@ -128,7 +129,8 @@ export default function MoveCard({ projectName, columnName, taskName }) {
           ref={moveRef}
           className={clsx(
             styles.moveCont,
-            user.theme === "dark" && styles.contDark
+            user.theme === "dark" && styles.contDark,
+            user.theme === "violet" && styles.contViolet
           )}>
           {projectTarget?.columns?.map((column, columnIndex) => (
             <li
@@ -218,11 +220,5 @@ MoveCard.propTypes = {
   projectName: PropTypes.string.isRequired,
   columnName: PropTypes.string.isRequired,
   // eslint-disable-next-line react/no-typos
-  taskName: PropTypes.oneOfType([
-    PropTypes.string,
-    // eslint-disable-next-line react/no-typos
-    PropTypes.undefined,
-    // eslint-disable-next-line react/no-typos
-    PropTypes.null,
-  ]),
+  taskName: PropTypes.string,
 };
