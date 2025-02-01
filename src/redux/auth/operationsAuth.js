@@ -145,14 +145,30 @@ export const updateUserInfo = createAsyncThunk(
 export const updateUserAvatar = createAsyncThunk(
   "auth/updateUserAvatar",
   async (formData, thunkAPI) => {
+    // console.log("formData from ops :", formData);
+
+    // Manually log FormData entries to check the contents
+    // for (let [key, value] of formData.entries()) {
+    //   console.log(key, value); // Log key-value pairs in FormData
+    //   console.log("ops");
+    // }
+
     try {
       const token = JSON.parse(localStorage.getItem("token"));
+
       const response = await axios.patch("/api/users/avatar", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
       });
+
+      // console.log("Form data:", formData);
+      // console.log("Headers:", {
+      //   Authorization: `Bearer ${token}`,
+      //   "Content-Type": "multipart/form-data",
+      // });
+
       return response.data; // Return the new avatar URL
     } catch (error) {
       return thunkAPI.rejectWithValue(

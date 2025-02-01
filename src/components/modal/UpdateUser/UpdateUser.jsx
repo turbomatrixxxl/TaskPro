@@ -1,17 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
+
 import { useAuth } from "../../../hooks/useAuth";
 import {
   refreshUser,
   updateUserInfo,
   updateUserAvatar,
 } from "../../../redux/auth/operationsAuth";
+import useToggle from "../../../hooks/useToggle";
+
 import clsx from "clsx";
+
 import Input from "../../InputAdi/Input";
 import Button from "../../commonComponents/Button";
-import styles from "./UpdateUser.module.css";
-import useToggle from "../../../hooks/useToggle";
+
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import styles from "./UpdateUser.module.css";
 
 export default function UpdateUser({ onClose }) {
   const { user } = useAuth();
@@ -39,21 +47,13 @@ export default function UpdateUser({ onClose }) {
 
     if (file) {
       setSelectedFile(file);
-
-      const formData = new FormData();
-      formData.append("avatar", file);
-
-      dispatch(updateUserAvatar(formData)); // Dispatch action to update avatar
-
-      setTimeout(() => {
-        dispatch(refreshUser());
-      }, 5000);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Dispatch user info update
     dispatch(
       updateUserInfo({
         username: userNewName,
@@ -62,9 +62,29 @@ export default function UpdateUser({ onClose }) {
       })
     );
 
+    // Dispatch the avatar update if a file is selected
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append("avatar", selectedFile);
+
+      dispatch(updateUserAvatar(formData))
+        .then((response) => {
+          // Handle success response
+          if (response) {
+            toast.success("Avatar updated successfully!"); // Success toast
+          } else {
+            toast.error("Failed to update avatar. Please try again."); // Error toast
+          }
+        })
+        .catch((error) => {
+          // console.error("Error during avatar upload:", error.message);
+          toast.error("An error occurred. Please try again later."); // Error toast
+        });
+    }
+
     setTimeout(() => {
       dispatch(refreshUser());
-    }, 500);
+    }, 3500);
 
     onClose();
   };
