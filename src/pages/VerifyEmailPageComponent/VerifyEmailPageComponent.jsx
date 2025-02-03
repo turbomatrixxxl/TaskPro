@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { resendVerificationEmail } from "../../redux/auth/operationsAuth";
+import {
+  refreshUser,
+  resendVerificationEmail,
+} from "../../redux/auth/operationsAuth";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/commonComponents/Button";
@@ -26,14 +29,16 @@ const VerifyEmailPage = () => {
 
     // console.log(user);
 
-    dispatch(resendVerificationEmail(user.email));
+    dispatch(resendVerificationEmail(user?.email));
   };
 
   useEffect(() => {
     if (errorAuth) {
       console.error("Error:", errorAuth);
     }
-  }, [errorAuth]);
+
+    dispatch(refreshUser());
+  }, [errorAuth, dispatch]);
 
   const getEmailProviderUrl = (email) => {
     if (!email || !email.includes("@")) {
@@ -41,7 +46,7 @@ const VerifyEmailPage = () => {
       return "https://mail.google.com";
     }
 
-    const domain = email.split("@")[1];
+    const domain = email?.split("@")[1];
     switch (domain) {
       case "gmail.com":
         return `https://mail.google.com/mail/u/0/#inbox`;
@@ -70,8 +75,7 @@ const VerifyEmailPage = () => {
         className={styles.emailLink}
         href={getEmailProviderUrl(user?.email)}
         target="_blank"
-        rel="noopener noreferrer"
-      >
+        rel="noopener noreferrer">
         <Button variant="auth">Go to your email provider</Button>
       </a>
       <Button
@@ -79,8 +83,7 @@ const VerifyEmailPage = () => {
           handleResendVerificationEmail();
         }}
         type="button"
-        variant="auth"
-      >
+        variant="auth">
         Resend Verification Email
       </Button>
 
@@ -93,9 +96,13 @@ const VerifyEmailPage = () => {
           If you've already verified your email, you can go to the
         </p>
 
-        <Button variant="auth" handleClick={() => {
-          navigate("/auth/login")
-        }}>Login page</Button>
+        <Button
+          variant="auth"
+          handleClick={() => {
+            navigate("/auth/login");
+          }}>
+          Login page
+        </Button>
 
         <p className={styles.infoText}>to sign in.</p>
       </div>
