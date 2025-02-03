@@ -19,11 +19,12 @@
   gap: 8px;
   justify-content: center;
   padding: 18px;
+  padding-top: 40px;
   overflow-y: auto;
   position: absolute;
   right: 0;
-  top: 135%;
-  width: 135px;
+  top: -600%;
+  min-width: 135px;
   z-index: 1000000;
 }
 
@@ -36,7 +37,7 @@
 }
 
 .moveCont .columnName:first-child {
-  margin-top: 40px;
+  margin-top: 50px;
 }
 
 .columnName {
