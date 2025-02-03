@@ -17,6 +17,8 @@
   display: flex;
   flex-direction: column;
   height: 122px;
+  flex-grow: 1;
+  margin-bottom: 24px;
   overflow-y: auto;
 }
 
