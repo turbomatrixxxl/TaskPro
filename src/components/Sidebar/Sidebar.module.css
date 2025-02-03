@@ -3,7 +3,7 @@
   flex-direction: column;
   height: -webkit-fill-available;
   justify-content: space-between;
-  overflow: auto;
+  overflow-y: auto;
   width: 225px;
 }
 
