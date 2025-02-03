@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/TaskPro/static/css/main.4f0ca795.css",
-    "main.js": "/TaskPro/static/js/main.d377d912.js",
+    "main.js": "/TaskPro/static/js/main.c9312c4d.js",
     "static/css/817.47295a18.chunk.css": "/TaskPro/static/css/817.47295a18.chunk.css",
     "static/js/817.85b2bc87.chunk.js": "/TaskPro/static/js/817.85b2bc87.chunk.js",
     "static/css/548.e8314238.chunk.css": "/TaskPro/static/css/548.e8314238.chunk.css",
-    "static/js/548.2a6b3602.chunk.js": "/TaskPro/static/js/548.2a6b3602.chunk.js",
+    "static/js/548.98b47650.chunk.js": "/TaskPro/static/js/548.98b47650.chunk.js",
     "static/css/807.d452f83c.chunk.css": "/TaskPro/static/css/807.d452f83c.chunk.css",
     "static/js/807.abbce33d.chunk.js": "/TaskPro/static/js/807.abbce33d.chunk.js",
     "static/css/973.a270d859.chunk.css": "/TaskPro/static/css/973.a270d859.chunk.css",
@@ -30,11 +30,11 @@
     "static/media/projectIconsSprite.svg": "/TaskPro/static/media/projectIconsSprite.ce7ea7ce5ef5309a92a0824cc79a457e.svg",
     "index.html": "/TaskPro/index.html",
     "main.4f0ca795.css.map": "/TaskPro/static/css/main.4f0ca795.css.map",
-    "main.d377d912.js.map": "/TaskPro/static/js/main.d377d912.js.map",
+    "main.c9312c4d.js.map": "/TaskPro/static/js/main.c9312c4d.js.map",
     "817.47295a18.chunk.css.map": "/TaskPro/static/css/817.47295a18.chunk.css.map",
     "817.85b2bc87.chunk.js.map": "/TaskPro/static/js/817.85b2bc87.chunk.js.map",
     "548.e8314238.chunk.css.map": "/TaskPro/static/css/548.e8314238.chunk.css.map",
-    "548.2a6b3602.chunk.js.map": "/TaskPro/static/js/548.2a6b3602.chunk.js.map",
+    "548.98b47650.chunk.js.map": "/TaskPro/static/js/548.98b47650.chunk.js.map",
     "807.d452f83c.chunk.css.map": "/TaskPro/static/css/807.d452f83c.chunk.css.map",
     "807.abbce33d.chunk.js.map": "/TaskPro/static/js/807.abbce33d.chunk.js.map",
     "973.a270d859.chunk.css.map": "/TaskPro/static/css/973.a270d859.chunk.css.map",
@@ -54,6 +54,6 @@
   },
   "entrypoints": [
     "static/css/main.4f0ca795.css",
-    "static/js/main.d377d912.js"
+    "static/js/main.c9312c4d.js"
   ]
 }
