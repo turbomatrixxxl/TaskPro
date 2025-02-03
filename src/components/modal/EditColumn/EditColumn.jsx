@@ -15,7 +15,7 @@ export default function AddColumn({ onClose, columnName, projectName }) {
   const formRef = useRef(null); // Ref for modal content
   const modalRef = useRef(null); // Ref for modal overlay
   const dispatch = useDispatch();
-  const [newColumnName, setNewColumnName] = useState("");
+  const [newColumnName, setNewColumnName] = useState(columnName);
   const [isDuplicate, setIsDuplicate] = useState(false);
 
   // console.log(projectName);
@@ -133,7 +133,7 @@ export default function AddColumn({ onClose, columnName, projectName }) {
             theme={user?.theme}
             value={newColumnName}
             handleChange={handleAddName}
-            placeholder={`Initial name: ${columnName || "Untitled Column"}`}
+            placeholder={`${columnName || "Untitled Column"}`}
             name="ToDo"
             type="text"
           />
