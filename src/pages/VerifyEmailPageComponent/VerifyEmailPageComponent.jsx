@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import {
-  refreshUser,
-  resendVerificationEmail,
-} from "../../redux/auth/operationsAuth";
+import { resendVerificationEmail } from "../../redux/auth/operationsAuth";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/commonComponents/Button";
@@ -36,9 +33,7 @@ const VerifyEmailPage = () => {
     if (errorAuth) {
       console.error("Error:", errorAuth);
     }
-
-    dispatch(refreshUser());
-  }, [errorAuth, dispatch]);
+  }, [errorAuth]);
 
   const getEmailProviderUrl = (email) => {
     if (!email || !email.includes("@")) {
