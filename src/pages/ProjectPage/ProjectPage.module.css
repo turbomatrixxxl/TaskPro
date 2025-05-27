@@ -313,6 +313,10 @@
   display: flex;
 }
 
+.iconNone {
+  display: none;
+}
+
 .highPriorityBell {
   stroke-width: 1.5;
   stroke-opacity: 1;

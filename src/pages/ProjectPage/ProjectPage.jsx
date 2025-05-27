@@ -141,7 +141,8 @@ export default function ProjectPage() {
       if (remainingDays <= 3 && remainingDays > 0)
         return clsx(styles.iconAlert, styles.medium);
       if (remainingDays <= 0) return clsx(styles.iconAlert, styles.high);
-      return clsx(styles.iconAlert);
+      if (remainingDays <= 5) return clsx(styles.iconAlert);
+      return clsx(styles.iconNone);
     };
 
     // console.log(getIconClass());
