@@ -325,13 +325,31 @@
 }
 
 .highPriorityBell {
-  scale: 1.35;
+  display: block;
   stroke-width: 1.5;
   stroke-opacity: 1;
 }
 
 .highPriorityBell:hover {
   scale: 1.5;
+}
+
+.iconAlert {
+  cursor: pointer;
+  display: block;
+}
+
+.medium {
+  scale: 1.35;
+}
+
+.high {
+  background: red;
+  border-radius: 50%;
+  height: fit-content;
+  padding: 2px;
+  scale: 1.4;
+  width: fit-content;
 }
 
 .moveCont {

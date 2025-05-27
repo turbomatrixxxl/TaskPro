@@ -137,20 +137,37 @@ export default function ProjectPage() {
 
     const remainingDays = Math.ceil(diffInTime / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
 
-    // Define styles dynamically
-    const iconStyle = {
-      display: remainingDays <= 5 ? "block" : "none",
-      stroke: remainingDays < 3 ? "red" : "inherit",
+    const getIconClass = () => {
+      if (remainingDays <= 3 && remainingDays > 0)
+        return clsx(styles.iconAlert, styles.medium);
+      if (remainingDays <= 0) return clsx(styles.iconAlert, styles.high);
+      return clsx(styles.iconAlert);
     };
 
+    // console.log(getIconClass());
+
     const handleClick = () => {
-      if (remainingDays <= 5) {
+      if (remainingDays <= 5 && remainingDays > 0) {
         toast.warning(
           `Warning, there are ${remainingDays} days left to finish this task...!`
         );
       }
       // console.log(remainingDays);
       // console.log(diffInTime);
+
+      if (remainingDays === 0) {
+        toast.warning(
+          `Warning, there are ${remainingDays} days left to finish this task...! You must finish the task Today...!!!`
+        );
+      }
+
+      if (remainingDays < 0) {
+        toast.warning(
+          `Warning, there are ${-Number(
+            remainingDays
+          )} days overdue to finish this task...!`
+        );
+      }
     };
 
     return (
@@ -158,10 +175,11 @@ export default function ProjectPage() {
         width="16"
         height="16"
         onClick={handleClick}
-        style={iconStyle}
+        // style={iconStyle}
         className={clsx(
-          styles.taskBell,
-          remainingDays <= 2 && styles.highPriorityBell
+          remainingDays <= 5 && styles.taskBell,
+          remainingDays <= 2 && styles.highPriorityBell,
+          getIconClass()
         )}>
         <use
           href={`${iconsSvg}#${clsx(
