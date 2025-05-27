@@ -145,6 +145,7 @@
   height: 154px;
   margin-right: 6px;
   width: 334px;
+  cursor: grabbing;
 }
 
 .taskItemContDark {
