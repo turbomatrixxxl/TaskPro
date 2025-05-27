@@ -177,8 +177,7 @@ export default function ProjectPage() {
         onClick={handleClick}
         // style={iconStyle}
         className={clsx(
-          remainingDays <= 5 && styles.taskBell,
-          remainingDays <= 2 && styles.highPriorityBell,
+          remainingDays <= 3 && styles.highPriorityBell,
           getIconClass()
         )}>
         <use

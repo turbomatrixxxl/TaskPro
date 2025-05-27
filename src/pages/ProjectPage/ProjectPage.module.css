@@ -313,19 +313,7 @@
   display: flex;
 }
 
-.taskBell {
-  cursor: pointer;
-  height: 16px;
-  width: 16px;
-  transition: all 0.3s ease-in-out;
-}
-
-.taskBell:hover {
-  scale: 1.4;
-}
-
 .highPriorityBell {
-  display: block;
   stroke-width: 1.5;
   stroke-opacity: 1;
 }
@@ -337,14 +325,21 @@
 .iconAlert {
   cursor: pointer;
   display: block;
+  height: 16px;
+  transition: all 0.3s ease-in-out;
+  width: 16px;
 }
 
 .iconAlert:hover {
-  scale: 1.4;
+  scale: 1.5;
 }
 
 .medium {
   scale: 1.35;
+}
+
+.medium:hover {
+  scale: 1.6;
 }
 
 .high {
@@ -354,6 +349,10 @@
   padding: 2px;
   scale: 1.4;
   width: fit-content;
+}
+
+.high:hover {
+  scale: 1.6;
 }
 
 .moveCont {
