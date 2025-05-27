@@ -339,6 +339,10 @@
   display: block;
 }
 
+.iconAlert:hover {
+  scale: 1.4;
+}
+
 .medium {
   scale: 1.35;
 }
